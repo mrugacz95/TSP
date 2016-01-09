@@ -7,7 +7,7 @@
 minstd_rand0 AntsAlgorithm::randomGenerator;
 float AntsAlgorithm::alpha=1.0f;
 float AntsAlgorithm::beta=3.0f;
-float AntsAlgorithm::rho=0.5f;
+float AntsAlgorithm::rho=0.6f;
 void AntsAlgorithm::solve() {
     vector<Ant*> ants;
     EdgePheromone edgePheromone(graph->getSize(), 1.f);
@@ -28,12 +28,16 @@ void AntsAlgorithm::solve() {
             edgePheromone.setPheromone(i, i + 1, newPheromoneValue);
         }
     }
-    for(int i=0;i< ants.size();i++)
-        if(solutionLength>ants[i]->getLength()) solutionLength=ants[i]->getLength();
+    best=ants[0];
+    for(int i=1;i< ants.size();i++)
+        if (best->getLength() > ants[i]->getLength()) {
+            best = ants[i];
+        }
 
-//    for(Ant* a : ants)
-//        delete (a);
-//    ants.clear();
+
+    for(Ant* a : ants)
+        if(a!=best)
+            delete (a);
 }
 string AntsAlgorithm::getName() {
     return "AntsAlgorithm";
@@ -43,13 +47,17 @@ AntsAlgorithm::AntsAlgorithm() {
     LARGE_INTEGER time;
     QueryPerformanceCounter(&time);
     randomGenerator.seed((unsigned)time.QuadPart);
-
 }
 
 unsigned AntsAlgorithm::countCurrentSolutionLength() {
-    return solutionLength;
+    return best->getLength();
 }
 
-void AntsAlgorithm::printSolution() {
-    cout<<"mrowka\n";
+void AntsAlgorithm::printSolutionPath() {
+    best->print();
+}
+
+AntsAlgorithm::~AntsAlgorithm() {
+    delete(best);
+
 }

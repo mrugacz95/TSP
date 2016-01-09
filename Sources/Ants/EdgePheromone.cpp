@@ -35,7 +35,3 @@ void EdgePheromone::reset(float value) {
     for(int i=0;i<pheromones.size();i++)
         pheromones[i]=value;
 }
-//
-//EdgePheromone::~EdgePheromone() {
-//    pheromones.clear();
-//}

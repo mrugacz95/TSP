@@ -15,7 +15,6 @@ public:
     void addPheromone(int a, int b, float amount);
 
     void reset(float value);
-    //~EdgePheromone();
 
 private:
     vector<float> pheromones;

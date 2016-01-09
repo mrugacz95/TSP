@@ -10,15 +10,16 @@
 #include <random>
 #include "../Solver.h"
 
-
+class Ant;
 using namespace std;
 class AntsAlgorithm : public Solver {
 public:
     AntsAlgorithm();
+    ~AntsAlgorithm();
     void solve() override;
     string getName() override;
 
-    virtual void printSolution() override;
+    void printSolutionPath();
 
     virtual unsigned countCurrentSolutionLength() override;
 
@@ -27,9 +28,9 @@ public:
     static float beta;
     static float rho;
 private:
-    int antsNum=20;
+    unsigned antsNum=20;
     int iterations=100;
-    unsigned int solutionLength;
+    Ant* best;
 };
 
 

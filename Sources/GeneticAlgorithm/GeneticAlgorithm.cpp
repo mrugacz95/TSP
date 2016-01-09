@@ -37,6 +37,6 @@ GeneticAlgorithm::~GeneticAlgorithm() {
     delete (pathSolution);
 }
 
-void GeneticAlgorithm::printSolutionPath() {
+void GeneticAlgorithm::printSolution() {
     pathSolution->print();
 }

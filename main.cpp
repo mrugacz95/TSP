@@ -15,13 +15,16 @@ void fun(){
 int main() {
     srand((unsigned)time(NULL));
     double start,finish;
-    MatrixGraph graph(10, 1000);
+    MatrixGraph graph(12, 1000);
     vector<Solver *> solversList;
-    //solversList.push_back(new BruteForce());
-    //solversList.push_back(new Random());
-    //solversList.push_back(new ImprovedBruteForce());
-    //solversList.push_back(new ClosestNeighbour());
-    //solversList.push_back(new GeneticAlgorithm());
+//    solversList.push_back(new BruteForce());
+    solversList.push_back(new Random());
+    solversList.push_back(new ImprovedBruteForce());
+    solversList.push_back(new ClosestNeighbour());
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
 
     for (Solver *s : solversList)

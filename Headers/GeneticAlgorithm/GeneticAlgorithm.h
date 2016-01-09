@@ -16,7 +16,7 @@ public:
         std::string getName() override;
         unsigned countCurrentSolutionLength() override;
         ~GeneticAlgorithm();
-        void printSolutionPath() override ;
+        void printSolution() override ;
 
 private:
         Path* pathSolution;

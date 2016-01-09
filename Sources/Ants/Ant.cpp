@@ -18,6 +18,8 @@ this->graph=graph;
 void Ant::walk() {
     path.clear();
     path.push_back(0);
+    for(int i=1;i<visited.size();i++)
+        visited[i]= false;
     visited[0]= true;
     for(int i=0;i<graph->getSize()-1;i++) {
         path.push_back(chooseVertex());
@@ -78,4 +80,10 @@ unsigned int Ant::getLength() {
 
 Ant::~Ant() {
     edgePheromone= nullptr;
+}
+
+void Ant::print() {
+    for(int v :path)
+        cout<<v<<", ";
+    cout<<"\n";
 }
