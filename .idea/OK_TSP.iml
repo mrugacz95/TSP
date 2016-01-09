@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/Ant.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/AntsAlgorithm.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/EdgePheromone.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/BruteForce.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/ClosestNeighbour.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Edge.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/GeneticAlgorithm/GeneticAlgorithm.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/GeneticAlgorithm/Path.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/GeneticAlgorithm/Population.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Graph.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/ImprovedBruteForce.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/ListGraph.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/MatrixGraph.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Random.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/SimulatedAnnealing.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Solver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/Utilities.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/Ant.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/AntsAlgorithm.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/EdgePheromone.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/BruteForce.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/ClosestNeighbour.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Edge.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/GeneticAlgorithm.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/Path.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/Population.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/ImprovedBruteForce.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/ListGraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/MatrixGraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Random.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/SimulatedAnnealing.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Solver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/Utilities.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file://D:/mingw-64/mingw32/i686-w64-mingw32/include" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include-fixed" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include/objc" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include/ssp" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://D:/mingw-64/mingw32/i686-w64-mingw32/include" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include-fixed" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include/objc" />
+          <root url="file://D:/mingw-64/mingw32/lib/gcc/i686-w64-mingw32/5.2.0/include/ssp" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
