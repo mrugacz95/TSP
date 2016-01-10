@@ -21,7 +21,7 @@ void AntsAlgorithm::solve() {
         pheromoneDelta.reset(0.f);
         for (Ant *ant : ants)
             ant->updatePheromone(&pheromoneDelta);
-        float newPheromoneValue;
+        double newPheromoneValue;
         for (int i = 0; i < graph->getSize() - 1; i++) {
             newPheromoneValue =
                     (1 - rho) * edgePheromone.getPheromone(i, i + 1) + pheromoneDelta.getPheromone(i, i + 1);

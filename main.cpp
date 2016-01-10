@@ -16,7 +16,7 @@ void fun(){
 int main() {
     srand((unsigned)time(NULL));
     double start,finish;
-    MatrixGraph graph(25, 1000);
+    MatrixGraph graph(50, 1000);
     vector<Solver *> solversList;
     //solversList.push_back(new BruteForce());
     solversList.push_back(new Random());

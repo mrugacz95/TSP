@@ -11,8 +11,8 @@ class EdgePheromone{
 public:
     EdgePheromone(int size, float initValue);
     double getPheromone(int a, int b);
-    void setPheromone(int a, int b, float amount);
-    void addPheromone(int a, int b, float amount);
+    void setPheromone(int a, int b, double amount);
+    void addPheromone(int a, int b, double amount);
 
     void reset(float value);
 

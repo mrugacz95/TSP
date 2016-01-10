@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.3)
 project(OK_TSP)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Bin")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -static-libgcc -static-libstdc++")
 set(SOURCE_FILES main.cpp Headers/Graph.h Sources/ListGraph.cpp Headers/ListGraph.h Sources/Edge.cpp Headers/Edge.h Sources/BruteForce.cpp Headers/BruteForce.h Sources/MatrixGraph.cpp Headers/MatrixGraph.h Sources/Solver.cpp Headers/Solver.h Sources/ClosestNeighbour.cpp Headers/ClosestNeighbour.h Sources/Random.cpp Headers/Random.h Sources/ImprovedBruteForce.cpp Headers/ImprovedBruteForce.h Sources/Utilities.cpp Headers/Utilities.h Sources/SimulatedAnnealing.cpp Headers/SimulatedAnnealing.h Sources/GeneticAlgorithm/GeneticAlgorithm.cpp Headers/GeneticAlgorithm/GeneticAlgorithm.h Sources/Ants/AntsAlgorithm.cpp Headers/Ants/AntsAlgorithm.h Headers/GeneticAlgorithm/Path.h  Sources/GeneticAlgorithm/Path.cpp Headers/GeneticAlgorithm/Population.h Sources/GeneticAlgorithm/Population.cpp Sources/Ants/Ant.cpp Headers/Ants/Ant.h Headers/Ants/EdgePheromone.h Sources/Ants/EdgePheromone.cpp)
 add_executable(OK_TSP ${SOURCE_FILES})

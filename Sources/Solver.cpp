@@ -20,7 +20,9 @@ void Solver::printResults() {
         cout<<solvingTime<<" ";
     cout<<" Lenght: "<< countCurrentSolutionLength()<<"\n";
     printParameters();
+    //cout<<"\t\t\t\t\t";
     //printSolutionPath();
+    cout<<"\n";
 }
 
 unsigned Solver::countSolutionLength(std::vector<int> &vec) {

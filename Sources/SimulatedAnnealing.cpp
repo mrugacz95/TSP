@@ -25,8 +25,6 @@ void SimulatedAnnealing::solve() {
         nextLength=countSolutionLength(solution);
         if (nextLength>previousLength){
             random =  (double)SimulatedAnnealing::randomGenerator() / (double)numeric_limits<INT32>::max();
-            double delta = (previousLength-nextLength);
-            double power=(previousLength-nextLength)/ temperature;
             probability=exp((previousLength-nextLength)/ temperature);
             if(random>probability) {//no accepted
                 swap(solution[swapA], solution[swapB]);
@@ -34,14 +32,10 @@ void SimulatedAnnealing::solve() {
             }
             else{
                 acc++;
-                //cout<<"--------------- from"<<previousLength<<" to:"<<nextLength<<"\n";
             }
         }
-        if(temperature * coolingFactor<0)
-            cout<<"wtf\n";
         temperature*=coolingFactor;
     }
-    cout<<"acc"<<acc<<" n:"<<noacc<<"\n";
 
 }
 
