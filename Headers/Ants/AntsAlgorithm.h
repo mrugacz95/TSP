@@ -15,6 +15,7 @@ using namespace std;
 class AntsAlgorithm : public Solver {
 public:
     AntsAlgorithm();
+    AntsAlgorithm(unsigned antsNum, unsigned iterations, float alpha, float beta, float rho);
     ~AntsAlgorithm();
     void solve() override;
     string getName() override;

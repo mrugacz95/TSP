@@ -15,17 +15,18 @@ public:
         void solve() override;
         std::string getName() override;
         unsigned countCurrentSolutionLength() override;
+
+        virtual void printSolutionPath() override;
+        GeneticAlgorithm(unsigned int populationSize, int iterations);
         ~GeneticAlgorithm();
-        void printSolution() override ;
 
 private:
         Path* pathSolution;
         float mutationChance;
         float mutationSize; //percent of gene mutation
-        unsigned int populationSize;
+        unsigned int populationSize=5;
         int eliteSize; //gens that will not be crossed over
-        Path crossoverOrder(Path mother,Path father);
-        int iterations=100;
+    int iterations=100;
 };
 
 

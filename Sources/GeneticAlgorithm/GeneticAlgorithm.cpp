@@ -8,13 +8,13 @@
 
 void GeneticAlgorithm::solve() {
 
-    Population population(50,graph);
+    Population population(populationSize,graph);
     population.sortPopulation();
-    int best = population.get(0)->getLength();
-    int improved;
+    unsigned int improved=population.get(0)->getLength();
     while(iterations--){
 
         population.makeNewPopulation();
+        if(improved>population.get(0)->getLength() && iterations<10) iterations=10;
         improved=population.get(0)->getLength();
     }
     pathSolution=population.getBestAndClean();
@@ -24,11 +24,6 @@ string GeneticAlgorithm::getName() {
 }
 
 
-
-Path GeneticAlgorithm::crossoverOrder(Path mother, Path father) {
-
-}
-
 unsigned GeneticAlgorithm::countCurrentSolutionLength() {
     return pathSolution->getLength();
 }
@@ -37,6 +32,10 @@ GeneticAlgorithm::~GeneticAlgorithm() {
     delete (pathSolution);
 }
 
-void GeneticAlgorithm::printSolution() {
+void GeneticAlgorithm::printSolutionPath() {
     pathSolution->print();
+}
+GeneticAlgorithm::GeneticAlgorithm(unsigned int populationSize, int iterations) {
+    this->populationSize = populationSize;
+    this->iterations = iterations;
 }

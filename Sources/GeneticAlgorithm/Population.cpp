@@ -48,16 +48,18 @@ void Population::makeNewPopulation() {
 
 void Population::print() {
     for(Path* p : population) {
-        cout<<p->getLength();
-        cout<<", ";
+        cout<<p->getLength()<<" ";
+        p->print();
     }
     cout<<"\n";
 }
 
 Path *Population::getBestAndClean() {
+    Path* best = population.front();
     while(population.size()>1) {
         delete (population.back());
         population.pop_back();
     }
-    return population.front();
+    population.pop_back();
+    return best;
 }

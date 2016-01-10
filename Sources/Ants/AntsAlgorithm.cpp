@@ -61,3 +61,14 @@ AntsAlgorithm::~AntsAlgorithm() {
     delete(best);
 
 }
+
+AntsAlgorithm::AntsAlgorithm(unsigned antsNum, unsigned iterations, float alpha, float beta, float rho) {
+    LARGE_INTEGER time;
+    QueryPerformanceCounter(&time);
+    randomGenerator.seed((unsigned)time.QuadPart);
+    this->antsNum = antsNum;
+    this->iterations = iterations;
+    this -> alpha = alpha;
+    this->beta = beta;
+    this->rho = rho;
+}

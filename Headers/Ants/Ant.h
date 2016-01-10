@@ -19,7 +19,6 @@ public:
     static bool antComp(Ant* lhs, Ant* rhs);
     unsigned int getLength();
     void print();
-    ~Ant();
 
 private:
     unsigned int length;
