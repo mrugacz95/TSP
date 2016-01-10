@@ -17,6 +17,7 @@ public:
         unsigned countCurrentSolutionLength() override;
 
         virtual void printSolutionPath() override;
+        GeneticAlgorithm();
         GeneticAlgorithm(unsigned int populationSize, int iterations);
         ~GeneticAlgorithm();
 

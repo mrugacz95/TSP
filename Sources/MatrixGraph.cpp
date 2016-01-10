@@ -8,15 +8,17 @@ MatrixGraph::MatrixGraph(unsigned int size) {
     this->size=size;
     distances.resize(size*(size-1)/2);
     for(unsigned int& i : distances){
-        i=rand();
+        i=rand()+1;
     }
+    maxLength=UINT16_MAX;
 }
 MatrixGraph::MatrixGraph(unsigned int size, unsigned int maxLength) {
     this->size=size;
     distances.resize(size*(size-1)/2);
     for(unsigned int& i : distances){
-        i=rand()%maxLength;
+        i=rand()%maxLength+1;
     }
+    this->maxLength=maxLength;
 }
 unsigned int MatrixGraph::distBetween(int a, int b) {
 
@@ -47,4 +49,8 @@ MatrixGraph &MatrixGraph::operator=(MatrixGraph &&other){
 
 MatrixGraph::MatrixGraph(const MatrixGraph& graph) {
     this->distances = graph.distances;
+}
+
+unsigned MatrixGraph::getMaxLength() {
+    return maxLength;
 }

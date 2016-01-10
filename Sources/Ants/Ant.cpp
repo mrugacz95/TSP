@@ -34,10 +34,9 @@ int Ant::chooseVertex() {
     for(int i =1; i <graph->getSize(); i++) {
         if(!visited[i]){
             pheromonAtractiveness=pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha);
-            if(pheromonAtractiveness<0.000001)
-                pheromonAtractiveness=0.000001;
             distanceAtractiveness=pow(1.f/graph->distBetween(path.back(),i),AntsAlgorithm::beta);
             vertexProbability[i]=distanceAtractiveness*pheromonAtractiveness;
+
             probabilitySum+= vertexProbability[i];
         }
         else
@@ -45,6 +44,12 @@ int Ant::chooseVertex() {
     }
     for(int i =1; i <graph->getSize(); i++){
         vertexProbability[i]/=probabilitySum;
+        if(isnan(vertexProbability[i])){ //TODO usunąć
+            int dist=graph->distBetween(path.back(),i);
+            distanceAtractiveness=pow(1.f/graph->distBetween(path.back(),i),AntsAlgorithm::beta);
+            pheromonAtractiveness=pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha);
+            vertexProbability[i]=0.000001;
+        }
     }
     double random =  (double)AntsAlgorithm::randomGenerator() / (double)numeric_limits<INT32>::max();
     probabilitySum=0;

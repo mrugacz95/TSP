@@ -14,6 +14,9 @@ class Graph{
         virtual void print()=0;
         virtual unsigned int getSize()=0;
         virtual unsigned int distBetween(int a, int b)=0;
+        virtual unsigned getMaxLength()=0;
+    protected:
+    unsigned maxLength;
 };
 
 #endif //OK_TSP_GRAPH_H

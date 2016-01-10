@@ -16,8 +16,10 @@ public:
     unsigned int distBetween(int a, int b) override;
     void print() override ;
     MatrixGraph &operator=(MatrixGraph &&other);
-
     unsigned int getSize() override;
+
+    virtual unsigned getMaxLength() override;
+
 private:
     vector<unsigned int> distances;
     unsigned int size;

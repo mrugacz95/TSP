@@ -7,6 +7,7 @@
 #include "Headers/Utilities.h"
 #include "Headers/GeneticAlgorithm/GeneticAlgorithm.h"
 #include "Headers/Ants/AntsAlgorithm.h"
+#include "Headers/SimulatedAnnealing.h"
 
 using namespace std;
 void fun(){
@@ -15,30 +16,24 @@ void fun(){
 int main() {
     srand((unsigned)time(NULL));
     double start,finish;
-    MatrixGraph graph(10, 1000);
+    MatrixGraph graph(20, 5);
     vector<Solver *> solversList;
-//    solversList.push_back(new BruteForce());
-//    solversList.push_back(new Random());
-//    solversList.push_back(new ImprovedBruteForce());
-//    solversList.push_back(new ClosestNeighbour());
+    solversList.push_back(new BruteForce());
+    solversList.push_back(new Random());
+    solversList.push_back(new ImprovedBruteForce());
+    solversList.push_back(new ClosestNeighbour());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
-    solversList.push_back(new GeneticAlgorithm(50,100));
-    solversList.push_back(new GeneticAlgorithm(50,100));
-    solversList.push_back(new GeneticAlgorithm(50,100));
-    solversList.push_back(new GeneticAlgorithm(50,100));
-    solversList.push_back(new GeneticAlgorithm(50,100));
-    solversList.push_back(new GeneticAlgorithm(50,100));
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new GeneticAlgorithm(75,150));
+    solversList.push_back(new GeneticAlgorithm());
+    solversList.push_back(new SimulatedAnnealing());
 
     for (Solver *s : solversList)
     s->setGraph(&graph);

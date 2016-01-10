@@ -11,12 +11,21 @@ void GeneticAlgorithm::solve() {
     Population population(populationSize,graph);
     population.sortPopulation();
     unsigned int improved=population.get(0)->getLength();
-    while(iterations--){
-
+    int it=iterations;
+    bool wasImproved = false;
+    int improvedIteration = 0;
+    int iteration=0;
+    while(it--){
+        iteration++;
         population.makeNewPopulation();
-        if(improved>population.get(0)->getLength() && iterations<10) iterations=10;
-        improved=population.get(0)->getLength();
+        if(improved>population.get(0)->getLength() && it<10){
+            //cout<<"wildcard\n";
+            it=10;
+            improved=population.get(0)->getLength();
+            improvedIteration=iteration;
+        }
     }
+    //cout<<"last improved: "<<improvedIteration<<"\n";
     pathSolution=population.getBestAndClean();
 }
 string GeneticAlgorithm::getName() {
@@ -38,4 +47,9 @@ void GeneticAlgorithm::printSolutionPath() {
 GeneticAlgorithm::GeneticAlgorithm(unsigned int populationSize, int iterations) {
     this->populationSize = populationSize;
     this->iterations = iterations;
+}
+
+GeneticAlgorithm::GeneticAlgorithm() {
+    iterations=100;
+    populationSize=50;
 }

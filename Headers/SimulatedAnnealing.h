@@ -6,13 +6,18 @@
 #define OK_TSP_SIMULATEDANNEALING_H
 
 
+#include <random>
 #include "Solver.h"
 
 class SimulatedAnnealing : public Solver {
-    void solve() override;
-
 public:
+    void solve() override;
     virtual string getName() override;
+    SimulatedAnnealing();
+    static minstd_rand0 randomGenerator;
+    double temperature(int i);
+private:
+    unsigned int iterations=200;
 };
 
 
