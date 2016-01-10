@@ -20,6 +20,9 @@ public:
     void solve() override;
     string getName() override;
 
+
+    virtual void printParameters() override;
+
     void printSolutionPath();
 
     virtual unsigned countCurrentSolutionLength() override;

@@ -10,14 +10,14 @@ using namespace std;
 class EdgePheromone{
 public:
     EdgePheromone(int size, float initValue);
-    float getPheromone(int a, int b);
+    double getPheromone(int a, int b);
     void setPheromone(int a, int b, float amount);
     void addPheromone(int a, int b, float amount);
 
     void reset(float value);
 
 private:
-    vector<float> pheromones;
+    vector<double> pheromones;
 
 };
 #endif //OK_TSP_EDGEPHEROMONES_H

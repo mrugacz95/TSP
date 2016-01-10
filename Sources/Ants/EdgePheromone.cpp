@@ -2,13 +2,14 @@
 // Created by Mrugi on 2016-01-09.
 //
 
+#include <c++/limits>
 #include "../../Headers/Ants/EdgePheromone.h"
 
 EdgePheromone::EdgePheromone(int size, float initValue) {
     pheromones.resize((unsigned)size*(size-1)/2);
     reset(initValue);
 }
-float EdgePheromone::getPheromone(int a, int b) {
+double EdgePheromone::getPheromone(int a, int b) {
 
     if (a >= b) {
         if (a == b) return 0;
@@ -18,6 +19,8 @@ float EdgePheromone::getPheromone(int a, int b) {
         return pheromones[(b * (b - 1)) / 2 + a];
 }
 void EdgePheromone::setPheromone(int a, int b, float amount){
+    if(amount==0)
+        amount=0.00001;
     if (a >= b)
         pheromones[(a * (a - 1)) / 2 + b]=amount;
     else

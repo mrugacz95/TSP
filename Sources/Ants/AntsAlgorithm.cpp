@@ -72,3 +72,7 @@ AntsAlgorithm::AntsAlgorithm(unsigned antsNum, unsigned iterations, float alpha,
     this->beta = beta;
     this->rho = rho;
 }
+
+void AntsAlgorithm::printParameters() {
+    cout<<"antsNum: "<<antsNum<<" iterations: "<<iterations<<" alpha:"<<alpha<<" beta: "<<beta<<" rho: "<<rho<<"\n";
+}

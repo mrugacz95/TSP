@@ -25,6 +25,7 @@ private:
     float startTemperature;
     float temperature;
     float coolingFactor;
+    int acc,noacc;
 };
 
 

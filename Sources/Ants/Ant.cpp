@@ -28,7 +28,7 @@ void Ant::walk() {
 }
 
 int Ant::chooseVertex() {
-    float probabilitySum=0;
+    double probabilitySum=0;
     double distanceAtractiveness;
     double pheromonAtractiveness;
     for(int i =1; i <graph->getSize(); i++) {
@@ -38,17 +38,22 @@ int Ant::chooseVertex() {
             vertexProbability[i]=distanceAtractiveness*pheromonAtractiveness;
 
             probabilitySum+= vertexProbability[i];
+            if(vertexProbability[i]>0 && probabilitySum ==0)
+                cout<<"bulshit\n";
         }
         else
             vertexProbability[i]=0;
     }
+    if(probabilitySum==0)
+        cout<<"ants wtf\n";
     for(int i =1; i <graph->getSize(); i++){
         vertexProbability[i]/=probabilitySum;
-        if(isnan(vertexProbability[i])){ //TODO usunąć
+        if(isnan(vertexProbability[i]) || (!visited[i] && pow(1.f/graph->distBetween(path.back(),i),AntsAlgorithm::beta)*pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha)==0)){ //TODO usunąć
             int dist=graph->distBetween(path.back(),i);
             distanceAtractiveness=pow(1.f/graph->distBetween(path.back(),i),AntsAlgorithm::beta);
+            double pheromone = edgePheromone->getPheromone(path.back(), i);
             pheromonAtractiveness=pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha);
-            int wynik = distanceAtractiveness*pheromonAtractiveness;
+            double wynik = distanceAtractiveness*pheromonAtractiveness;
             vertexProbability[i]=0.000001;
         }
     }

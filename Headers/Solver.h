@@ -16,7 +16,7 @@ class Solver {
         void solveWithTimeCounting();
         virtual string getName()=0;
         void setGraph(Graph* graph);
-        virtual void printSolution();
+        virtual void printResults();
         bool operator< (Solver &rhs);
         double getSolvingTime() const;
         virtual void printSolutionPath();

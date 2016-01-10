@@ -16,16 +16,26 @@ void fun(){
 int main() {
     srand((unsigned)time(NULL));
     double start,finish;
-    MatrixGraph graph(20, 1000);
+    MatrixGraph graph(25, 1000);
     vector<Solver *> solversList;
     //solversList.push_back(new BruteForce());
     solversList.push_back(new Random());
     //solversList.push_back(new ImprovedBruteForce());
     solversList.push_back(new ClosestNeighbour());
     solversList.push_back(new AntsAlgorithm());
+    solversList.push_back(new AntsAlgorithm(50,100,1,3,0.5f));
+    solversList.push_back(new AntsAlgorithm(20,100,1,3,0.5f));
+    solversList.push_back(new AntsAlgorithm(20,100,1,1,0.5f));
+    solversList.push_back(new AntsAlgorithm(50,100,1,1,0.8f));
     solversList.push_back(new GeneticAlgorithm(75,150));
+    solversList.push_back(new GeneticAlgorithm(50,200));
+    solversList.push_back(new GeneticAlgorithm(20,150));
     solversList.push_back(new GeneticAlgorithm());
-    solversList.push_back(new SimulatedAnnealing(100,.9f,10000));
+    solversList.push_back(new SimulatedAnnealing(800,.9f,10000));
+    solversList.push_back(new SimulatedAnnealing(800,.9f,1000));
+    solversList.push_back(new SimulatedAnnealing(800,.9f,100));
+    solversList.push_back(new SimulatedAnnealing(200,.85f,1000));
+    solversList.push_back(new SimulatedAnnealing(2000,.85f,1000));
 
     for (Solver *s : solversList)
     s->setGraph(&graph);
@@ -43,8 +53,10 @@ int main() {
         s->countCurrentSolutionLength();
     }
     sort(solversList.begin(),solversList.end(), Utilities::compLengthAndTime );
-    for(auto s : solversList)
-        s->printSolution();
+    for(int i=0;i<solversList.size();i++) {
+        cout<<i+1<<". ";
+        solversList[i]->printResults();
+    }
     cout<<"\t\t\t\t\tMulti threading Executed in time"<<((double)(finish-start))/CLOCKS_PER_SEC;
     return 0;
 }

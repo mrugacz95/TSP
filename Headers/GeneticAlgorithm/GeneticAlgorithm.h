@@ -21,6 +21,9 @@ public:
         GeneticAlgorithm(unsigned int populationSize, int iterations);
         ~GeneticAlgorithm();
 
+
+    virtual void printParameters() override;
+
 private:
         Path* pathSolution;
         float mutationChance;

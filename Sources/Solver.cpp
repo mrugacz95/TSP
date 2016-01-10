@@ -10,7 +10,7 @@ void Solver::setGraph(Graph *graph) {
     this->graph=graph;
 }
 
-void Solver::printSolution() {
+void Solver::printResults() {
 //    if(solution.empty()){
 //        cout<<getName()<<" - not solved yet.\n";
 //        return;
@@ -19,7 +19,8 @@ void Solver::printSolution() {
     if(timeCounted)
         cout<<solvingTime<<" ";
     cout<<" Lenght: "<< countCurrentSolutionLength()<<"\n";
-    printSolutionPath();
+    printParameters();
+    //printSolutionPath();
 }
 
 unsigned Solver::countSolutionLength(std::vector<int> &vec) {

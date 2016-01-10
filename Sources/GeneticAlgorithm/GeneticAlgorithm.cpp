@@ -53,3 +53,7 @@ GeneticAlgorithm::GeneticAlgorithm() {
     iterations=100;
     populationSize=50;
 }
+
+void GeneticAlgorithm::printParameters() {
+    cout<<"iterations: "<<iterations<<" populationSize"<<populationSize<<"\n";
+}

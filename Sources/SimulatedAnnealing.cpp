@@ -13,7 +13,7 @@ void SimulatedAnnealing::solve() {
     }
     int previousLength,nextLength;
     double random,probability;
-    int accepted=0,noacc=0;
+    acc=0,noacc=0;
     temperature = startTemperature;
     for(int it=2;it<iterations+2;it++) {
         for (int i = 0; i < graph->getSize() - 1; i++) {
@@ -33,18 +33,15 @@ void SimulatedAnnealing::solve() {
                 noacc++;
             }
             else{
-                accepted++;
-                cout<<"--------------- from"<<previousLength<<" to:"<<nextLength<<"\n";
+                acc++;
+                //cout<<"--------------- from"<<previousLength<<" to:"<<nextLength<<"\n";
             }
         }
         if(temperature * coolingFactor<0)
             cout<<"wtf\n";
         temperature*=coolingFactor;
-        int l=countCurrentSolutionLength();
-        cout<<l<<" ";
-        printSolutionPath();
     }
-    cout<<"acc"<<accepted<<" n:"<<noacc;
+    cout<<"acc"<<acc<<" n:"<<noacc<<"\n";
 
 }
 
@@ -70,5 +67,5 @@ SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFac
 }
 
 void SimulatedAnnealing::printParameters() {
-    cout<<"iterations: "<<iterations<<" coolongFactor"<<coolingFactor<<" startTemperature"<<startTemperature<<"\n";
+    cout<<"iterations: "<<iterations<<" coolongFactor:"<<coolingFactor<<" startTemperature:"<<startTemperature<<" Accepted worse: "<<acc<<" Discarded worse: "<<noacc<<"\n";
 }
