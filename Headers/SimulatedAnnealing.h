@@ -14,10 +14,17 @@ public:
     void solve() override;
     virtual string getName() override;
     SimulatedAnnealing();
+    SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture);
     static minstd_rand0 randomGenerator;
-    double temperature(int i);
+    double temperatureFunc(int i);
+
+    virtual void printParameters() override;
+
 private:
     unsigned int iterations=200;
+    float startTemperature;
+    float temperature;
+    float coolingFactor;
 };
 
 

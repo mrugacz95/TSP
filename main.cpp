@@ -16,24 +16,16 @@ void fun(){
 int main() {
     srand((unsigned)time(NULL));
     double start,finish;
-    MatrixGraph graph(20, 5);
+    MatrixGraph graph(20, 1000);
     vector<Solver *> solversList;
-    solversList.push_back(new BruteForce());
+    //solversList.push_back(new BruteForce());
     solversList.push_back(new Random());
-    solversList.push_back(new ImprovedBruteForce());
+    //solversList.push_back(new ImprovedBruteForce());
     solversList.push_back(new ClosestNeighbour());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
-    solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new AntsAlgorithm());
     solversList.push_back(new GeneticAlgorithm(75,150));
     solversList.push_back(new GeneticAlgorithm());
-    solversList.push_back(new SimulatedAnnealing());
+    solversList.push_back(new SimulatedAnnealing(100,.9f,10000));
 
     for (Solver *s : solversList)
     s->setGraph(&graph);

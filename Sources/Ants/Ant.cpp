@@ -29,8 +29,8 @@ void Ant::walk() {
 
 int Ant::chooseVertex() {
     float probabilitySum=0;
-    float distanceAtractiveness;
-    float pheromonAtractiveness;
+    double distanceAtractiveness;
+    double pheromonAtractiveness;
     for(int i =1; i <graph->getSize(); i++) {
         if(!visited[i]){
             pheromonAtractiveness=pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha);
@@ -48,6 +48,7 @@ int Ant::chooseVertex() {
             int dist=graph->distBetween(path.back(),i);
             distanceAtractiveness=pow(1.f/graph->distBetween(path.back(),i),AntsAlgorithm::beta);
             pheromonAtractiveness=pow(edgePheromone->getPheromone(path.back(), i),AntsAlgorithm::alpha);
+            int wynik = distanceAtractiveness*pheromonAtractiveness;
             vertexProbability[i]=0.000001;
         }
     }

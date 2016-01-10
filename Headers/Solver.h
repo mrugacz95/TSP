@@ -20,7 +20,8 @@ class Solver {
         bool operator< (Solver &rhs);
         double getSolvingTime() const;
         virtual void printSolutionPath();
-    virtual unsigned countCurrentSolutionLength();
+        virtual unsigned countCurrentSolutionLength();
+        virtual void printParameters();
         ~Solver();
         thread solveAsync();
     protected:

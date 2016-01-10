@@ -28,6 +28,6 @@ private:
     int chooseVertex();
     EdgePheromone* edgePheromone;
     vector<int> visited;
-    vector<float> vertexProbability;
+    vector<double> vertexProbability;
 };
 #endif //OK_TSP_ANT_H

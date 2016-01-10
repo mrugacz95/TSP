@@ -12,8 +12,9 @@ void SimulatedAnnealing::solve() {
         solution[i]=i;
     }
     int previousLength,nextLength;
-    unsigned it=iterations;
     double random,probability;
+    int accepted=0,noacc=0;
+    temperature = startTemperature;
     for(int it=2;it<iterations+2;it++) {
         for (int i = 0; i < graph->getSize() - 1; i++) {
             solution[i], solution[randomGenerator()% graph->getSize()];
@@ -22,16 +23,28 @@ void SimulatedAnnealing::solve() {
         previousLength=countSolutionLength(solution);
         swap(solution[swapA], solution[swapB]);
         nextLength=countSolutionLength(solution);
-        if (nextLength>= previousLength){
+        if (nextLength>previousLength){
             random =  (double)SimulatedAnnealing::randomGenerator() / (double)numeric_limits<INT32>::max();
-            probability=exp((double)(nextLength=previousLength)/temperature(it));
-            if(random*exp(iterations)>probability)
+            double delta = (previousLength-nextLength);
+            double power=(previousLength-nextLength)/ temperature;
+            probability=exp((previousLength-nextLength)/ temperature);
+            if(random>probability) {//no accepted
                 swap(solution[swapA], solution[swapB]);
+                noacc++;
+            }
+            else{
+                accepted++;
+                cout<<"--------------- from"<<previousLength<<" to:"<<nextLength<<"\n";
+            }
         }
+        if(temperature * coolingFactor<0)
+            cout<<"wtf\n";
+        temperature*=coolingFactor;
         int l=countCurrentSolutionLength();
-        //cout<<l<<" ";
-        //printSolutionPath();
+        cout<<l<<" ";
+        printSolutionPath();
     }
+    cout<<"acc"<<accepted<<" n:"<<noacc;
 
 }
 
@@ -45,6 +58,17 @@ SimulatedAnnealing::SimulatedAnnealing() {
     randomGenerator.seed((unsigned)time.QuadPart);
 }
 
-double SimulatedAnnealing::temperature(int i) {
+double SimulatedAnnealing::temperatureFunc(int i) {
     return graph->getMaxLength()/log(i);
+}
+
+SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture) {
+    this->iterations=iterations;
+    this->coolingFactor = coolingFactor;
+    this->startTemperature = startTemperture;
+
+}
+
+void SimulatedAnnealing::printParameters() {
+    cout<<"iterations: "<<iterations<<" coolongFactor"<<coolingFactor<<" startTemperature"<<startTemperature<<"\n";
 }
