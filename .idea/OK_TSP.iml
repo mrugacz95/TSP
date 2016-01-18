@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/Ant.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/AntsAlgorithm.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/Ants/EdgePheromone.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Headers/BranchAndBound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/BruteForce.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/ClosestNeighbour.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/Edge.h" isTestSource="false" />
@@ -13,7 +14,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Headers/GeneticAlgorithm/Path.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/GeneticAlgorithm/Population.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/Graph.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Headers/ImprovedBruteForce.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/ListGraph.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/MatrixGraph.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Headers/Random.h" isTestSource="false" />
@@ -23,13 +23,13 @@
       <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/Ant.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/AntsAlgorithm.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/Ants/EdgePheromone.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sources/BranchAndBound.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/BruteForce.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/ClosestNeighbour.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/Edge.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/GeneticAlgorithm.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/Path.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/GeneticAlgorithm/Population.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sources/ImprovedBruteForce.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/ListGraph.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/MatrixGraph.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sources/Random.cpp" isTestSource="false" />

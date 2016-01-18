@@ -21,7 +21,7 @@ public:
     virtual void printParameters() override;
 
 private:
-    unsigned int iterations=200;
+    unsigned int iterations=1000;
     float startTemperature;
     float temperature;
     float coolingFactor;

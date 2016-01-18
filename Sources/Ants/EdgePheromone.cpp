@@ -19,6 +19,8 @@ double EdgePheromone::getPheromone(int a, int b) {
         return pheromones[(b * (b - 1)) / 2 + a];
 }
 void EdgePheromone::setPheromone(int a, int b, double amount){
+    if(amount==0)
+        amount=0.00001;
     if (a >= b)
         pheromones[(a * (a - 1)) / 2 + b]=amount;
     else

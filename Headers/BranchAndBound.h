@@ -8,7 +8,7 @@
 
 #include "Solver.h"
 
-class ImprovedBruteForce: public Solver {
+class BranchAndBound : public Solver {
     public:
         string getName() override;
 

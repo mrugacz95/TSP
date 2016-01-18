@@ -5,9 +5,6 @@
 #include "../../Headers/Ants/AntsAlgorithm.h"
 #include "../../Headers/Ants/Ant.h"
 minstd_rand0 AntsAlgorithm::randomGenerator;
-float AntsAlgorithm::alpha=1.0f;
-float AntsAlgorithm::beta=3.0f;
-float AntsAlgorithm::rho=0.6f;
 void AntsAlgorithm::solve() {
     vector<Ant*> ants;
     EdgePheromone edgePheromone(graph->getSize(), 1.f);
@@ -47,6 +44,10 @@ AntsAlgorithm::AntsAlgorithm() {
     LARGE_INTEGER time;
     QueryPerformanceCounter(&time);
     randomGenerator.seed((unsigned)time.QuadPart);
+
+    AntsAlgorithm::alpha=1.0f;
+    AntsAlgorithm::beta=3.0f;
+    AntsAlgorithm::rho=0.6f;
 }
 
 unsigned AntsAlgorithm::countCurrentSolutionLength() {

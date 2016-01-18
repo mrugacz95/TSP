@@ -18,10 +18,11 @@ void Solver::printResults() {
     cout<<getName()<<" ";
     if(timeCounted)
         cout<<solvingTime<<" ";
+    cout<<"Graph size:"<<graph->getSize()<<" ";
     cout<<" Lenght: "<< countCurrentSolutionLength()<<"\n";
     printParameters();
-    //cout<<"\t\t\t\t\t";
-    //printSolutionPath();
+    cout<<"\t\t\t\t\t";
+    printSolutionPath();
     cout<<"\n";
 }
 

@@ -54,6 +54,9 @@ double SimulatedAnnealing::temperatureFunc(int i) {
 }
 
 SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture) {
+    LARGE_INTEGER time;
+    QueryPerformanceCounter(&time);
+    randomGenerator.seed((unsigned)time.QuadPart);
     this->iterations=iterations;
     this->coolingFactor = coolingFactor;
     this->startTemperature = startTemperture;

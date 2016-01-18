@@ -28,9 +28,9 @@ public:
     virtual unsigned countCurrentSolutionLength() override;
 
     static minstd_rand0 randomGenerator;
-    static float alpha;
-    static float beta;
-    static float rho;
+    float alpha;
+    float beta;
+    float rho;
 private:
     unsigned antsNum=20;
     int iterations=100;

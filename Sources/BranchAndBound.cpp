@@ -3,9 +3,9 @@
 //
 
 
-#include "../Headers/ImprovedBruteForce.h"
+#include "../Headers/BranchAndBound.h"
 
-void ImprovedBruteForce::solve() {
+void BranchAndBound::solve() {
     bestSolutionLength=~0UL;
     visited.resize(graph->getSize(),false);
     tmpSolution.clear();
@@ -13,7 +13,7 @@ void ImprovedBruteForce::solve() {
         dfs(i,0);
 }
 
-void ImprovedBruteForce::dfs(int a, unsigned currentLength) {
+void BranchAndBound::dfs(int a, unsigned currentLength) {
 
     tmpSolution.push_back(a);
     if(tmpSolution.size() == graph->getSize()) {
@@ -39,6 +39,6 @@ void ImprovedBruteForce::dfs(int a, unsigned currentLength) {
     return;
 }
 
-string ImprovedBruteForce::getName() {
-    return "ImprovedBruteForce";
+string BranchAndBound::getName() {
+    return "BranchAndBound";
 }
