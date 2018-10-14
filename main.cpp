@@ -10,14 +10,10 @@
 #include "Headers/BranchAndBound.h"
 
 using namespace std;
-void fun(){
-    cout<<"123\n";
-}
 int main() {
-    int choose;
     int algorithm;
     int nodes;
-    srand((unsigned)time(NULL));
+    srand((unsigned)time(nullptr));
     vector<MatrixGraph*> graphs;
     vector<Solver *> solversList;
     cout<<"Add graphs (-1 to stop)\n";
@@ -101,8 +97,9 @@ int main() {
                     }
                     case 6: {
                         int iter, popSize;
+                        float mutSize;
                         cout <<
-                        "Genetic Algorithm added\nChoose parameters population size and number of interations (-1) for default)\n";
+                        "Genetic Algorithm added\nChoose parameters population size, mut ratio and number of interations (-1) for default)\n";
                         cin >> popSize ;
                         if (popSize < 0) {
                             for (MatrixGraph *graph : graphs) {
@@ -111,9 +108,9 @@ int main() {
                             }
                             break;
                         }
-                        cin >> iter;
+                        cin >>mutSize>> iter;
                         for (MatrixGraph *graph : graphs) {
-                            solversList.push_back(new GeneticAlgorithm(popSize, iter));
+                            solversList.push_back(new GeneticAlgorithm(popSize,mutSize, iter));
                             solversList.back()->setGraph(graph);
                         }
                         break;

@@ -7,7 +7,8 @@
 #include "../../Headers/Utilities.h"
 #include <profileapi.h>
 
-Path::Path(unsigned int size, Graph* graph) {
+Path::Path(unsigned int size, float mutationSize, Graph* graph) {
+    this->mutationSize=mutationSize;
     LARGE_INTEGER time;
     QueryPerformanceCounter(&time);
     randomGenerator.seed((unsigned) time.QuadPart);
@@ -67,7 +68,7 @@ void Path::print() {
     cout<<"\n";
 }
 
-void Path::mutationInversion(int mutationSize) {
+void Path::mutationInversion() {
     int from=randomGenerator()%path.size(),
             to=(from+(int)round(mutationSize*path.size()))%path.size(),
             swapsNum=(from+to)/2-from;
@@ -75,12 +76,12 @@ void Path::mutationInversion(int mutationSize) {
         swap(path[(from+i)%path.size()],path[(to+path.size()-i)%path.size()]);
 }
 
-void Path::mutationScramble(float mutationSize) {
+void Path::mutationScramble() {
     int changesNum;
     if(mutationSize==0)
         changesNum=1;
     else
-        changesNum= (int)round(mutationSize*path.size());
+        changesNum= (int)ceil(mutationSize*(double)path.size());
     for(int i=0;i< changesNum;i++){
         swap(path[randomGenerator()%path.size()],path[randomGenerator()%path.size()]);
     }

@@ -74,7 +74,6 @@ thread Solver::solveAsync() {
 
 Solver::~Solver() {
     delete(graph);
-
 }
 
 void Solver::printSolutionPath()
