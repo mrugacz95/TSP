@@ -8,29 +8,32 @@
 #include "../Solver.h"
 #include "Path.h"
 #include <algorithm>
+
 class GeneticAlgorithm : public Solver {
 
 public:
-    public:
-        void solve() override;
-        std::string getName() override;
-        unsigned countCurrentSolutionLength() override;
+    void solve() override;
 
-        virtual void printSolutionPath() override;
-        GeneticAlgorithm();
-        GeneticAlgorithm(unsigned int populationSize, int iterations);
-        ~GeneticAlgorithm();
+    std::string getName() override;
 
+    unsigned countCurrentSolutionLength() override;
 
-    virtual void printParameters() override;
+    void printSolutionPath() override;
 
+    GeneticAlgorithm();
+
+    GeneticAlgorithm(unsigned int populationSize, float mutationSize, int iterations);
+
+    void printParameters() override;
+
+    ~GeneticAlgorithm();
 private:
-        Path* pathSolution;
-        float mutationChance;
-        float mutationSize; //percent of gene mutation
-        unsigned int populationSize=5;
-        int eliteSize; //gens that will not be crossed over
-    int iterations=100;
+    Path *pathSolution;
+    float mutationChance;
+    float mutationSize; // percent of gene mutation
+    unsigned int populationSize = 20;
+    int eliteSize; // gens that will not be crossed over
+    int iterations = 100;
 };
 
 

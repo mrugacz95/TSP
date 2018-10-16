@@ -6,11 +6,11 @@
 #include <algorithm>
 #include <profileapi.h>
 
-Population::Population(unsigned int populationSize,Graph* graph) {
+Population::Population(unsigned int populationSize,float mutationSize,Graph* graph) {
     this->populationSize=populationSize;
     population.resize(populationSize);
     for(int i=0;i<populationSize;i++)
-        population[i]=new Path(graph->getSize(),graph);
+        population[i]=new Path(graph->getSize(),mutationSize,graph);
 
     LARGE_INTEGER time;
     QueryPerformanceCounter(&time);
@@ -32,11 +32,13 @@ Population::~Population() {
 }
 
 void Population::makeNewPopulation() {
-    for(int i=1;i<populationSize-1;i++){
+    int elite = (int)round(0.15f*populationSize);
+    for(int i=1;i<elite;i++){
         Path* mother = get(i);
         Path* father = get(randomGenerator()%populationSize);
         population.push_back(new Path(mother,father));
-        population.back()->mutationScramble(0);
+        //population.back()->mutationScramble();
+        population.back()->mutationInversion();
     }
     sortPopulation();
     while(population.size()>populationSize) {
