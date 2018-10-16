@@ -1,8 +1,4 @@
-//
-// Created by Mrugi on 2016-01-09.
-//
-
-#include <c++/limits>
+#include <limits>
 #include "../../Headers/Ants/EdgePheromone.h"
 
 EdgePheromone::EdgePheromone(int size, float initValue) {

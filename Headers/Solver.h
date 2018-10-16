@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-11-12.
-//
-
 #ifndef OK_TSP_SOLUTION_H
 #define OK_TSP_SOLUTION_H
 

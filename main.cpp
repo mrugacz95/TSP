@@ -13,7 +13,7 @@ using namespace std;
 int main() {
     int algorithm;
     int nodes;
-    srand((unsigned)time(nullptr));
+    srand(422);
     vector<MatrixGraph*> graphs;
     vector<Solver *> solversList;
     cout<<"Add graphs (-1 to stop)\n";

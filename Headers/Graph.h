@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-10-28.
-//
-
 #ifndef OK_TSP_GRAPH_H
 #define OK_TSP_GRAPH_H
 #include <iostream>

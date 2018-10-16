@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-10-29.
-//
-
 #include "../Headers/Edge.h"
 
 Edge::Edge(int destiny, int lenght) {

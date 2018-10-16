@@ -1,12 +1,6 @@
-//
-// Created by Mrugi on 2015-11-23.
-//
-
 #ifndef OK_TSP_ANTSALGORITHM_H
 #define OK_TSP_ANTSALGORITHM_H
 
-
-#include <profileapi.h>
 #include <random>
 #include "../Solver.h"
 
@@ -23,7 +17,7 @@ public:
 
     virtual void printParameters() override;
 
-    void printSolutionPath();
+    void printSolutionPath() override;
 
     virtual unsigned countCurrentSolutionLength() override;
 

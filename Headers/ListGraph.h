@@ -1,14 +1,11 @@
-//
-// Created by Mrugi on 2015-10-29.
-//
-
 #ifndef OK_TSP_LISTGRAPH_H
 #define OK_TSP_LISTGRAPH_H
 
 
 #include "Graph.h"
 #include "Edge.h"
-//TODO zrezygnowaæ albo poprawiæ
+
+//TODO zrezygnowac albo poprawic
 class ListGraph : public Graph{
     public:
         ListGraph();

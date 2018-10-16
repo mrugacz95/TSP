@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-11-14.
-//
-
 #ifndef OK_TSP_UTILITIES_H
 #define OK_TSP_UTILITIES_H
 
@@ -11,7 +7,6 @@
 class Utilities {
     public:
         static bool compLengthAndTime(Solver* lhs, Solver* rhs);
-        static minstd_rand0 randomGenerator;
 };
 
 

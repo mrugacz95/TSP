@@ -1,17 +1,9 @@
-//
-// Created by Mrugi on 2016-01-06.
-//
-
 #include <algorithm>
 #include "../../Headers/GeneticAlgorithm/Path.h"
 #include "../../Headers/Utilities.h"
-#include <profileapi.h>
 
 Path::Path(unsigned int size, float mutationSize, Graph* graph) {
     this->mutationSize=mutationSize;
-    LARGE_INTEGER time;
-    QueryPerformanceCounter(&time);
-    randomGenerator.seed((unsigned) time.QuadPart);
     this->graph=graph;
     path.resize(size);
     for(int i=0;i< path.size();i++)
@@ -37,9 +29,6 @@ bool Path::operator<(Path&& rhs) {
 Path::Path(Path* mother, Path* father) {
     unsigned int size=mother->path.size();
     this->path.resize(size,-1);
-    LARGE_INTEGER time;
-    QueryPerformanceCounter(&time);
-    randomGenerator.seed((unsigned)time.QuadPart);
     int from=randomGenerator()%size,to=randomGenerator()%size;
     for(int i=0;i<size;i++){
         if(from <= to && i>= from && i<=to){

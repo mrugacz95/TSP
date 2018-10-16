@@ -1,40 +1,35 @@
-//
-// Created by Mrugi on 2015-11-15.
-//
-
-#include <profileapi.h>
 #include "../Headers/SimulatedAnnealing.h"
 
 minstd_rand0 SimulatedAnnealing::randomGenerator;
+
 void SimulatedAnnealing::solve() {
     solution.resize(graph->getSize());
-    for(int i=0;i<graph->getSize();i++){
-        solution[i]=i;
+    for (int i = 0; i < graph->getSize(); i++) {
+        solution[i] = i;
     }
-    int previousLength,nextLength;
-    double random,probability;
-    acc=0,noacc=0;
+    int previousLength, nextLength;
+    double random, probability;
+    acc = 0, noacc = 0;
     temperature = startTemperature;
-    for(int it=2;it<iterations+2;it++) {
+    for (int it = 2; it < iterations + 2; it++) {
         for (int i = 0; i < graph->getSize() - 1; i++) {
-            solution[i], solution[randomGenerator()% graph->getSize()];
+            solution[i], solution[randomGenerator() % graph->getSize()];
         }
         int swapA = randomGenerator() % graph->getSize(), swapB = randomGenerator() % graph->getSize();
-        previousLength=countSolutionLength(solution);
+        previousLength = countSolutionLength(solution);
         swap(solution[swapA], solution[swapB]);
-        nextLength=countSolutionLength(solution);
-        if (nextLength>previousLength){
-            random =  (double)SimulatedAnnealing::randomGenerator() / (double)numeric_limits<INT32>::max();
-            probability=exp((previousLength-nextLength)/ temperature);
-            if(random>probability) {//no accepted
+        nextLength = countSolutionLength(solution);
+        if (nextLength > previousLength) {
+            random = (double) SimulatedAnnealing::randomGenerator() / (double) numeric_limits<int>::max();
+            probability = exp((previousLength - nextLength) / temperature);
+            if (random > probability) {//no accepted
                 swap(solution[swapA], solution[swapB]);
                 noacc++;
-            }
-            else{
+            } else {
                 acc++;
             }
         }
-        temperature*=coolingFactor;
+        temperature *= coolingFactor;
     }
 
 }
@@ -44,25 +39,20 @@ string SimulatedAnnealing::getName() {
 }
 
 SimulatedAnnealing::SimulatedAnnealing() {
-    LARGE_INTEGER time;
-    QueryPerformanceCounter(&time);
-    randomGenerator.seed((unsigned)time.QuadPart);
 }
 
 double SimulatedAnnealing::temperatureFunc(int i) {
-    return graph->getMaxLength()/log(i);
+    return graph->getMaxLength() / log(i);
 }
 
 SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture) {
-    LARGE_INTEGER time;
-    QueryPerformanceCounter(&time);
-    randomGenerator.seed((unsigned)time.QuadPart);
-    this->iterations=iterations;
+    this->iterations = iterations;
     this->coolingFactor = coolingFactor;
     this->startTemperature = startTemperture;
 
 }
 
 void SimulatedAnnealing::printParameters() {
-    cout<<"iterations: "<<iterations<<" coolongFactor:"<<coolingFactor<<" startTemperature:"<<startTemperature<<" Accepted worse: "<<acc<<" Discarded worse: "<<noacc<<"\n";
+    cout << "iterations: " << iterations << " coolongFactor:" << coolingFactor << " startTemperature:"
+         << startTemperature << " Accepted worse: " << acc << " Discarded worse: " << noacc << "\n";
 }

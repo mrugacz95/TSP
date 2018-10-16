@@ -1,8 +1,3 @@
-//
-// Created by Mrugi on 2015-11-14.
-//
-
-
 #include "../Headers/BranchAndBound.h"
 
 void BranchAndBound::solve() {

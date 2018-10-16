@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2016-01-06.
-//
-
 #ifndef OK_TSP_POPULATION_H
 #define OK_TSP_POPULATION_H
 

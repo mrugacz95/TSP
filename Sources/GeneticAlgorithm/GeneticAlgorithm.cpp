@@ -1,9 +1,4 @@
-//
-// Created by Mrugi on 2015-11-15.
-//
-
 #include "../../Headers/GeneticAlgorithm/GeneticAlgorithm.h"
-#include "../../Headers/GeneticAlgorithm/Path.h"
 #include "../../Headers/GeneticAlgorithm/Population.h"
 
 void GeneticAlgorithm::solve() {

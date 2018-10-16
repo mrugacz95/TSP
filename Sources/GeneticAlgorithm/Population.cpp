@@ -1,20 +1,10 @@
-//
-// Created by Mrugi on 2016-01-06.
-//
-
 #include "../../Headers/GeneticAlgorithm/Population.h"
-#include <algorithm>
-#include <profileapi.h>
 
 Population::Population(unsigned int populationSize,float mutationSize,Graph* graph) {
     this->populationSize=populationSize;
     population.resize(populationSize);
     for(int i=0;i<populationSize;i++)
         population[i]=new Path(graph->getSize(),mutationSize,graph);
-
-    LARGE_INTEGER time;
-    QueryPerformanceCounter(&time);
-    randomGenerator.seed((unsigned)time.QuadPart);
 }
 
 void Population::sortPopulation() {

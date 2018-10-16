@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2016-01-09.
-//
-
 #ifndef OK_TSP_EDGEPHEROMONES_H
 #define OK_TSP_EDGEPHEROMONES_H
 

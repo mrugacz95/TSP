@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-11-13.
-//
-
 #include "../Headers/ClosestNeighbour.h"
 
 void ClosestNeighbour::solve() {

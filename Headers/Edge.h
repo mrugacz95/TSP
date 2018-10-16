@@ -1,7 +1,3 @@
-//
-// Created by Mrugi on 2015-10-29.
-//
-
 #ifndef OK_TSP_EDGE_H
 #define OK_TSP_EDGE_H
 
