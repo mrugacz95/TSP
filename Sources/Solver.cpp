@@ -1,4 +1,5 @@
-#include "../Headers/Solver.h"
+
+#include <Solver.h>
 
 void Solver::setGraph(Graph *graph) {
     this->graph = graph;
@@ -56,10 +57,6 @@ unsigned Solver::countCurrentSolutionLength() {
     return countSolutionLength(solution);
 }
 
-thread Solver::solveAsync() {
-    return thread([=] { solveWithTimeCounting(); });
-}
-
 
 Solver::~Solver() {
     delete (graph);
@@ -76,5 +73,5 @@ void Solver::printSolutionPath() {
 }
 
 void Solver::printParameters() {
-    return;
+
 }

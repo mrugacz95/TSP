@@ -14,7 +14,9 @@ public:
     MatrixGraph &operator=(MatrixGraph &&other);
     unsigned int getSize() override;
 
-    virtual unsigned getMaxLength() override;
+    unsigned getMaxLength() override;
+
+    ~MatrixGraph();
 
 private:
     vector<unsigned int> distances;

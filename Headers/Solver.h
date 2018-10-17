@@ -19,7 +19,6 @@ class Solver {
         virtual unsigned countCurrentSolutionLength();
         virtual void printParameters();
         ~Solver();
-        thread solveAsync();
     protected:
         virtual void solve()=0;
         bool timeCounted;

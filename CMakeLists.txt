@@ -22,10 +22,9 @@ add_executable(TSP
         Headers/Graph.h
         Headers/ListGraph.h
         Headers/MatrixGraph.h
-        Headers/Random.h
+        Headers/RandomSolver.h
         Headers/SimulatedAnnealing.h
         Headers/Solver.h
-        Headers/Utilities.h
         Sources/Ants/Ant.cpp
         Sources/Ants/AntsAlgorithm.cpp
         Sources/Ants/EdgePheromone.cpp
@@ -38,8 +37,10 @@ add_executable(TSP
         Sources/Edge.cpp
         Sources/ListGraph.cpp
         Sources/MatrixGraph.cpp
-        Sources/Random.cpp
+        Sources/RandomSolver.cpp
         Sources/SimulatedAnnealing.cpp
         Sources/Solver.cpp
-        Sources/Utilities.cpp
-        main.cpp)
+        main.cpp
+        Headers/GraphLoader.h
+        Sources/RandomGraphLoader.cpp
+        Headers/RandomGraphLoader.h)

@@ -1,6 +1,5 @@
 #include <algorithm>
 #include "../../Headers/GeneticAlgorithm/Path.h"
-#include "../../Headers/Utilities.h"
 
 Path::Path(unsigned int size, float mutationSize, Graph* graph) {
     this->mutationSize=mutationSize;
