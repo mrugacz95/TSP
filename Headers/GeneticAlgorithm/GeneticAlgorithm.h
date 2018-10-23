@@ -1,8 +1,9 @@
-#ifndef OK_TSP_GENETICALGORITHM_H
-#define OK_TSP_GENETICALGORITHM_H
+#ifndef TSP_GENETICALGORITHM_H
+#define TSP_GENETICALGORITHM_H
 
-#include "../Solver.h"
+#include "Solver.h"
 #include "Path.h"
+
 #include <algorithm>
 
 class GeneticAlgorithm : public Solver {
@@ -23,6 +24,7 @@ public:
     void printParameters() override;
 
     ~GeneticAlgorithm();
+
 private:
     Path *pathSolution;
     float mutationChance;
@@ -33,4 +35,4 @@ private:
 };
 
 
-#endif //OK_TSP_GENETICALGORITHM_H
+#endif //TSP_GENETICALGORITHM_H

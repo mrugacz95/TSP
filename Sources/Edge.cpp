@@ -1,8 +1,10 @@
-#include "../Headers/Edge.h"
+#include "Edge.h"
 
-Edge::Edge(int destiny, int lenght) {
+Edge::Edge(unsigned int destiny, unsigned int length) {
     this->destiny = destiny;
-    this->lenght = lenght;
+    this->length = length;
 }
-int Edge::getDestiny() { return destiny; }
-int Edge::getLength() { return lenght; }
+
+unsigned int Edge::getDestiny() { return destiny; }
+
+unsigned int Edge::getLength() { return length; }

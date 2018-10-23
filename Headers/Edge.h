@@ -1,17 +1,20 @@
-#ifndef OK_TSP_EDGE_H
-#define OK_TSP_EDGE_H
+#ifndef TSP_EDGE_H
+#define TSP_EDGE_H
 
 
-class Edge{
+class Edge {
 public:
-    Edge(int destiny, int lenght);
-    int getLength();
-    int getDestiny();
+    Edge(unsigned int destiny, unsigned int length);
+
+    unsigned int getLength();
+
+    unsigned int getDestiny();
+
 private:
-    int lenght;
-    int destiny;
+    unsigned int length;
+    unsigned int destiny;
 
 };
 
 
-#endif //OK_TSP_EDGE_H
+#endif //TSP_EDGE_H

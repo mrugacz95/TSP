@@ -1,18 +1,21 @@
-#ifndef OK_TSP_CLOSESTNEIGHBOUR_H
-#define OK_TSP_CLOSESTNEIGHBOUR_H
+#ifndef TSP_CLOSESTNEIGHBOUR_H
+#define TSP_CLOSESTNEIGHBOUR_H
 
 
 #include "Solver.h"
 
+#include <vector>
+
 class ClosestNeighbour : public Solver {
     public:
         void solve() override;
-        string getName() override;
+
+    std::string getName() override;
 
     private:
-        vector<bool> visited;
+    std::vector<bool> visited;
         void dfs(int v);
 };
 
 
-#endif //OK_TSP_CLOSESTNEIGHBOUR_H
+#endif //TSP_CLOSESTNEIGHBOUR_H

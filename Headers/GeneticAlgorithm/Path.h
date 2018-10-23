@@ -1,11 +1,10 @@
-#ifndef OK_TSP_PATH_H
-#define OK_TSP_PATH_H
+#ifndef TSP_PATH_H
+#define TSP_PATH_H
 
-using namespace std;
+#include "SymmetricMatrixGraph.h"
 
 #include <vector>
 #include <random>
-#include "../MatrixGraph.h"
 
 class Path {
 public:
@@ -30,13 +29,12 @@ public:
     static bool pathComp(Path *lhs, Path *rhs);
 
 private:
-    minstd_rand0 randomGenerator;
     unsigned int length;
     Graph *graph;
-    vector<int> path;
+    std::vector<int> path;
     float mutationSize;
 
     void countLength();
 };
 
-#endif //OK_TSP_PATH_H
+#endif //TSP_PATH_H

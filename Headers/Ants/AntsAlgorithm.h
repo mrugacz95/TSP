@@ -1,8 +1,7 @@
-#ifndef OK_TSP_ANTSALGORITHM_H
-#define OK_TSP_ANTSALGORITHM_H
+#ifndef TSP_ANTSALGORITHM_H
+#define TSP_ANTSALGORITHM_H
 
-#include <random>
-#include "../Solver.h"
+#include "Solver.h"
 
 class Ant;
 using namespace std;
@@ -12,16 +11,16 @@ public:
     AntsAlgorithm(unsigned antsNum, unsigned iterations, float alpha, float beta, float rho);
     ~AntsAlgorithm();
     void solve() override;
-    string getName() override;
+
+    std::string getName() override;
 
 
-    virtual void printParameters() override;
+    void printParameters() override;
 
     void printSolutionPath() override;
 
-    virtual unsigned countCurrentSolutionLength() override;
+    unsigned countCurrentSolutionLength() override;
 
-    static minstd_rand0 randomGenerator;
     float alpha;
     float beta;
     float rho;
@@ -32,4 +31,4 @@ private:
 };
 
 
-#endif //OK_TSP_ANTSALGORITHM_H
+#endif //TSP_ANTSALGORITHM_H

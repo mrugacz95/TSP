@@ -1,29 +1,29 @@
 #ifndef OK_TSP_LISTGRAPH_H
 #define OK_TSP_LISTGRAPH_H
 
-
 #include "Graph.h"
 #include "Edge.h"
 
-//TODO zrezygnowac albo poprawic
+#include <vector>
+
 class ListGraph : public Graph {
 public:
-    ListGraph();
+    explicit ListGraph(unsigned size);
 
-    void print() override;
+    std::string getName() override;
 
-    bool areConnected(int a, int b);
+    bool areConnected(unsigned a, unsigned b) override;
 
-    unsigned int distBetween(int a, int b) override;
+    unsigned distanceBetween(unsigned int a, unsigned int b) override;
 
-    std::vector<Edge> getVertNeighbours(int a);
+    int findClosestNeighbour(unsigned node) override;
 
-    int findClosestNeighbour(int v);
+    ~ListGraph() override;
 
-    ~ListGraph();
+    explicit operator std::string() override;
 
 private:
-    std::vector<std::vector<Edge> > neighbourList;
+    std::vector<std::vector<Edge>> neighbourList;
 };
 
 

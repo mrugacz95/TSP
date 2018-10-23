@@ -1,10 +1,10 @@
-#include "../../Headers/Ants/AntsAlgorithm.h"
-#include "../../Headers/Ants/Ant.h"
+#include "Ants/AntsAlgorithm.h"
+#include "Ants/Ant.h"
 
 void AntsAlgorithm::solve() {
     vector<Ant *> ants;
-    EdgePheromone edgePheromone(graph->getSize(), 1.f);
-    EdgePheromone pheromoneDelta(graph->getSize(), 0.f);
+    EdgePheromone edgePheromone(graph->getNumberOfNodes(), 1.f);
+    EdgePheromone pheromoneDelta(graph->getNumberOfNodes(), 0.f);
     ants.resize(antsNum);
     for (int i = 0; i < ants.size(); i++)
         ants[i] = new Ant(AntsAlgorithm::alpha, AntsAlgorithm::beta, graph, &edgePheromone);
@@ -15,7 +15,7 @@ void AntsAlgorithm::solve() {
         for (Ant *ant : ants)
             ant->updatePheromone(&pheromoneDelta);
         double newPheromoneValue;
-        for (int i = 0; i < graph->getSize() - 1; i++) {
+        for (int i = 0; i < graph->getNumberOfNodes() - 1; i++) {
             newPheromoneValue =
                     (1 - rho) * edgePheromone.getPheromone(i, i + 1) + pheromoneDelta.getPheromone(i, i + 1);
             edgePheromone.setPheromone(i, i + 1, newPheromoneValue);
@@ -65,6 +65,6 @@ AntsAlgorithm::AntsAlgorithm(unsigned antsNum, unsigned iterations, float alpha,
 }
 
 void AntsAlgorithm::printParameters() {
-    cout << "antsNum: " << antsNum << " iterations: " << iterations << " alpha:" << alpha << " beta: " << beta
-         << " rho: " << rho << "\n";
+    std::cout << "antsNum: " << antsNum << " iterations: " << iterations << " alpha:" << alpha << " beta: " << beta
+              << " rho: " << rho << "\n";
 }

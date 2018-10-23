@@ -1,23 +1,25 @@
-#include "../Headers/BruteForce.h"
+#include "BruteForce.h"
+
+#include <limits>
 
 void BruteForce::solve() {
-    vector<int> tmp;
-    tmp.resize(graph->getSize());
-    for(int i=0;i<tmp.size();i++)
-        tmp[i]=i;
-    unsigned length, bestLength = ~0UL>>1;
-    do{
-        length =0;
+    std::vector<int> tmp;
+    tmp.resize(graph->getNumberOfNodes());
+    for (int i = 0; i < tmp.size(); i++)
+        tmp[i] = i;
+    unsigned length, bestLength = std::numeric_limits<unsigned int>::max();
+    do {
+        length = 0;
         length += countSolutionLength(tmp);
-        length +=graph->distBetween(tmp.front(),tmp.back());
-        if(length < bestLength) {
+        length += graph->distanceBetween(tmp.front(), tmp.back());
+        if (length < bestLength) {
             bestLength = length;
             solution = tmp;
         }
-    }while (next_permutation(tmp.begin(),tmp.end()));
+    } while (next_permutation(tmp.begin(), tmp.end()));
     return;
 }
 
-string BruteForce::getName() {
+std::string BruteForce::getName() {
     return "BruteForce";
 }

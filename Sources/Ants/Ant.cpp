@@ -1,14 +1,14 @@
+#include "Ants/Ant.h"
+#include <iostream>
 #include <cmath>
-#include "../../Headers/Ants/Ant.h"
-#include "../../Headers/Ants/AntsAlgorithm.h"
 
 Ant::Ant(float alpha, float beta, Graph *graph, EdgePheromone *edgePheromone) {
     this->graph = graph;
-    visited.resize(graph->getSize());
+    visited.resize(graph->getNumberOfNodes());
     this->edgePheromone = edgePheromone;
     this->alpha = alpha;
     this->beta = beta;
-    vertexProbability.resize(graph->getSize(), 0.f);
+    vertexProbability.resize(graph->getNumberOfNodes(), 0.f);
 }
 
 void Ant::walk() {
@@ -17,7 +17,7 @@ void Ant::walk() {
     for (int i = 1; i < visited.size(); i++)
         visited[i] = false;
     visited[0] = true;
-    for (int i = 0; i < graph->getSize() - 1; i++) {
+    for (int i = 0; i < graph->getNumberOfNodes() - 1; i++) {
         path.push_back(chooseVertex());
         visited[path.back()] = true;
     }
@@ -27,21 +27,21 @@ int Ant::chooseVertex() {
     double probabilitySum = 0;
     double distanceAttractiveness;
     double pheromoneAttractiveness;
-    for (int i = 1; i < graph->getSize(); i++) {
+    for (int i = 1; i < graph->getNumberOfNodes(); i++) {
         if (!visited[i]) {
             pheromoneAttractiveness = pow(edgePheromone->getPheromone(path.back(), i), alpha);
-            distanceAttractiveness = pow(1.f / graph->distBetween(path.back(), i), beta);
+            distanceAttractiveness = pow(1.f / graph->distanceBetween(path.back(), i), beta);
             vertexProbability[i] = distanceAttractiveness * pheromoneAttractiveness;
 
             probabilitySum += vertexProbability[i];
             if (vertexProbability[i] > 0 && probabilitySum == 0)
-                cout << "bulshit\n";
+                std::cout << "bulshit\n";
         } else
             vertexProbability[i] = 0;
     }
     if (probabilitySum == 0)
-        cout << "ants wtf\n";
-    for (int i = 1; i < graph->getSize(); i++) {
+        std::cout << "ants wtf\n";
+    for (int i = 1; i < graph->getNumberOfNodes(); i++) {
         vertexProbability[i] /= probabilitySum;
     }
     double random = (double) rand() / (double) RAND_MAX;
@@ -66,8 +66,8 @@ void Ant::updatePheromone(EdgePheromone *pheromoneDelta) {
 unsigned int Ant::countLength() {
     length = 0;
     for (int i = 0; i < path.size() - 1; i++)
-        length += graph->distBetween(path[i], path[i + 1]);
-    length += graph->distBetween(path.front(), path.back());
+        length += graph->distanceBetween(path[i], path[i + 1]);
+    length += graph->distanceBetween(path.front(), path.back());
     return length;
 }
 
@@ -82,6 +82,6 @@ unsigned int Ant::getLength() {
 
 void Ant::print() {
     for (int v :path)
-        cout << v << ", ";
-    cout << "\n";
+        std::cout << v << ", ";
+    std::cout << "\n";
 }

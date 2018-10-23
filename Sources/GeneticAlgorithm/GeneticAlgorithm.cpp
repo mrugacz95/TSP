@@ -1,5 +1,5 @@
-#include "../../Headers/GeneticAlgorithm/GeneticAlgorithm.h"
-#include "../../Headers/GeneticAlgorithm/Population.h"
+#include "GeneticAlgorithm/GeneticAlgorithm.h"
+#include "GeneticAlgorithm/Population.h"
 
 void GeneticAlgorithm::solve() {
 
@@ -19,11 +19,11 @@ void GeneticAlgorithm::solve() {
             improvedIteration = iteration;
         }
     }
-    cout << "last improved: " << improvedIteration << "\n";
+    std::cout << "last improved: " << improvedIteration << "\n";
     pathSolution = population.getBestAndClean();
 }
 
-string GeneticAlgorithm::getName() {
+std::string GeneticAlgorithm::getName() {
     return "GeneticAlgorithm";
 }
 
@@ -53,5 +53,5 @@ GeneticAlgorithm::GeneticAlgorithm() {
 }
 
 void GeneticAlgorithm::printParameters() {
-    cout << "iterations: " << iterations << " populationSize" << populationSize << "\n";
+    std::cout << "iterations: " << iterations << " populationSize" << populationSize << "\n";
 }

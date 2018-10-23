@@ -1,10 +1,10 @@
-#include "../Headers/SimulatedAnnealing.h"
+#include "SimulatedAnnealing.h"
 
-minstd_rand0 SimulatedAnnealing::randomGenerator;
+#include <limits>
 
 void SimulatedAnnealing::solve() {
-    solution.resize(graph->getSize());
-    for (int i = 0; i < graph->getSize(); i++) {
+    solution.resize(graph->getNumberOfNodes());
+    for (int i = 0; i < graph->getNumberOfNodes(); i++) {
         solution[i] = i;
     }
     int previousLength, nextLength;
@@ -12,18 +12,18 @@ void SimulatedAnnealing::solve() {
     acc = 0, noacc = 0;
     temperature = startTemperature;
     for (int it = 2; it < iterations + 2; it++) {
-        for (int i = 0; i < graph->getSize() - 1; i++) {
-            solution[i], solution[randomGenerator() % graph->getSize()];
+        for (int i = 0; i < graph->getNumberOfNodes() - 1; i++) {
+            solution[i], solution[rand() % graph->getNumberOfNodes()];
         }
-        int swapA = randomGenerator() % graph->getSize(), swapB = randomGenerator() % graph->getSize();
+        int swapA = rand() % graph->getNumberOfNodes(), swapB = rand() % graph->getNumberOfNodes();
         previousLength = countSolutionLength(solution);
-        swap(solution[swapA], solution[swapB]);
+        std::swap(solution[swapA], solution[swapB]);
         nextLength = countSolutionLength(solution);
         if (nextLength > previousLength) {
-            random = (double) SimulatedAnnealing::randomGenerator() / (double) numeric_limits<int>::max();
+            random = (double) rand() / (double) std::numeric_limits<int>::max();
             probability = exp((previousLength - nextLength) / temperature);
             if (random > probability) {//no accepted
-                swap(solution[swapA], solution[swapB]);
+                std::swap(solution[swapA], solution[swapB]);
                 noacc++;
             } else {
                 acc++;
@@ -34,7 +34,7 @@ void SimulatedAnnealing::solve() {
 
 }
 
-string SimulatedAnnealing::getName() {
+std::string SimulatedAnnealing::getName() {
     return "SimulatedAnnealing";
 }
 
@@ -42,7 +42,7 @@ SimulatedAnnealing::SimulatedAnnealing() {
 }
 
 double SimulatedAnnealing::temperatureFunc(int i) {
-    return graph->getMaxLength() / log(i);
+    return graph->MAX_LENGTH / log(i);
 }
 
 SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture) {
@@ -53,6 +53,6 @@ SimulatedAnnealing::SimulatedAnnealing(unsigned int iterations, float coolingFac
 }
 
 void SimulatedAnnealing::printParameters() {
-    cout << "iterations: " << iterations << " coolongFactor:" << coolingFactor << " startTemperature:"
-         << startTemperature << " Accepted worse: " << acc << " Discarded worse: " << noacc << "\n";
+    std::cout << "iterations: " << iterations << " coolongFactor:" << coolingFactor << " startTemperature:"
+              << startTemperature << " Accepted worse: " << acc << " Discarded worse: " << noacc << "\n";
 }

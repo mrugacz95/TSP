@@ -1,20 +1,21 @@
-#ifndef OK_TSP_IMPROVEDBRUTEFORCE_H
-#define OK_TSP_IMPROVEDBRUTEFORCE_H
+#ifndef TSP_IMPROVEDBRUTEFORCE_H
+#define TSP_IMPROVEDBRUTEFORCE_H
 
 
 #include "Solver.h"
 
 class BranchAndBound : public Solver {
     public:
-        string getName() override;
+    std::string getName() override;
 
     private:
         void solve() override;
-        vector<bool> visited;
-        vector<int> tmpSolution;
+
+    std::vector<bool> visited;
+    std::vector<int> tmpSolution;
         unsigned bestSolutionLength;
         void dfs(int a, unsigned currentLength);
 };
 
 
-#endif //OK_TSP_IMPROVEDBRUTEFORCE_H
+#endif //TSP_IMPROVEDBRUTEFORCE_H

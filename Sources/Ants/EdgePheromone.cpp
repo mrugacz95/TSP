@@ -1,5 +1,4 @@
-#include <limits>
-#include "../../Headers/Ants/EdgePheromone.h"
+#include "Ants/EdgePheromone.h"
 
 EdgePheromone::EdgePheromone(int size, float initValue) {
     pheromones.resize((unsigned)size*(size-1)/2);
@@ -31,6 +30,6 @@ void EdgePheromone::addPheromone(int a, int b, double amount) {
 }
 
 void EdgePheromone::reset(float value) {
-    for(int i=0;i<pheromones.size();i++)
-        pheromones[i]=value;
+    for (double &pheromone : pheromones)
+        pheromone = value;
 }

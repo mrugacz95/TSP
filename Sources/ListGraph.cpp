@@ -1,62 +1,60 @@
+#include "ListGraph.h"
 
-#include <ListGraph.h>
+#include <sstream>
+#include <limits>
 
-ListGraph::ListGraph() {
-    this->verticesNumber = 20;
-    for (int i = 0; i < verticesNumber; ++i) {
+ListGraph::ListGraph(unsigned size) {
+    for (int i = 0; i < size; ++i) {
         std::vector<Edge> list;
-        for (int j = 0; j < verticesNumber / 2; ++j) {
-            list.push_back(Edge(rand() % verticesNumber, rand() % verticesNumber % 100 + 1));
+        for (int j = 0; j < size / 2; ++j) {
+            list.push_back(Edge(rand() % size, rand() % size % MAX_LENGTH + 1));
         }
         neighbourList.push_back(list);
     }
 }
 
-void ListGraph::print() {
+ListGraph::operator std::string() {
+    std::ostringstream result;
     for (int i = 0; i < neighbourList.size(); ++i) {
-        std::cout << i << ": ";
-        for (int j = 0; j < neighbourList[i].size(); ++j) {
-            std::cout << neighbourList[i][j].getDestiny() << "<l:" << neighbourList[i][j].getLength() << ">, ";
+        result << i << ": ";
+        for (auto &j : neighbourList[i]) {
+            result << j.getDestiny() << "<l:" << j.getLength() << ">, ";
         }
-        std::cout << "\n";
+        result << "\n";
     }
+    return result.str();
 }
 
-bool ListGraph::areConnected(int a, int b) {
-    for (int i = 0; i < neighbourList[a].size(); ++i) {
-        if (neighbourList[a][i].getDestiny() == b)
+std::string ListGraph::getName() {
+    return "ListGraph";
+}
+
+bool ListGraph::areConnected(unsigned a, unsigned b) {
+    for (auto &i : neighbourList[a]) {
+        if (i.getDestiny() == b)
             return true;
     }
     return false;
 }
 
-unsigned int ListGraph::distBetween(int a, int b) {
-    for (int i = 0; i < neighbourList[a].size(); ++i) {
-        if (neighbourList[a][i].getDestiny() == b)
-            return neighbourList[a][i].getLength();
+unsigned int ListGraph::distanceBetween(unsigned int a, unsigned int b) {
+    for (auto &i : neighbourList[a]) {
+        if (i.getDestiny() == b)
+            return i.getLength();
     }
-    return -1;
+    return std::numeric_limits<unsigned int>::max();
 }
 
-std::vector<Edge> ListGraph::getVertNeighbours(int a) {
-    return std::vector<Edge>();
-}
-
-
-int ListGraph::findClosestNeighbour(int v) {
-    if (neighbourList[v].empty())
+int ListGraph::findClosestNeighbour(unsigned node) {
+    if (neighbourList[node].empty())
         return -1;
-    int closest = neighbourList[v][0].getLength();
-    int n;
-    for (int i = 1; i < neighbourList[v].size(); i++) {
-        if (neighbourList[v][i].getLength() < closest) {
-            closest = neighbourList[v][i].getLength();
-            n = i;
+    Edge closest = neighbourList[node][0];
+    for (auto edge = neighbourList[node].begin(); edge != neighbourList[node].end(); edge++) {
+        if (edge->getLength() < closest.getLength()) {
+            closest = *edge;
         }
-        return n;
     }
-
-
+    return closest.getDestiny();
 }
 
 ListGraph::~ListGraph() {

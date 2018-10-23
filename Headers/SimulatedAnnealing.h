@@ -3,25 +3,29 @@
 
 
 #include <random>
+
 #include "Solver.h"
 
 class SimulatedAnnealing : public Solver {
 public:
     void solve() override;
-    virtual string getName() override;
+
+    std::string getName() override;
+
     SimulatedAnnealing();
+
     SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture);
-    static minstd_rand0 randomGenerator;
+
     double temperatureFunc(int i);
 
-    virtual void printParameters() override;
+    void printParameters() override;
 
 private:
-    unsigned int iterations=1000;
+    unsigned int iterations = 1000;
     float startTemperature;
     float temperature;
     float coolingFactor;
-    int acc,noacc;
+    int acc, noacc;
 };
 
 

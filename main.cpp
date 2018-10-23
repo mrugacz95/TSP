@@ -1,59 +1,63 @@
-#include <iostream>
-#include "Headers/MatrixGraph.h"
-#include "Headers/BruteForce.h"
-#include "Headers/ClosestNeighbour.h"
+#include "SymmetricMatrixGraph.h"
+#include "BruteForce.h"
+#include "ClosestNeighbour.h"
 #include "RandomSolver.h"
-#include "Headers/GeneticAlgorithm/GeneticAlgorithm.h"
-#include "Headers/Ants/AntsAlgorithm.h"
-#include "Headers/SimulatedAnnealing.h"
-#include "Headers/BranchAndBound.h"
-#include "Headers/GraphLoader.h"
-#include "Headers/RandomGraphLoader.h"
-
-using namespace std;
+#include "GeneticAlgorithm/GeneticAlgorithm.h"
+#include "Ants/AntsAlgorithm.h"
+#include "SimulatedAnnealing.h"
+#include "BranchAndBound.h"
+#include "AsymmetricMatrixGraph.h"
 
 int main() {
     int algorithm;
-    srand((int) time(NULL));
-    vector<MatrixGraph *> graphs;
+    srand(422);
+    std::vector<SymmetricMatrixGraph *> graphs;
     Solver *solver = nullptr;
-
-    GraphLoader *graphLoader;
-    cout << "Choose graph source:\n0 Random graph\n1 From file\n";
+    Graph *graph;
+    std::cout << "Choose graph source:\n0 Random graph\n1 From file\n";
     int graphSource;
-    cin >> graphSource;
+    std::cin >> graphSource;
     switch (graphSource) {
-        case 1: //TODO implement loading from file
+        case 0:
+            unsigned size;
+            std::cout << "Provide graph size\n";
+            std::cin >> size;
+            graph = new AsymmetricMatrixGraph(size);
+            break;
         default:
-            graphLoader = new RandomGraphLoader();
+            std::cout << "Provide file path\n";
+            std::string filename;
+            std::cin >> filename;
+            graph = new AsymmetricMatrixGraph(filename);
             break;
 
     }
     do {
-        cout
-                << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm\n6 Geneticalgorithm\n-1 start\n";
-        cin >> algorithm;
+        std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
+                     "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
+                     "\n6 Geneticalgorithm\n-1 start\n";
+        std::cin >> algorithm;
         switch (algorithm) {
             case 0:
-                cout << "BruteForce added\n";
+                std::cout << "BruteForce added\n";
                 solver = new BruteForce();
                 break;
             case 1:
-                cout << "Random added\n";
+                std::cout << "Random added\n";
                 solver = new RandomSolver(1000);
                 break;
             case 2:
-                cout << "Branch and Bound added\n";
+                std::cout << "Branch and Bound added\n";
                 solver = new BranchAndBound();
                 break;
             case 3:
-                cout << "Closest neighbour added\n";
+                std::cout << "Closest neighbour added\n";
                 solver = new ClosestNeighbour();
                 break;
             case 4: {
 
-                cout << "Simulated Annealing added\nChoose parameters: temperature, "
-                        "number of iterations and cooling factor (-1) for default)";
+                std::cout << "Simulated Annealing added\nChoose parameters: temperature, "
+                             "number of iterations and cooling factor (-1) for default)";
                 unsigned int iter;
                 float temp, coolingFactor;
                 cin >> temp;
@@ -68,8 +72,8 @@ int main() {
             case 5: {
                 unsigned int iter, antsNum;
                 float alpha, beta, rho;
-                cout <<
-                     "Ants Algorithm added\nChoose parameters number of ants, alpha, beta, rho and number of iterations (-1) for default)\n";
+                std::cout <<
+                          "Ants Algorithm added\nChoose parameters number of ants, alpha, beta, rho and number of iterations (-1) for default)\n";
                 cin >> antsNum;
                 if (antsNum < 0) {
                     solver = new AntsAlgorithm();
@@ -82,8 +86,8 @@ int main() {
             case 6: {
                 unsigned int iter, popSize;
                 float mutSize;
-                cout << "Genetic Algorithm added\nChoose parameters population size,"
-                        " mut ratio and number of iterations (-1) for default)\n";
+                std::cout << "Genetic Algorithm added\nChoose parameters population size,"
+                             " mut ratio and number of iterations (-1) for default)\n";
                 cin >> popSize;
                 if (popSize < 0) {
                     solver = new GeneticAlgorithm();
@@ -95,12 +99,11 @@ int main() {
             }
             default:
                 if (algorithm > 6)
-                    cout << "Wrong number\n";
+                    std::cout << "Wrong number\n";
                 algorithm = -1;
         }
     } while (algorithm >= 0);
-    cout << "Started\n";
-    Graph *graph = graphLoader->load();
+    std::cout << "Started\n";
     solver->setGraph(graph);
     solver->solveWithTimeCounting();
     solver->countCurrentSolutionLength();

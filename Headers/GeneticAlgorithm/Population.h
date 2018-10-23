@@ -1,5 +1,5 @@
-#ifndef OK_TSP_POPULATION_H
-#define OK_TSP_POPULATION_H
+#ifndef TSP_POPULATION_H
+#define TSP_POPULATION_H
 
 #include "Path.h"
 
@@ -20,9 +20,8 @@ public:
     Path *getBestAndClean();
 
 private:
-    minstd_rand0 randomGenerator;
     unsigned int populationSize;
-    vector<Path *> population;
+    std::vector<Path *> population;
 };
 
-#endif //OK_TSP_POPULATION_H
+#endif //TSP_POPULATION_H
