@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <iostream>
+#include <GeneticAlgorithm/Path.h>
+
 
 Path::Path(unsigned int size, float mutationSize, Graph *graph) {
     this->mutationSize = mutationSize;
@@ -94,4 +96,8 @@ Path::Path(Path *source, Graph *graph) {
     for (int i = 0; i < source->path.size(); i++)
         this->path.push_back(source->path[i]);
     countLength();
+}
+
+std::vector<int> Path::getPath() {
+    return path;
 }

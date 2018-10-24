@@ -7,14 +7,19 @@
 #include <vector>
 
 class ClosestNeighbour : public Solver {
-    public:
-        void solve() override;
+public:
+    void solve() override;
 
     std::string getName() override;
 
-    private:
+    void printParameters() override;
+
+    ~ClosestNeighbour() override = default;
+
+private:
     std::vector<bool> visited;
-        void dfs(int v);
+
+    void dfs(int v);
 };
 
 

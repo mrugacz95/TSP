@@ -31,6 +31,7 @@ void AntsAlgorithm::solve() {
     for (Ant *a : ants)
         if (a != best)
             delete (a);
+    solution = best->getPath();
 }
 
 string AntsAlgorithm::getName() {
@@ -41,14 +42,6 @@ AntsAlgorithm::AntsAlgorithm() {
     AntsAlgorithm::alpha = 1.0f;
     AntsAlgorithm::beta = 3.0f;
     AntsAlgorithm::rho = 0.6f;
-}
-
-unsigned AntsAlgorithm::countCurrentSolutionLength() {
-    return best->getLength();
-}
-
-void AntsAlgorithm::printSolutionPath() {
-    best->print();
 }
 
 AntsAlgorithm::~AntsAlgorithm() {

@@ -10,11 +10,14 @@ class RandomSolver : public Solver {
 public:
     explicit RandomSolver(unsigned int iterations);
 
-    void solve() override;
-
     std::string getName() override;
 
+    void printParameters() override;
+
+
+    ~RandomSolver() override = default;
 private:
+    void solve() override;
     unsigned int iterations;
 };
 

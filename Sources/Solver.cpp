@@ -9,10 +9,10 @@ void Solver::setGraph(Graph *graph) {
 
 void Solver::printResults() {
     std::cout << getName() << " ";
-    if (timeCounted)
+    if (solvingTime > 0)
         std::cout << solvingTime << " ";
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
-    std::cout << " Lenght: " << countCurrentSolutionLength() << "\n";
+    std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
     printParameters();
     std::cout << "\t\t\t\t\t";
     printSolutionPath();
@@ -27,8 +27,7 @@ unsigned Solver::countSolutionLength(std::vector<int> &vec) {
     return length;
 }
 
-void Solver::solveWithTimeCounting() {
-    timeCounted = true;
+void Solver::start() {
     int counter = 0;
     clock_t begin = std::clock(), end;
     do {
@@ -39,29 +38,12 @@ void Solver::solveWithTimeCounting() {
     solvingTime = double(end - begin) / counter;
 }
 
-void Solver::simpleSolve() {
-    timeCounted = false;
-    solve();
-}
-
 bool Solver::operator<(Solver &rhs) {
     return solvingTime < rhs.getSolvingTime();
 }
 
 double Solver::getSolvingTime() const {
     return solvingTime;
-}
-
-unsigned Solver::countCurrentSolutionLength() {
-    if (solution.empty())
-        return std::numeric_limits<unsigned int>::max();
-
-    return countSolutionLength(solution);
-}
-
-
-Solver::~Solver() {
-    delete graph;
 }
 
 void Solver::printSolutionPath() {
@@ -72,8 +54,4 @@ void Solver::printSolutionPath() {
     for (int v : solution)
         std::cout << v << ", ";
     std::cout << "\n";
-}
-
-void Solver::printParameters() {
-
 }

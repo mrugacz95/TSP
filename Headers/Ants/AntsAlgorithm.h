@@ -17,9 +17,7 @@ public:
 
     void printParameters() override;
 
-    void printSolutionPath() override;
-
-    unsigned countCurrentSolutionLength() override;
+    unsigned countCurrentSolutionLength();
 
     float alpha;
     float beta;

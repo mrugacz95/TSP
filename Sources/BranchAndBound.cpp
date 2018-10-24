@@ -36,3 +36,7 @@ void BranchAndBound::dfs(int a, unsigned currentLength) {
 std::string BranchAndBound::getName() {
     return "BranchAndBound";
 }
+
+void BranchAndBound::printParameters() {
+
+}

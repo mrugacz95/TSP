@@ -7,11 +7,17 @@
 
 #include <algorithm>
 
-class BruteForce :public Solver {
-    public:
-        void solve() override;
-
+class BruteForce : public Solver {
+public:
     std::string getName() override;
+
+    void printParameters() override;
+
+    ~BruteForce() override = default;
+
+protected:
+    void solve() override;
+
 };
 
 

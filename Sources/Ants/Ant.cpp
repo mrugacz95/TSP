@@ -1,6 +1,8 @@
 #include "Ants/Ant.h"
 #include <iostream>
 #include <cmath>
+#include <Ants/Ant.h>
+
 
 Ant::Ant(float alpha, float beta, Graph *graph, EdgePheromone *edgePheromone) {
     this->graph = graph;
@@ -84,4 +86,8 @@ void Ant::print() {
     for (int v :path)
         std::cout << v << ", ";
     std::cout << "\n";
+}
+
+std::vector<int> Ant::getPath() {
+    return path;
 }

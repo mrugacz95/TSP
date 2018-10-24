@@ -7,7 +7,6 @@ void GeneticAlgorithm::solve() {
     population.sortPopulation();
     unsigned int improved = population.get(0)->getLength();
     int it = iterations;
-    bool wasImproved = false;
     int improvedIteration = 0;
     int iteration = 0;
     while (it--) {
@@ -21,23 +20,15 @@ void GeneticAlgorithm::solve() {
     }
     std::cout << "last improved: " << improvedIteration << "\n";
     pathSolution = population.getBestAndClean();
+    solution = pathSolution->getPath();
 }
 
 std::string GeneticAlgorithm::getName() {
     return "GeneticAlgorithm";
 }
 
-
-unsigned GeneticAlgorithm::countCurrentSolutionLength() {
-    return pathSolution->getLength();
-}
-
 GeneticAlgorithm::~GeneticAlgorithm() {
     delete (pathSolution);
-}
-
-void GeneticAlgorithm::printSolutionPath() {
-    pathSolution->print();
 }
 
 GeneticAlgorithm::GeneticAlgorithm(unsigned int populationSize, float mutationSize, int iterations) {

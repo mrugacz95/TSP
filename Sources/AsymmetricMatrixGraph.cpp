@@ -6,7 +6,7 @@
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
     matrix.resize(size);
     for (int i = 0; i < size; i++) {
-        matrix[0].resize(size);
+        matrix[i].resize(size);
         for (int j = 0; j < size; ++j) {
             matrix[i][j] = rand() % MAX_LENGTH + 1;
         }

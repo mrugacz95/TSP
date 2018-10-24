@@ -22,6 +22,8 @@ public:
 
     void print();
 
+    std::vector<int> getPath();
+
 private:
     unsigned int length;
     Graph *graph;

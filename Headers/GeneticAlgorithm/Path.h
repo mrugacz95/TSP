@@ -28,6 +28,8 @@ public:
 
     static bool pathComp(Path *lhs, Path *rhs);
 
+    std::vector<int> getPath();
+
 private:
     unsigned int length;
     Graph *graph;

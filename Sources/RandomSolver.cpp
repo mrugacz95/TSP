@@ -27,3 +27,7 @@ void RandomSolver::solve() {
 std::string RandomSolver::getName() {
     return "Random Solver";
 }
+
+void RandomSolver::printParameters() {
+
+}

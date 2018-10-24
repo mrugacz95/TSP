@@ -10,21 +10,24 @@ void ClosestNeighbour::dfs(int v) {
     solution.push_back(v);
     if (solution.size() == graph->getNumberOfNodes())
         return;
-    visited[v]=true;
-    int closest=-1,currDist,destiny;
+    visited[v] = true;
+    int closest = -1, currDist, destiny;
     for (int i = 0; i < graph->getNumberOfNodes(); i++) {
-        if(visited[i]) continue;
-        if(v ==i) continue;
+        if (visited[i]) continue;
+        if (v == i) continue;
         currDist = graph->distanceBetween(v, i);
-        if (closest > currDist || closest == -1 ){
-            closest=currDist;
-            destiny=i;
+        if (closest > currDist || closest == -1) {
+            closest = currDist;
+            destiny = i;
         }
     }
     dfs(destiny);
-    return;
 }
 
 std::string ClosestNeighbour::getName() {
     return "ClosestNeighbour";
+}
+
+void ClosestNeighbour::printParameters() {
+
 }

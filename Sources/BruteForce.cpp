@@ -17,9 +17,14 @@ void BruteForce::solve() {
             solution = tmp;
         }
     } while (next_permutation(tmp.begin(), tmp.end()));
-    return;
 }
 
 std::string BruteForce::getName() {
     return "BruteForce";
 }
+
+void BruteForce::printParameters() {
+}
+
+
+

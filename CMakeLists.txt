@@ -21,7 +21,8 @@ set(HEADER_FILES Headers/Ants/Ant.h
         Headers/RandomSolver.h
         Headers/SimulatedAnnealing.h
         Headers/Solver.h
-        Headers/SymmetricMatrixGraph.h)
+        Headers/SymmetricMatrixGraph.h
+        Headers/LocalSearch.h)
 set(SOURCE_FILES main.cpp
         Sources/Ants/Ant.cpp
         Sources/Ants/AntsAlgorithm.cpp
@@ -38,6 +39,8 @@ set(SOURCE_FILES main.cpp
         Sources/RandomSolver.cpp
         Sources/SimulatedAnnealing.cpp
         Sources/Solver.cpp
-        Sources/SymmetricMatrixGraph.cpp)
+        Sources/SymmetricMatrixGraph.cpp
+        Sources/LocalSearch.cpp
+        Sources/LocalSearch.cpp)
 add_executable(TSP ${SOURCE_FILES} ${HEADER_FILES})
 

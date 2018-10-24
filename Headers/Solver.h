@@ -9,36 +9,59 @@
 
 class Solver {
 public:
-    void simpleSolve();
+    /**
+     * Starts solution optimization
+     */
+    void start();
 
-    void solveWithTimeCounting();
-
+    /**
+     * Returns solver implementation name
+     * @return
+     */
     virtual std::string getName() = 0;
 
+    /**
+     * Graph setter
+     * @param graph Graph with distances to find solution
+     */
     void setGraph(Graph *graph);
 
-    virtual void printResults();
+    /**
+     * prints found results
+     */
+    void printResults();
 
+    /**
+     * Operator which allows to compare solvers by time
+     * @param rhs other solver
+     * @return
+     */
     bool operator<(Solver &rhs);
 
+    /**
+     * Returns solution time
+     * @return solution time
+     */
     double getSolvingTime() const;
 
-    virtual void printSolutionPath();
+    /**
+     * Prints found path
+     */
+    void printSolutionPath();
 
-    virtual unsigned countCurrentSolutionLength();
+    /**
+     * Prints used parameters
+     */
+    virtual void printParameters() = 0;
 
-    virtual void printParameters();
-
-    ~Solver();
+    virtual ~Solver() = default;
 
 protected:
-    virtual void solve() = 0;
-
-    bool timeCounted;
     double solvingTime;
     Graph *graph;
     std::vector<int> solution;
 
+    virtual void solve() = 0;
     virtual unsigned countSolutionLength(std::vector<int> &vec);
 };
 
