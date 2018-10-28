@@ -3,7 +3,6 @@
 
 #include "Graph.h"
 
-#include <string>
 #include <vector>
 
 class SymmetricMatrixGraph : public Graph {

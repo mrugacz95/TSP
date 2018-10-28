@@ -2,6 +2,7 @@
 #define OK_TSP_GRAPH_H
 
 #include <string>
+#include <limits>
 
 class Graph {
 public:

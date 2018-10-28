@@ -2,6 +2,7 @@
 #define TSP_POPULATION_H
 
 #include "Path.h"
+#include <algorithm>
 
 class Population {
 public:
