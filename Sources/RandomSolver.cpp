@@ -1,8 +1,7 @@
 #include "RandomSolver.h"
-
-RandomSolver::RandomSolver(unsigned int iterations) {
-    this->iterations = iterations;
-}
+#include <algorithm>
+#include <random>
+#include <RandomSolver.h>
 
 void RandomSolver::solve() {
 
@@ -11,11 +10,11 @@ void RandomSolver::solve() {
         tmpSolution[i] = i;
     unsigned int bestLength = std::numeric_limits<unsigned>::max();
     std::vector<int> bestSolution;
-    for (int iter = 0; iter < iterations; iter++) {
-        // shuffle
-        for (unsigned long i = tmpSolution.size() - 1; i > 1; i--) {
-            std::swap(tmpSolution[i], tmpSolution[rand() % i]);
-        }
+    auto random_engine = std::default_random_engine(seed);
+    std::clock_t start = clock();
+    solution = tmpSolution;
+    while (start + this->maxTime >= clock()) {
+        std::shuffle(tmpSolution.begin(), tmpSolution.end(), random_engine);
         unsigned length = countSolutionLength(tmpSolution);
         if (bestLength > length) {
             bestLength = length;
@@ -28,6 +27,7 @@ std::string RandomSolver::getName() {
     return "Random Solver";
 }
 
-void RandomSolver::printParameters() {
-
+RandomSolver::RandomSolver(unsigned seed, unsigned maxTime) {
+    this->seed = seed;
+    this->maxTime = maxTime;
 }

@@ -2,6 +2,10 @@
 
 #include <limits>
 #include <ctime>
+#include <sstream>
+#include <Solver.h>
+#include <fstream>
+
 
 void Solver::setGraph(Graph *graph) {
     this->graph = graph;
@@ -10,12 +14,12 @@ void Solver::setGraph(Graph *graph) {
 void Solver::printResults() {
     std::cout << getName() << " ";
     if (solvingTime > 0)
-        std::cout << solvingTime << " ";
+        std::cout << "Time (ms):" << solvingTime << " ";
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
-    std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
+    std::cout << " Length: " << countSolutionLength(solution) << "\n";
     printParameters();
     std::cout << "\t\t\t\t\t";
-    printSolutionPath();
+    getSolutionPath();
     std::cout << "\n";
 }
 
@@ -46,12 +50,28 @@ double Solver::getSolvingTime() const {
     return solvingTime;
 }
 
-void Solver::printSolutionPath() {
+std::string Solver::getSolutionPath() {
     if (solution.empty()) {
-        std::cout << "Not solved";
+        return "Not solved";
+    }
+    std::ostringstream result;
+    for (int v : solution)
+        result << v << " ";
+    return result.str();
+}
+
+void Solver::saveToFile(std::string filename) {
+    std::fstream file;
+    file.open(filename, std::ios::out);
+    if (!file.good()) {
+        std::cout << "Couldn't not open file";
         return;
     }
-    for (int v : solution)
-        std::cout << v << ", ";
-    std::cout << "\n";
+    file << getName() << "\n";
+    file << getSolvingTime() << "\n";
+    file << graph->getNumberOfNodes() << "\n";
+    file << countSolutionLength(solution) << "\n";
+    file << getSolutionPath() << "\n";
+
+    file.close();
 }

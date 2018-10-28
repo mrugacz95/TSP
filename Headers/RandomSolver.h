@@ -8,17 +8,18 @@
 
 class RandomSolver : public Solver {
 public:
-    explicit RandomSolver(unsigned int iterations);
+    RandomSolver(unsigned seed, unsigned maxTime);
 
     std::string getName() override;
 
     void printParameters() override;
 
-
     ~RandomSolver() override = default;
 private:
     void solve() override;
-    unsigned int iterations;
+
+    unsigned int maxTime;
+    unsigned seed;
 };
 
 
