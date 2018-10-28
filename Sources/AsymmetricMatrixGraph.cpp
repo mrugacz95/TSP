@@ -2,13 +2,14 @@
 
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
     matrix.resize(size);
     for (int i = 0; i < size; i++) {
         matrix[i].resize(size);
         for (int j = 0; j < size; ++j) {
-            matrix[i][j] = rand() % MAX_LENGTH + 1;
+            matrix[i][j] = random() % MAX_LENGTH + 1;
         }
     }
 }
@@ -16,8 +17,11 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
     std::ifstream infile(filename);
+    if (!infile.is_open()) {
+        std::cout << "File not found";
+        exit(0);
+    }
     std::string line;
-    std::vector<std::vector<int>> matrix;
     int field = 0;
     int size = 0;
 
@@ -29,7 +33,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
         if (line == "EDGE_WEIGHT_SECTION") break;
     }
     for (int i = size; i != 0; i--) {
-        std::vector<int> row;
+        std::vector<unsigned> row;
         for (int j = size; j != 0; j--) {
             infile >> field;
             row.push_back(field);

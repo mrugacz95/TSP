@@ -10,8 +10,10 @@
 
 int main() {
     int algorithm;
-    srand(422);
+    unsigned int seed = 422;
+    srand(seed);
     std::vector<SymmetricMatrixGraph *> graphs;
+    std::string outputFile;
     Solver *solver = nullptr;
     Graph *graph;
     std::cout << "Choose graph source:\n0 Random graph\n1 From file\n";
@@ -32,6 +34,8 @@ int main() {
             break;
 
     }
+    std::cout << "Provide output file path\n";
+    std::cin >> outputFile;
     std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
                  "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
                  "\n6 Geneticalgorithm\n-1 start\n";
@@ -43,7 +47,7 @@ int main() {
             break;
         case 1:
             std::cout << "Random added\n";
-            solver = new RandomSolver(1000);
+            solver = new RandomSolver(seed, 10000000);
             break;
         case 2:
             std::cout << "Branch and Bound added\n";
@@ -105,7 +109,9 @@ int main() {
     solver->start();
     solver->getSolvingTime();
     solver->printResults();
+    solver->saveToFile(outputFile);
     graphs.clear();
+
     delete graph;
 
     return 0;
