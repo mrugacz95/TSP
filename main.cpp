@@ -7,6 +7,8 @@
 #include "SimulatedAnnealing.h"
 #include "BranchAndBound.h"
 #include "AsymmetricMatrixGraph.h"
+#include "Greedy.h"
+#include "Steepest.h"
 
 int main() {
     int algorithm;
@@ -34,7 +36,7 @@ int main() {
     }
     std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
                  "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
-                 "\n6 Geneticalgorithm\n-1 start\n";
+                 "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n-1 start\n";
     std::cin >> algorithm;
     switch (algorithm) {
         case 0:
@@ -96,6 +98,14 @@ int main() {
             solver = new GeneticAlgorithm(popSize, mutSize, iter);
             break;
         }
+        case 7:
+            std::cout << "Greedy added\n";
+            solver = new Greedy();
+            break;
+        case 8:
+            std::cout << "Steepest added\n";
+            solver = new Steepest();
+            break;
         default:
             std::cout << "Wrong number\n";
             return 0;

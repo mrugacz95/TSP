@@ -40,6 +40,11 @@ public:
     virtual explicit operator std::string() = 0;
 
     /**
+     * Prints the matrix which defines the costs of traveling between cities
+     */
+    virtual void print() = 0;
+
+    /**
      * Returns closest neighbour for node in grpah
      * @param node Node to find closest neighbour
      * @return distance to closest neighbour

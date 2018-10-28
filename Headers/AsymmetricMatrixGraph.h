@@ -24,6 +24,8 @@ public:
 
     int findClosestNeighbour(unsigned node) override;
 
+    void print() override;
+
 private:
     std::vector<std::vector<unsigned>> matrix;
 };

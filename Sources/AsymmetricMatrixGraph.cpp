@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
     matrix.resize(size);
@@ -17,7 +18,6 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
     std::ifstream infile(filename);
     std::string line;
-    std::vector<std::vector<int>> matrix;
     int field = 0;
     int size = 0;
 
@@ -29,7 +29,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
         if (line == "EDGE_WEIGHT_SECTION") break;
     }
     for (int i = size; i != 0; i--) {
-        std::vector<int> row;
+        std::vector<unsigned> row;
         for (int j = size; j != 0; j--) {
             infile >> field;
             row.push_back(field);
@@ -78,4 +78,13 @@ int AsymmetricMatrixGraph::findClosestNeighbour(unsigned node) {
         }
     }
     return closest;
+}
+
+void AsymmetricMatrixGraph::print() {
+    for (auto& x: matrix) {
+        for (auto& y: x) {
+            std::cout << y << "\t";
+        }
+        std::cout << std::endl;
+    }
 }
