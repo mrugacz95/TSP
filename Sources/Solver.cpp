@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <ctime>
+#include <numeric>
 
 void Solver::setGraph(Graph *graph) {
     this->graph = graph;
@@ -9,14 +10,14 @@ void Solver::setGraph(Graph *graph) {
 
 void Solver::printResults() {
     std::cout << getName() << " ";
-    if (solvingTime > 0)
-        std::cout << solvingTime << " ";
+    if (meanSolvingTime > 0)
+        std::cout << meanSolvingTime << " ";
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
     std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
+    std::cout << "TIME: " << meanSolvingTime << "\n";
     printParameters();
-    std::cout << "\t\t\t\t\t";
     printSolutionPath();
-    std::cout << "\n";
+    printTimes();
 }
 
 unsigned Solver::countSolutionLength(std::vector<int> &vec) {
@@ -28,22 +29,24 @@ unsigned Solver::countSolutionLength(std::vector<int> &vec) {
 }
 
 void Solver::start() {
-    int counter = 0;
-    clock_t begin = std::clock(), end;
+    double accumulator = 0.0;
+    clock_t begin, end;
     do {
+        begin = std::clock();
         solve();
-        counter++;
         end = clock();
-    } while (end - begin < 60 && counter < 10);
-    solvingTime = double(end - begin) / counter;
+        solvingTimes.push_back(double(end - begin) / CLOCKS_PER_SEC);
+        accumulator += solvingTimes.back();
+    } while (accumulator < 60 && solvingTimes.size() < 10);
+    meanSolvingTime = accumulator / solvingTimes.size();
 }
 
 bool Solver::operator<(Solver &rhs) {
-    return solvingTime < rhs.getSolvingTime();
+    return meanSolvingTime < rhs.getSolvingTime();
 }
 
 double Solver::getSolvingTime() const {
-    return solvingTime;
+    return meanSolvingTime;
 }
 
 void Solver::printSolutionPath() {
@@ -54,4 +57,11 @@ void Solver::printSolutionPath() {
     for (int v : solution)
         std::cout << v << ", ";
     std::cout << "\n";
+}
+
+void Solver::printTimes() {
+    std::cout << "TIMES: ";
+    for (auto& t : solvingTimes)
+        std::cout << t << " ";
+    std::cout << std::endl;
 }

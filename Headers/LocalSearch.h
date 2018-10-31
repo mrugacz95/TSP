@@ -8,10 +8,12 @@ class LocalSearch : public Solver {
 
 public: 
     void solve() override;
+    void printParameters() override;
 
 protected:
+    std::vector<int> deltaCounter;
     int delta(const std::vector<int> solution, const int i, const int j);
-   virtual int search(std::vector<int>& solution) = 0;
+    virtual int search(std::vector<int>& solution) = 0;
 };
 
 

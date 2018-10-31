@@ -17,9 +17,3 @@ int Greedy::search(std::vector<int>& solution) {
 std::string Greedy::getName() {
     return "Greedy LS Solver";
 }
-
-void Greedy::printParameters() {
-
-}
-
-

@@ -33,6 +33,11 @@ public:
     void printResults();
 
     /**
+     * prints solving times
+     */
+    void printTimes();
+
+    /**
      * Operator which allows to compare solvers by time
      * @param rhs other solver
      * @return
@@ -58,9 +63,11 @@ public:
     virtual ~Solver() = default;
 
 protected:
-    double solvingTime;
+    double meanSolvingTime;
+    std::vector<double> solvingTimes;
     Graph *graph;
     std::vector<int> solution;
+    std::vector<int> bestScores;
 
     virtual void solve() = 0;
     virtual unsigned countSolutionLength(std::vector<int> &vec);

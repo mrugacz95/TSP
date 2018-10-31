@@ -21,7 +21,3 @@ int Steepest::search(std::vector<int>& solution) {
 std::string Steepest::getName() {
     return "Steepest LS Solver";
 }
-
-void Steepest::printParameters() {
-
-}

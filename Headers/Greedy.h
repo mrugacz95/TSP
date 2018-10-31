@@ -8,7 +8,6 @@ class Greedy : public LocalSearch {
 
 public:
     std::string getName() override;
-    void printParameters() override;
 
 private:
     int search(std::vector<int>& solution) override;
