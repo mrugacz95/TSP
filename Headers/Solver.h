@@ -33,6 +33,11 @@ public:
     void printResults();
 
     /**
+     * prints scores
+     */
+    void printScores();
+
+    /**
      * prints solving times
      */
     void printTimes();

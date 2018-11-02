@@ -6,6 +6,7 @@
 
 class Graph {
 public:
+    int size;
     /**
      * Returns graph's implementation name
      * @return graph's implementation name

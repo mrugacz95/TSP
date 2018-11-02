@@ -34,7 +34,7 @@ void LocalSearch::solve() {
     int bestScore = countSolutionLength(solution);
     int prevScore = bestScore + 1;
     // search until no prgress
-    while(bestScore < prevScore) { // && deltaCounter.back() < 10000) {
+    while(bestScore < prevScore) {
         prevScore = bestScore;
         bestScore += search(solution);
     }
@@ -45,11 +45,6 @@ void LocalSearch::printParameters() {
     std::cout << "DELTAS: ";
     for (auto& delta : deltaCounter) {
       std::cout << delta << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "BEST SCORES: ";
-    for (auto& score : bestScores) {
-      std::cout << score << " ";
     }
     std::cout << std::endl;
 }

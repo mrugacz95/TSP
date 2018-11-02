@@ -15,9 +15,11 @@ void Solver::printResults() {
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
     std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
     std::cout << "TIME: " << meanSolvingTime << "\n";
+    std::cout << "SIZE: " << graph->size << "\n";
     printParameters();
     printSolutionPath();
     printTimes();
+    printScores();
 }
 
 unsigned Solver::countSolutionLength(std::vector<int> &vec) {
@@ -63,5 +65,13 @@ void Solver::printTimes() {
     std::cout << "TIMES: ";
     for (auto& t : solvingTimes)
         std::cout << t << " ";
+    std::cout << std::endl;
+}
+
+void Solver::printScores() {
+    std::cout << "BEST SCORES: ";
+    for (auto& score : bestScores) {
+      std::cout << score << " ";
+    }
     std::cout << std::endl;
 }
