@@ -27,13 +27,11 @@ void LocalSearch::solve() {
     solution.resize(graph->getNumberOfNodes());
     std::iota(solution.begin(), solution.end(), 0);
     // shuffle it
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(solution.begin(), solution.end(), g);
+    std::shuffle(solution.begin(), solution.end(), std::default_random_engine());
     // assess initial solution
     int bestScore = countSolutionLength(solution);
     int prevScore = bestScore + 1;
-    // search until no prgress
+    // search until no progress
     while(bestScore < prevScore) { // && deltaCounter.back() < 10000) {
         prevScore = bestScore;
         bestScore += search(solution);
