@@ -53,7 +53,7 @@ public:
     /**
      * Prints found path
      */
-    void printSolutionPath();
+    std::string getSolutionPath();
 
     /**
      * Prints used parameters
@@ -61,6 +61,8 @@ public:
     virtual void printParameters() = 0;
 
     virtual ~Solver() = default;
+
+    void saveToFile(std::string filename);
 
 protected:
     double meanSolvingTime;

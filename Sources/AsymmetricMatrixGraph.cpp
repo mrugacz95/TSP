@@ -9,7 +9,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
     for (int i = 0; i < size; i++) {
         matrix[i].resize(size);
         for (int j = 0; j < size; ++j) {
-            matrix[i][j] = rand() % MAX_LENGTH + 1;
+            matrix[i][j] = random() % MAX_LENGTH + 1;
         }
     }
 }
@@ -17,6 +17,10 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
     std::ifstream infile(filename);
+    if (!infile.is_open()) {
+        std::cout << "File not found";
+        exit(0);
+    }
     std::string line;
     int field = 0;
     int size = 0;
