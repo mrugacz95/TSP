@@ -5,6 +5,7 @@
 #include <iostream>
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
+    size = size;
     matrix.resize(size);
     for (int i = 0; i < size; i++) {
         matrix[i].resize(size);
@@ -23,7 +24,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
     }
     std::string line;
     int field = 0;
-    int size = 0;
+    size = 0;
 
     while (getline(infile, line)) {
         if (line.rfind("DIMENSION:", 0) == 0) {

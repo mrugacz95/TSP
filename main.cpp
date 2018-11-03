@@ -49,7 +49,7 @@ int main() {
             break;
         case 1:
             std::cout << "Random added\n";
-            solver = new RandomSolver(seed, 10000000);
+            solver = new RandomSolver(pow(graph->size, 2.9) / 5); // experimentally found formula
             break;
         case 2:
             std::cout << "Branch and Bound added\n";
@@ -121,7 +121,6 @@ int main() {
     solver->printResults();
     solver->saveToFile(outputFile);
     graphs.clear();
-
     delete graph;
 
     return 0;

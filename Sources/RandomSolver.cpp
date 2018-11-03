@@ -4,7 +4,6 @@
 #include <RandomSolver.h>
 
 void RandomSolver::solve() {
-
     std::vector<int> tmpSolution(graph->getNumberOfNodes());
     for (int i = 0; i < tmpSolution.size(); i++)
         tmpSolution[i] = i;
