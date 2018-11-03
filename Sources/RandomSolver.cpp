@@ -31,3 +31,7 @@ RandomSolver::RandomSolver(unsigned seed, unsigned maxTime) {
     this->seed = seed;
     this->maxTime = maxTime;
 }
+
+void RandomSolver::printParameters() {
+
+}
