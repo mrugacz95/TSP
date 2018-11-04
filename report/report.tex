@@ -43,104 +43,51 @@
 %\end{figure}
 
 
-To jest przykładowy tekst w LaTeX. Przeczytaj go uważnie (treść, jego źródło oraz \%komentarze) i użyj tego źródła \texttt{*.tex} jako szablonu sprawozdania -- to źródło pokazuje jak
+Naszym zadanie było zaimplementowanie i przestudiowanie asymetrycznego problemu komiwojażera. Problem ten polega na znalezieniu najkrótszego cyklu Hamiltona w grafie asymetrycznym. Można go interpretować jako logistyczny problem dotyczący znalezienia takiej trasy dla dostawcy aby odwiedził wszystkie miasta w jak najkrótszym czasie. Problem należy do klasy problemów NP-zupełnych. Złożoność tego problemu, w najgorszym przypadku, sprowadza się do przeglądnięcia wszystkich cyklów Hamiltona których dla grafu o zupełnego o n wierzchołkach jest n!. Dlatego problem ten optymalizuje się algorytmami które w przestrzeni rozwiązań starają się rozważać mniejszą część rozwiązań i uzyskują rozwiązanie gorsze od optymalnego ale osiągają wynik w znacznie krótszym czasie.
 
-\begin{tightlist}
-\item wstawić schemat stworzony graphviz'em (Rys.~\ref{fig:schemat}),
-\item wstawić wykres stworzony gnuplot'em (Rys.~\ref{fig:1Tdelta}, \ref{fig:3d}, \ref{fig:every} i \ref{fig:regr}) oraz matplotlib'em (Rys.~\ref{fig:matplotlib}),
-\item zacytować literaturę sformatowaną przez bibtex~\cite{MiOIB,Goldberg-2002},
-\item odwoływać się do rysunków, cytowań i części sprawozdania (np.\ rozdział~\ref{sec:typografia}).
-\end{tightlist}
-
-
-
-
-
-
-
-\section{Cechy dobrego sprawozdania}
-
-Dobre sprawozdanie
-\begin{tightlist}
-\item pozwala odtworzyć samodzielnie czytelnikowi eksperyment (od danych po wyniki),
-\item nie zawiera niedomówień,
-\item przedstawia wnioski uporządkowane od ogólnych do szczegółowych,
-\item cytuje literaturę w tekście,
-\item nie zawiera zbyt obszernych listingów,
-\item czytelnie prezentuje wyniki -- zwykle za pomocą wykresów,
-\item wszelkie dane liczbowe pokazuje z właściwą liczbą miejsc znaczących,
-\item jest zwięzłe i estetyczne.
-\end{tightlist}
-
-\subsection{Typografia}
-\label{sec:typografia}
-
-Pamiętajmy o różnicy pomiędzy łącznikiem\footnote{Przeczytaj w Wikipedii opis hasła ,,Dywiz''.} a myślnikiem -- a także o cytowaniu wszelkich materiałów źródłowych w odpowiednich miejscach~\cite{WikiDash}. Cytujmy konkretną stronę, a nie ogólny adres witryny. Cudzysłowy polskie piszemy metodą ,,przecinków i apostrofów''.
-
-Do sprawdzania pisowni bezpośrednio w pliku\ .tex służy między innymi program \emph{aspell}. Rozumie on różne sposoby kodowania polskich literek, a także ma wbudowane filtry do html'a i innych popularnych formatów. Dzięki tym filtrom pomija słowa kluczowe typowe dla danego formatu pliku, analizując tylko właściwy tekst. %backslash przed kropką i spacją podpowiada LaTeX'owi, żeby użył zwykłej spacji (a nie poszerzonej), ponieważ kropka za spacją nie jest końcem zdania (LaTeX domyślnie robi większe przerwy przed wszystkimi kropkami zakładając, że kropki oddzielają zdania).
-
-
-
-
-
-
-
-\section{Wykresy}
-
-\noindent Do przetwarzania tekstowych plików z wynikami oraz rysowania wykresów wyśmienicie nadaje się python wzbogacony o bibliotekę matplotlib. Zdecydowanie warto się ich nauczyć! Jeśli jednak chciał(a)byś wykorzystać program gnuplot (co jest mniej przyszłościowe), to jego nowe wersje posiadają już niezły terminal `pdf', więc można zrezygnować z pośrednictwa formatu ps/eps. Jeśli nie wiesz jak zrobić jakiś rodzaj wykresu, sprawdź stronę z przykładami gnuplota~\cite{GnuplotDemos}.
-
-Zanim przygotujesz wykres, obejrzyj koniecznie porady dotyczące ich tworzenia -- jak zrobić czytelny i profesjonalny wykres:~\url{https://www.youtube.com/watch?v=pfSgcsQ2Mtk}. %tylda to "nierozłączna spacja" -- skleja sąsiadujące wyrazy.
-
-
-\begin{figure}
+\begin{figure} 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{rys_wykres2d.pdf}
+\includegraphics[width=0.7\textwidth]{TSP_USA.png}
 \end{center}
-\caption{Przykładowy wykres z gnuplota, terminal postscript, zamieniony na pdf za pomocą programu epstopdf z dystrybucji LaTeX'a (czasem eps2pdf). Wykres pokazuje różnice $\Delta_{dir}$ wartości $p_{dir}$ dla kąta $90^\circ$.}
-\label{fig:1Tdelta}
+\caption{Przykładowe rozwiązanie problemu komiwojażera polegającego na znalezieniu trasy pomiędzy stolicami stanów Stanów Zjednoczonych.}
+\label{fig:schemat}
 \end{figure}
 
-\begin{figure}
+
+\section{Opis sąsiedzctwa}
+
+Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest tworzony poprzez zamianę miejscami dwóch wierzchołków rozwązania. 
+
+\begin{figure} 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{rys_wykres3d.pdf}
+\includegraphics[width=0.4\textwidth]{twooptwiki.pdf}
 \end{center}
-\caption{Jeszcze jeden przykładowy wykres z gnuplota.}
-\label{fig:3d}
+\caption{Przykład sąsiedzctwa.}
+\label{fig:schemat}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.85\textwidth]{rys_gnuplot_every.pdf}
-\end{center}
-\caption{Przykład filtrowania danych do wykresu (\emph{every}) oraz użycie własnych funkcji i formuł w gnuplocie.}
-\label{fig:every}
-\end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.85\textwidth]{rys_gnuplot_regr.pdf}
-\end{center}
-\caption{Przykład regresji: gnuplot ma wbudowany moduł dopasowujący do danych parametry funkcji o dowolnej zadanej postaci. Pozwala też definiować makra, prowadzić obliczenia i umieszczać na wykresie etykiety.}
-\label{fig:regr}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.48\textwidth]{rys_short_scalar_2_02.png}\hfill\includegraphics[width=0.48\textwidth]{rys_short_scalar_2_02-kulki.png}
-\end{center}
-\caption{Przykład wizualizacji w python+matplotlib; tutaj dane 5D pokazane na dwa sposoby w 3D. Wstawione bitmapy (nieprawidłowo, powinna być postać wektorowa), a wykresy są tu za małe (nieczytelne).}
-\label{fig:matplotlib}
-\end{figure}
-
-\clearpage %pozwol LaTeX'owi umiescic zaległe rysunki od razu tutaj -- "uwalnia" nagromadzone zaległości, dzięki temu nie wylądują na końcu dokumentu
+\section{Porównanie działania algorytmów}
 
 
+\subsection{Jakość}
+\subsection{Czas działania}
+\subsection{Efektywność}
+\subsection{Średnia liczba kroków algorytmów}
 
 
+\section{Jakość rozwiązania początkowego a jakość rozwiązania końcowego}
+\section{Jakość rozwiązania w zależności od ilości uruchomień}
+\section{Podobieństwo rozwiązań}
+\section{Wnioski}
 
-%%%%%%%%%%%%%%%% literatura %%%%%%%%%%%%%%%%
+\section{Trudności i problemy}
 
-\bibliography{sprawozd}
+\section{Propozycje udoskonaleń}
+
+\clearpage
+
+\bibliography{report}
 \bibliographystyle{plainurl}
 
 
