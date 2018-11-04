@@ -9,10 +9,11 @@
 #include "AsymmetricMatrixGraph.h"
 #include "Greedy.h"
 #include "Steepest.h"
+#include <ctime>
 
 int main() {
     int algorithm;
-    srand(422);
+    srand(time(NULL));
     std::vector<SymmetricMatrixGraph *> graphs;
     Solver *solver = nullptr;
     Graph *graph;

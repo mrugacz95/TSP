@@ -28,6 +28,7 @@ BEST = {
     'ftv160': 2683,
     'ftv170': 2755,
     'kro124': 36230,
+    'kro124p': 36230, # simple copy of 124
     'p43': 5620,
     'rbg323': 1326,
     'rbg358': 1163,
@@ -41,16 +42,20 @@ bar_width = 0.7
 def getPlotStuff(alg):
     if alg == '1':
         return ("RS", 0)
+    if alg == '3':
+        return ("H Nearest", 1)
     if alg == '7':
-        return ("LS Greedy", 1)
+        return ("LS Greedy", 2)
     if alg == '8':
-        return ("LS Steepest", 2)
+        return ("LS Steepest", 3)
     return ()
 
-a = check_output('./evaluate.sh').decode('utf-8')
+with open('evaluation', 'r') as fh:
+    a = fh.read()
 lines = a.split("\n")[:-1]
 
 instances = {'RS': {'color':'red'},
+             'H Nearest': {'color':'cyan'},
              'LS Greedy': {'color':'green'},
              'LS Steepest': {'color':'blue'},
             }

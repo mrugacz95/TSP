@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ALGORITHMS="1 7 8"
-INSTANCES=`ls ../cpp/selected_problems/*.atsp`
+ALGORITHMS="7 8"
+INSTANCES=`ls ./problems/*.atsp`
 for ALG in $ALGORITHMS; do
   for INSTANCE in $INSTANCES; do
     echo ${INSTANCE##*/} $ALG
