@@ -26,7 +26,7 @@ unsigned Solver::countSolutionLength(std::vector<int> &vec) {
     unsigned int length = 0;
     for (int i = 0; i < vec.size() - 1; i++)
         length += graph->distanceBetween(vec[i], vec[i + 1]);
-    length += graph->distanceBetween(vec.front(), vec.back());
+    length += graph->distanceBetween(vec.back(), vec.front());
     return length;
 }
 

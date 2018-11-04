@@ -6,6 +6,28 @@ import numpy as np
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
+POS = {
+    'br17': 1,
+    'ftv33': 2,
+    'ftv35': 3,
+    'ftv38': 4,
+    'p43': 5,
+    'ftv44': 6,
+    'ftv47': 7,
+    'ry48p': 8,
+    'ft53': 9,
+    'ftv55': 10,
+    'ftv64': 11,
+    'ft70': 12,
+    'ftv70': 13,
+    'kro124p': 14,
+    'ftv170': 15,
+    'rbg323': 16,
+    'rbg358': 17,
+    'rbg403': 18,
+    'rbg443': 19,
+}
+
 BEST = {
     'br17': 39,
     'ft53': 6905,
@@ -37,7 +59,7 @@ BEST = {
     'ry48p': 14422,
 }
 
-bar_width = 0.7
+bar_width = 0.4
 
 def getPlotStuff(alg):
     if alg == '1':
@@ -66,6 +88,7 @@ for k, v in instances.items():
     v['mean_s'] = []
     v['std_s'] = []
     v['min_s'] = []
+    v['quality'] = []
 
 labels = []
 positions = []
@@ -73,50 +96,61 @@ for i in range(0, len(lines), 4):
     print(lines[i])
     line = lines[i].split()
     labels.append(line[0].replace(".atsp", ""))
-    positions.append(int(lines[i+1])+bar_width)
+    positions.append(POS[labels[-1]]*3 + bar_width)
 
     plot_stuff = getPlotStuff(lines[i].split()[-1])
     times = np.fromstring(lines[i+2], dtype=np.float32, sep=' ')
-    scores = np.fromstring(lines[i+3], dtype=np.int32, sep=' ') / BEST[labels[-1]]
+    scores = np.fromstring(lines[i+3], dtype=np.int32, sep=' ') / BEST[labels[-1]] - 1
 
-    instances[plot_stuff[0]]['pos'].append(positions[-1] + (plot_stuff[1]-1)*bar_width)
+    instances[plot_stuff[0]]['pos'].append(POS[labels[-1]]*3 + (plot_stuff[1]-1)*bar_width)
     instances[plot_stuff[0]]['mean_t'].append(np.mean(times))
     instances[plot_stuff[0]]['std_t'].append(np.std(times))
     instances[plot_stuff[0]]['mean_s'].append(np.mean(scores))
+    instances[plot_stuff[0]]['quality'].append(1/np.mean(scores))
     instances[plot_stuff[0]]['std_s'].append(np.std(scores))
     instances[plot_stuff[0]]['min_s'].append(np.min(scores))
 
 # wykres 1
+#for k, v in instances.items():
+#    plt.bar(v['pos'], v['mean_s'], width=bar_width,
+#            color=v['color'], yerr=v['std_s'], label=k)
+#
+#plt.xticks(positions, labels)
+#plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
+#plt.legend()
+#plt.show()
+#
+# #wykres 2
+#for k, v in instances.items():
+#    plt.bar(v['pos'], v['min_s'], width=bar_width,
+#            color=v['color'], label=k)
+#
+#plt.xticks(positions, labels)
+#plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
+#plt.legend()
+#plt.show()
+#
+# #wykres 3
+#for k, v in instances.items():
+#    plt.bar(v['pos'], v['mean_t'], width=bar_width,
+#            color=v['color'], yerr=v['std_t'], label=k)
+#plt.xticks(positions, labels)
+#plt.ylabel(r'Czas [s]}', fontsize=18)
+#plt.yscale('log')
+#plt.legend()
+#plt.show()
+
+
+# wykres 4
 for k, v in instances.items():
-    plt.bar(v['pos'], v['mean_s'], width=bar_width,
-            color=v['color'], yerr=v['std_s'], label=k)
+    plt.plot(v['quality'], v['mean_t'], color=v['color'], marker='o',
+            linestyle='', label=k)
 
-plt.xticks(positions, labels)
-plt.ylabel(r'$\frac{\eta}{\eta_{min}}$', fontsize=18)
-plt.legend()
-plt.show()
-
-# wykres 2
-for k, v in instances.items():
-    plt.bar(v['pos'], v['min_s'], width=bar_width,
-            color=v['color'], label=k)
-
-plt.xticks(positions, labels)
-plt.ylabel(r'$\frac{\eta}{\eta_{min}}$', fontsize=18)
-plt.legend()
-plt.show()
-
-# wykres 3
-for k, v in instances.items():
-    plt.bar(v['pos'], v['mean_t'], width=bar_width,
-            color=v['color'], yerr=v['std_t'], label=k)
-plt.xticks(positions, labels)
 plt.ylabel(r'Czas [s]}', fontsize=18)
+plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$', fontsize=18)
 plt.yscale('log')
 plt.legend()
 plt.show()
-
-
 
 
 
