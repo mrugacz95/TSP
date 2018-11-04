@@ -12,7 +12,8 @@ void RandomSolver::solve() {
     auto random_engine = std::default_random_engine(seed);
     std::clock_t start = clock();
     solution = tmpSolution;
-    while (start + this->maxTime >= clock()) {
+    unsigned iterationsCounter = iterations;
+    while (start + this->maxTime >= clock() && iterationsCounter--) {
         std::shuffle(tmpSolution.begin(), tmpSolution.end(), random_engine);
         unsigned length = countSolutionLength(tmpSolution);
         if (bestLength > length) {
@@ -29,8 +30,15 @@ std::string RandomSolver::getName() {
 RandomSolver::RandomSolver(unsigned seed, unsigned maxTime) {
     this->seed = seed;
     this->maxTime = maxTime;
+    this->iterations = std::numeric_limits<unsigned>::max();
 }
 
 void RandomSolver::printParameters() {
+
+}
+
+RandomSolver::RandomSolver(unsigned iterations) {
+    this->iterations = iterations;
+    this->maxTime = std::numeric_limits<unsigned>::max();
 
 }

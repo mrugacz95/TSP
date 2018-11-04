@@ -22,6 +22,8 @@ public:
 
     explicit operator std::string() override;
 
+    unsigned int getSize() override;
+
 private:
     std::vector<std::vector<Edge>> neighbourList;
 };

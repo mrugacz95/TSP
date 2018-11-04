@@ -19,7 +19,7 @@ void Solver::printResults() {
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
     std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
     std::cout << "TIME: " << meanSolvingTime << "\n";
-    std::cout << "SIZE: " << graph->size << "\n";
+    std::cout << "SIZE: " << graph->getSize() << "\n";
     printParameters();
     std::cout << "\t\t\t\t\t";
     getSolutionPath();

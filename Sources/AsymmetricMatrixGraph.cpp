@@ -93,3 +93,7 @@ void AsymmetricMatrixGraph::print() {
         std::cout << std::endl;
     }
 }
+
+unsigned int AsymmetricMatrixGraph::getSize() {
+    return matrix.size();
+}
