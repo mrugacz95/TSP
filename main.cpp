@@ -9,6 +9,7 @@
 #include "AsymmetricMatrixGraph.h"
 #include "Greedy.h"
 #include "Steepest.h"
+#include <ctime>
 
 int main() {
     int algorithm;
