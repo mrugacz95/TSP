@@ -23,6 +23,7 @@ int LocalSearch::delta(const std::vector<int> solution, const int i, const int j
 
 void LocalSearch::solve() {
     deltaCounter.push_back(0);
+    jumpCounter.push_back(0);
     // prepare permutation
     solution.resize(graph->getNumberOfNodes());
     std::iota(solution.begin(), solution.end(), 0);
@@ -37,6 +38,7 @@ void LocalSearch::solve() {
     while(bestScore < prevScore) {
         prevScore = bestScore;
         bestScore += search(solution);
+        jumpCounter.back()++;
     }
     bestScores.push_back(bestScore);
 }
@@ -45,6 +47,11 @@ void LocalSearch::printParameters() {
     std::cout << "DELTAS: ";
     for (auto& delta : deltaCounter) {
       std::cout << delta << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "JUMPS: ";
+    for (auto& jump : jumpCounter) {
+      std::cout << jump << " ";
     }
     std::cout << std::endl;
 }

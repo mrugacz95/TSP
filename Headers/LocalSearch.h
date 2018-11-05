@@ -12,6 +12,7 @@ public:
 
 protected:
     std::vector<int> deltaCounter;
+    std::vector<int> jumpCounter;
     int delta(const std::vector<int> solution, const int i, const int j);
     virtual int search(std::vector<int>& solution) = 0;
 };
