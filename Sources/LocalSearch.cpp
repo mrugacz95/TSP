@@ -33,6 +33,7 @@ void LocalSearch::solve() {
     std::shuffle(solution.begin(), solution.end(), g);
     // assess initial solution
     int bestScore = countSolutionLength(solution);
+    firstScores.push_back(bestScore);
     int prevScore = bestScore + 1;
     // search until no prgress
     while(bestScore < prevScore) {
