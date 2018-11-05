@@ -1,7 +1,6 @@
 #!/usr/bin/python
-from matplotlib import pyplot as plt
-from subprocess import check_output
 import numpy as np
+from matplotlib import pyplot as plt
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
@@ -50,7 +49,7 @@ BEST = {
     'ftv160': 2683,
     'ftv170': 2755,
     'kro124': 36230,
-    'kro124p': 36230, # simple copy of 124
+    'kro124p': 36230,  # simple copy of 124
     'p43': 5620,
     'rbg323': 1326,
     'rbg358': 1163,
@@ -59,98 +58,99 @@ BEST = {
     'ry48p': 14422,
 }
 
-bar_width = 0.4
+BAR_WIDTH = 0.4
+
 
 def getPlotStuff(alg):
-    if alg == '1':
-        return ("RS", 0)
-    if alg == '3':
-        return ("H Nearest", 1)
-    if alg == '7':
-        return ("LS Greedy", 2)
-    if alg == '8':
-        return ("LS Steepest", 3)
-    return ()
-
-with open('evaluation', 'r') as fh:
-    a = fh.read()
-lines = a.split("\n")[:-1]
-
-instances = {'RS': {'color':'red'},
-             'H Nearest': {'color':'cyan'},
-             'LS Greedy': {'color':'green'},
-             'LS Steepest': {'color':'blue'},
-            }
-for k, v in instances.items():
-    v['pos'] = []
-    v['mean_t'] = []
-    v['std_t'] = []
-    v['mean_s'] = []
-    v['std_s'] = []
-    v['min_s'] = []
-    v['quality'] = []
-
-labels = []
-positions = []
-for i in range(0, len(lines), 4):
-    print(lines[i])
-    line = lines[i].split()
-    labels.append(line[0].replace(".atsp", ""))
-    positions.append(POS[labels[-1]]*3 + bar_width)
-
-    plot_stuff = getPlotStuff(lines[i].split()[-1])
-    times = np.fromstring(lines[i+2], dtype=np.float32, sep=' ')
-    scores = np.fromstring(lines[i+3], dtype=np.int32, sep=' ') / BEST[labels[-1]] - 1
-
-    instances[plot_stuff[0]]['pos'].append(POS[labels[-1]]*3 + (plot_stuff[1]-1)*bar_width)
-    instances[plot_stuff[0]]['mean_t'].append(np.mean(times))
-    instances[plot_stuff[0]]['std_t'].append(np.std(times))
-    instances[plot_stuff[0]]['mean_s'].append(np.mean(scores))
-    instances[plot_stuff[0]]['quality'].append(1/np.mean(scores))
-    instances[plot_stuff[0]]['std_s'].append(np.std(scores))
-    instances[plot_stuff[0]]['min_s'].append(np.min(scores))
-
-# wykres 1
-#for k, v in instances.items():
-#    plt.bar(v['pos'], v['mean_s'], width=bar_width,
-#            color=v['color'], yerr=v['std_s'], label=k)
-#
-#plt.xticks(positions, labels)
-#plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
-#plt.legend()
-#plt.show()
-#
-# #wykres 2
-#for k, v in instances.items():
-#    plt.bar(v['pos'], v['min_s'], width=bar_width,
-#            color=v['color'], label=k)
-#
-#plt.xticks(positions, labels)
-#plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
-#plt.legend()
-#plt.show()
-#
-# #wykres 3
-#for k, v in instances.items():
-#    plt.bar(v['pos'], v['mean_t'], width=bar_width,
-#            color=v['color'], yerr=v['std_t'], label=k)
-#plt.xticks(positions, labels)
-#plt.ylabel(r'Czas [s]}', fontsize=18)
-#plt.yscale('log')
-#plt.legend()
-#plt.show()
+    return {
+        '1': ('RS', 0),
+        '3': ('H Nearest', 1),
+        '7': ('LS Greedy', 2),
+        '8': ('LS Steepest', 3)
+    }.get(alg, ())
 
 
-# wykres 4
-for k, v in instances.items():
-    plt.plot(v['quality'], v['mean_t'], color=v['color'], marker='o',
-            linestyle='', label=k)
+def main():
+    with open('evaluation', 'r') as fh:
+        a = fh.read()
+    lines = a.split("\n")[:-1]
 
-plt.ylabel(r'Czas [s]}', fontsize=18)
-plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$', fontsize=18)
-plt.yscale('log')
-plt.legend()
-plt.show()
+    instances = {'RS': {'color': 'red'},
+                 'H Nearest': {'color': 'cyan'},
+                 'LS Greedy': {'color': 'green'},
+                 'LS Steepest': {'color': 'blue'},
+                 }
+
+    for k, v in instances.items():
+        v['pos'] = []
+        v['mean_t'] = []
+        v['std_t'] = []
+        v['mean_s'] = []
+        v['std_s'] = []
+        v['min_s'] = []
+        v['quality'] = []
+
+    labels = []
+    positions = []
+    for i in range(0, len(lines), 4):
+        print(lines[i])
+        line = lines[i].split()
+        labels.append(line[0].replace(".atsp", ""))
+        positions.append(POS[labels[-1]] * 3 + BAR_WIDTH)
+
+        plot_stuff = getPlotStuff(lines[i].split()[-1])
+        times = np.fromstring(lines[i + 2], dtype=np.float32, sep=' ')
+        scores = np.fromstring(lines[i + 3], dtype=np.int32, sep=' ') / BEST[labels[-1]] - 1
+
+        instances[plot_stuff[0]]['pos'].append(POS[labels[-1]] * 3 + (plot_stuff[1] - 1) * BAR_WIDTH)
+        instances[plot_stuff[0]]['mean_t'].append(np.mean(times))
+        instances[plot_stuff[0]]['std_t'].append(np.std(times))
+        instances[plot_stuff[0]]['mean_s'].append(np.mean(scores))
+        instances[plot_stuff[0]]['quality'].append(1 / np.mean(scores))
+        instances[plot_stuff[0]]['std_s'].append(np.std(scores))
+        instances[plot_stuff[0]]['min_s'].append(np.min(scores))
+
+    plt.xticks(positions, labels)
+    plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
+    plt.legend()
+    plt.savefig('report/pics/plot_mean.pdf')
+    plt.clf()
+
+    # plot 2
+    for k, v in instances.items():
+        plt.bar(v['pos'], v['min_s'], width=BAR_WIDTH,
+                color=v['color'], label=k)
+
+    plt.xticks(positions, labels)
+    plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
+    plt.legend()
+    plt.savefig('report/pics/plot_min.pdf')
+    plt.clf()
+
+    # plot 3
+    for k, v in instances.items():
+        plt.bar(v['pos'], v['mean_t'], width=BAR_WIDTH,
+                color=v['color'], yerr=v['std_t'], label=k)
+    plt.xticks(positions, labels)
+    plt.ylabel(r'Czas [s]', fontsize=18)
+    plt.yscale('log')
+    plt.legend()
+    plt.savefig('report/pics/plot_steps.pdf')
+    plt.clf()
+
+    # plot 4
+    for k, v in instances.items():
+        plt.plot(v['quality'], v['mean_t'], color=v['color'], marker='o',
+                 linestyle='', label=k)
+
+    plt.ylabel(r'Czas [s]', fontsize=18)
+    plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$', fontsize=18)
+    plt.yscale('log')
+    plt.xscale('log')
+    plt.legend()
+    plt.savefig('report/pics/quality.pdf')
+    plt.clf()
 
 
-
+if __name__ == '__main__':
+    main()
