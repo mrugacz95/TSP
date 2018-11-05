@@ -71,10 +71,64 @@ Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest twor
 
 
 \subsection{Jakość}
+Za miarę jakości obliczamy wg wzoru:
+$$ \frac{\eta}{\eta_{min}}-1 $$
+Co można interpretować jako wartość o ile długość rozwiązania $\eta$ jest procentowo dłuższa od rozwiązania optymalnego $\eta_{min}$
+Na  rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 - 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne rezultaty czyli o 30\% gorsze rozwiązania.
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=1\textwidth]{min_s.pdf}
+\end{center}
+\caption{Najlepsze uzyskane wyniki.}
+\label{fig:plot_min}
+\end{figure}
+
+Na rys. \ref{fig:plot_svg} zostały przedstwione średnie wyniki algorytmów.
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=1\textwidth]{avg_s.pdf}
+\end{center}
+\caption{Średnie wyniki algorytmów}
+\label{fig:plot_avg}
+\end{figure}
+
 \subsection{Czas działania}
+
+\ref{fig:plot_time}
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=1\textwidth]{time.pdf}
+\end{center}
+\caption{Czas działania algorytmów}
+\label{fig:plot_time}
+\end{figure}
+
 \subsection{Efektywność}
+
+Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas działania oraz jakoś wyniku wykreśliliśmy wykres który przedstawia te zależności.. Z rys. \ref{fig:plot_quality} można wyczytać że najlepsze wyniki w czasie uzyskał algorytm heurystyczny a najgorsze algorytm losowy.
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=1\textwidth]{quality.pdf}
+\end{center}
+\caption{Efektywność algorytmów}
+\label{fig:plot_quality}
+\end{figure}
+
 \subsection{Średnia liczba kroków algorytmów}
 
+\ref{fig:plot_steps}
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=1\textwidth]{steps.pdf}
+\end{center}
+\caption{Średnia liczba kroków algorytmów}
+\label{fig:plot_steps}
+\end{figure}
 
 \section{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
 \section{Jakość rozwiązania w zależności od ilości uruchomień}
