@@ -23,6 +23,8 @@ public:
 
     int findClosestNeighbour(unsigned node) override;
 
+    unsigned int getSize() override;
+
 private:
     std::vector<unsigned int> distances;
     unsigned int size;

@@ -9,6 +9,7 @@
 #include "AsymmetricMatrixGraph.h"
 #include "Greedy.h"
 #include "Steepest.h"
+#include <ctime>
 
 int main() {
     int algorithm;
@@ -49,7 +50,8 @@ int main() {
             break;
         case 1:
             std::cout << "Random added\n";
-            solver = new RandomSolver(pow(graph->size, 2.9) / 5); // experimentally found formula
+            solver = new RandomSolver(
+                    static_cast<unsigned int>(pow(graph->getSize(), 2.9) / 5)); // experimentally found formula
             break;
         case 2:
             std::cout << "Branch and Bound added\n";

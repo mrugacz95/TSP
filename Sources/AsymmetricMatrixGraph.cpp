@@ -37,6 +37,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
         std::vector<unsigned> row;
         for (int j = size; j != 0; j--) {
             infile >> field;
+            if (i == j) field += 99999;
             row.push_back(field);
         }
         matrix.push_back(row);
@@ -92,4 +93,8 @@ void AsymmetricMatrixGraph::print() {
         }
         std::cout << std::endl;
     }
+}
+
+unsigned int AsymmetricMatrixGraph::getSize() {
+    return matrix.size();
 }

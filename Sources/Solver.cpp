@@ -19,7 +19,7 @@ void Solver::printResults() {
     std::cout << "Graph size:" << graph->getNumberOfNodes() << " ";
     std::cout << " Lenght: " << countSolutionLength(solution) << "\n";
     std::cout << "TIME: " << meanSolvingTime << "\n";
-    std::cout << "SIZE: " << graph->size << "\n";
+    std::cout << "SIZE: " << graph->getSize() << "\n";
     printParameters();
     std::cout << "\t\t\t\t\t";
     getSolutionPath();
@@ -31,7 +31,7 @@ unsigned Solver::countSolutionLength(std::vector<int> &vec) {
     unsigned int length = 0;
     for (int i = 0; i < vec.size() - 1; i++)
         length += graph->distanceBetween(vec[i], vec[i + 1]);
-    length += graph->distanceBetween(vec.front(), vec.back());
+    length += graph->distanceBetween(vec.back(), vec.front());
     return length;
 }
 
@@ -44,7 +44,8 @@ void Solver::start() {
         end = clock();
         solvingTimes.push_back(double(end - begin) / CLOCKS_PER_SEC);
         accumulator += solvingTimes.back();
-    } while (accumulator < 60 && solvingTimes.size() < 10);
+    //} while (accumulator < 60 && solvingTimes.size() < 10);
+    } while (solvingTimes.size() < 300);
     meanSolvingTime = accumulator / solvingTimes.size();
 }
 
@@ -92,6 +93,11 @@ void Solver::printTimes() {
 void Solver::printScores() {
     std::cout << "BEST SCORES: ";
     for (auto& score : bestScores) {
+      std::cout << score << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "FIRST SCORES: ";
+    for (auto& score : firstScores) {
       std::cout << score << " ";
     }
     std::cout << std::endl;

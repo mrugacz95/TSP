@@ -75,6 +75,7 @@ protected:
     Graph *graph;
     std::vector<int> solution;
     std::vector<int> bestScores;
+    std::vector<int> firstScores;
 
     virtual void solve() = 0;
     virtual unsigned countSolutionLength(std::vector<int> &vec);

@@ -10,6 +10,8 @@ class RandomSolver : public Solver {
 public:
     RandomSolver(unsigned seed, unsigned maxTime);
 
+    explicit RandomSolver(unsigned iterations);
+
     std::string getName() override;
 
     void printParameters() override;
@@ -20,6 +22,7 @@ private:
 
     unsigned int maxTime;
     unsigned seed;
+    unsigned iterations;
 };
 
 
