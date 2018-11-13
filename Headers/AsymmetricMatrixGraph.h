@@ -30,6 +30,7 @@ public:
 
 private:
     std::vector<std::vector<unsigned>> matrix;
+    unsigned size;
 };
 
 

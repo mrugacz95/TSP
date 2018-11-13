@@ -13,8 +13,6 @@
 
 int main() {
     int algorithm;
-    unsigned int seed = 422;
-    srand(seed);
     std::vector<SymmetricMatrixGraph *> graphs;
     std::string outputFile;
     Solver *solver = nullptr;
@@ -37,8 +35,20 @@ int main() {
             break;
 
     }
+
+    std::cout << "Provide seed\n";
     std::cout << "Provide output file path\n";
     std::cin >> outputFile;
+
+    unsigned int seed = 422;
+    std::cin >> seed;
+    if (seed == 0) {
+        seed = (unsigned) time(nullptr);
+    }
+    srand(seed);
+    std::default_random_engine engine;
+    engine.seed(seed);
+
     std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
                  "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
                  "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n-1 start\n";
@@ -50,8 +60,7 @@ int main() {
             break;
         case 1:
             std::cout << "Random added\n";
-            solver = new RandomSolver(
-                    static_cast<unsigned int>(pow(graph->getSize(), 2.9) / 5)); // experimentally found formula
+            solver = new RandomSolver(10); // experimentally found formula
             break;
         case 2:
             std::cout << "Branch and Bound added\n";
@@ -78,16 +87,16 @@ int main() {
         }
         case 5: {
             unsigned int iter, antsNum;
-            float alpha, beta, rho;
-            std::cout <<
-                      "Ants Algorithm added\nChoose parameters number of ants, alpha, beta, rho and number of iterations (-1) for default)\n";
-            cin >> antsNum;
-            if (antsNum < 0) {
+//            float alpha, beta, rho;
+//            std::cout <<
+//                      "Ants Algorithm added\nChoose parameters number of ants, alpha, beta, rho and number of iterations (-1) for default)\n";
+//            cin >> antsNum;
+//            if (antsNum < 0) {
                 solver = new AntsAlgorithm();
-                break;
-            }
-            cin >> alpha >> beta >> rho >> iter;
-            solver = new AntsAlgorithm(antsNum, iter, alpha, beta, rho);
+//                break;
+//            }
+//            cin >> alpha >> beta >> rho >> iter;
+//            solver = new AntsAlgorithm(antsNum, iter, alpha, beta, rho);
             break;
         }
         case 6: {
@@ -106,11 +115,11 @@ int main() {
         }
         case 7:
             std::cout << "Greedy added\n";
-            solver = new Greedy();
+            solver = new Greedy(engine);
             break;
         case 8:
             std::cout << "Steepest added\n";
-            solver = new Steepest();
+            solver = new Steepest(engine);
             break;
         default:
             std::cout << "Wrong number\n";

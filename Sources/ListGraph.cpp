@@ -65,5 +65,5 @@ ListGraph::~ListGraph() {
 }
 
 unsigned int ListGraph::getSize() {
-    return size;
+    return neighbourList.size();
 }

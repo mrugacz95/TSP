@@ -1,4 +1,6 @@
 #!/usr/bin/python
+from collections import defaultdict
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -75,20 +77,12 @@ def main():
         a = fh.read()
     lines = a.split("\n")[:-1]
 
-    instances = {'RS': {'color': 'red'},
-                 'H Nearest': {'color': 'cyan'},
-                 'LS Greedy': {'color': 'green'},
-                 'LS Steepest': {'color': 'blue'},
+    instances = {'RS': defaultdict(list, {'color': 'red'}),
+                 'H Nearest': defaultdict(list, {'color': 'purple'}),
+                 'LS Greedy': defaultdict(list, {'color': 'green'}),
+                 'LS Steepest': defaultdict(list, {'color': 'blue'}),
                  }
 
-    for k, v in instances.items():
-        v['pos'] = []
-        v['mean_t'] = []
-        v['std_t'] = []
-        v['mean_s'] = []
-        v['std_s'] = []
-        v['min_s'] = []
-        v['quality'] = []
 
     labels = []
     positions = []
@@ -106,9 +100,10 @@ def main():
         instances[plot_stuff[0]]['mean_t'].append(np.mean(times))
         instances[plot_stuff[0]]['std_t'].append(np.std(times))
         instances[plot_stuff[0]]['mean_s'].append(np.mean(scores))
-        instances[plot_stuff[0]]['quality'].append(1 / np.mean(scores))
+        instances[plot_stuff[0]]['quality'].append((1 / np.mean(scores) - 1))
         instances[plot_stuff[0]]['std_s'].append(np.std(scores))
         instances[plot_stuff[0]]['min_s'].append(np.min(scores))
+        instances[plot_stuff[0]]['instance'].append(POS[labels[-1]])
 
     plt.xticks(positions, labels)
     plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
@@ -128,14 +123,16 @@ def main():
     plt.clf()
 
     # plot 3
+    plt.figure(num=None, figsize=(10, 6))
     for k, v in instances.items():
-        plt.bar(v['pos'], v['mean_t'], width=BAR_WIDTH,
-                color=v['color'], yerr=v['std_t'], label=k)
-    plt.xticks(positions, labels)
-    plt.ylabel(r'Czas [s]', fontsize=18)
+        plt.plot(v['instance'], v['mean_t'], color=v['color'], label=k, marker='o', linewidth=0)
+    plt.xticks(list(POS.values()), list(POS.keys()))
     plt.yscale('log')
+    plt.ylabel(r'Czas [s]')
     plt.legend()
-    plt.savefig('report/pics/plot_steps.pdf')
+    # plt.show()
+    plt.savefig('report/pics/plot_mean_time.pdf')
+    plt.gcf().clear()
     plt.clf()
 
     # plot 4
@@ -144,7 +141,7 @@ def main():
                  linestyle='', label=k)
 
     plt.ylabel(r'Czas [s]', fontsize=18)
-    plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$', fontsize=18)
+    plt.xlabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
     plt.yscale('log')
     plt.xscale('log')
     plt.legend()

@@ -34,16 +34,7 @@
 
 \section{Wstęp}
 
-%\begin{figure} %obrazek pojawia się przed pierwszym odwołaniem do niego -- to przydatna zasada
-%\begin{center}
-%\includegraphics[width=0.4\textwidth]{rys_graf.pdf}
-%\end{center}
-%\caption{Przykładowy schemat z programu \emph{graphviz} -- narzędzia do automatycznego generowania schematów~\cite{graphviz}. Przerywane strzałki oznaczają, że wszędzie gdzie się da używamy grafiki wektorowej -- unikamy wstawiania bitmap do dokumentu. W niektórych przypadkach użycie bitmap jest uzasadnione (w celu szybkiego podglądu na ekranie lub dla niezwykle skomplikowanych grafik, zawierających np.~setki tysięcy obiektów). Różnice w grafice rastrowej i wektorowej omawia prezentacja~\url{https://www.youtube.com/watch?v=_98SDNIpm24}.}
-%\label{fig:schemat}
-%\end{figure}
-
-
-Naszym zadanie było zaimplementowanie i przestudiowanie asymetrycznego problemu komiwojażera. Problem ten polega na znalezieniu najkrótszego cyklu Hamiltona w grafie asymetrycznym. Można go interpretować jako logistyczny problem dotyczący znalezienia takiej trasy dla dostawcy aby odwiedził wszystkie miasta w jak najkrótszym czasie. Problem należy do klasy problemów NP-zupełnych. Złożoność tego problemu, w najgorszym przypadku, sprowadza się do przeglądnięcia wszystkich cyklów Hamiltona których dla grafu o zupełnego o n wierzchołkach jest n!. Dlatego problem ten optymalizuje się algorytmami które w przestrzeni rozwiązań starają się rozważać mniejszą część rozwiązań i uzyskują rozwiązanie gorsze od optymalnego ale osiągają wynik w znacznie krótszym czasie.
+Naszym zadaniem było zaimplementowanie i przestudiowanie asymetrycznego problemu komiwojażera. Problem ten polega na znalezieniu najkrótszego cyklu Hamiltona w grafie asymetrycznym. Można go interpretować jako logistyczny problem dotyczący znalezienia takiej trasy dla dostawcy, aby ten odwiedził wszystkich odbiorców w jak najkrótszym czasie. Problem należy do klasy problemów NP-zupełnych. Złożoność tego problemu, w najgorszym przypadku, sprowadza się do przeglądnięcia wszystkich cyklów Hamiltona których dla grafu o zupełnego o $n$ wierzchołkach jest $n!$. Dlatego problem ten optymalizuje się algorytmami które w przestrzeni rozwiązań starają się rozważać mniejszą część rozwiązań i uzyskują rozwiązania często gorsze od optymalnego ale osiągają ten wynik w znacznie krótszym czasie.
 
 \begin{figure} 
 \begin{center}
@@ -71,12 +62,15 @@ Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest twor
 
 
 \subsection{Jakość}
-Za miarę jakości obliczamy wg wzoru:
+Za miarę jakości obraliśmy wartość równania:
 $$ \frac{\eta}{\eta_{min}}-1 $$
-Co można interpretować jako wartość o ile długość rozwiązania $\eta$ jest procentowo dłuższa od rozwiązania optymalnego $\eta_{min}$
-Na  rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 - 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne rezultaty czyli o 30\% gorsze rozwiązania.
+gdzie:\\
+$\eta_{min}$ -- długość optimum globalnego \\
+$\eta$ -- długość rozważanego rozwiązania
 
-\begin{figure} 
+Co można interpretować jako wartość o ile długość rozwiązania $\eta$ jest procentowo dłuższa od rozwiązania optymalnego $\eta_{min}$
+
+\begin{figure}[h!]
 \begin{center}
 \includegraphics[width=1\textwidth]{min_s.pdf}
 \end{center}
@@ -84,7 +78,10 @@ Na  rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z
 \label{fig:plot_min}
 \end{figure}
 
-Na rys. \ref{fig:plot_svg} zostały przedstwione średnie wyniki algorytmów.
+Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 - 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego.
+
+
+Na rys. \ref{fig:plot_svg} zostały przedstawione średnie wyniki algorytmów.
 
 \begin{figure} 
 \begin{center}
@@ -96,11 +93,11 @@ Na rys. \ref{fig:plot_svg} zostały przedstwione średnie wyniki algorytmów.
 
 \subsection{Czas działania}
 
-\ref{fig:plot_time}
+Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie Greedy i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny.
 
 \begin{figure} 
 \begin{center}
-\includegraphics[width=1\textwidth]{time.pdf}
+    \includegraphics[width=1\textwidth]{plot_mean_time.pdf}
 \end{center}
 \caption{Czas działania algorytmów}
 \label{fig:plot_time}
@@ -131,8 +128,54 @@ Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas d
 \end{figure}
 
 \section{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
+
+
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{first_last_finest.pdf}
+    \end{center}
+    \caption{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
+    \label{fig:plot_steps}
+\end{figure}
+
 \section{Jakość rozwiązania w zależności od ilości uruchomień}
+
+
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{multi_run_ry48p_atsp.pdf}
+    \end{center}
+    \caption{Jakość rozwiązania w zależności od ilości uruchomień. Instancja ry48p.}
+    \label{fig:plot_multi_run_ry48p}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{multi_run_ftv35_atsp.pdf}
+    \end{center}
+    \caption{Jakość rozwiązania w zależności od ilości uruchomień. Instancja ftv35.}
+    \label{fig:plot_multi_run_ry48p}
+\end{figure}
+
+
 \section{Podobieństwo rozwiązań}
+
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{quality_similarity_ftv38.pdf}
+    \end{center}
+    \caption{Jakość rozwiązania w zależności podobieństwa do znalezionego optimum. Instancja ftv38.}
+    \label{fig:quality_sim_ftv38}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=1\textwidth]{quality_similarity_ry48p.pdf}
+    \end{center}
+    \caption{Jakość rozwiązania w zależności podobieństwa do znalezionego optimum. Instancja ry48p.}
+    \label{fig:quality_sim_ry48p}
+\end{figure}
+
 \section{Wnioski}
 
 \section{Trudności i problemy}

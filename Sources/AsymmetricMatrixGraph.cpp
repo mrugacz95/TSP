@@ -5,7 +5,7 @@
 #include <iostream>
 
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
-    size = size;
+    this->size = size;
     matrix.resize(size);
     for (int i = 0; i < size; i++) {
         matrix[i].resize(size);
@@ -96,5 +96,5 @@ void AsymmetricMatrixGraph::print() {
 }
 
 unsigned int AsymmetricMatrixGraph::getSize() {
-    return matrix.size();
+    return size;
 }
