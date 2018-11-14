@@ -6,7 +6,8 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[OT4]{fontenc} 
 \usepackage{graphicx,color} %include pdf's (and png's for raster graphics... avoid raster graphics!) 
-\usepackage{url} 
+\usepackage{url}
+\usepackage{float}
 \usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref} %za wszystkimi pakietami; pdfborder nie wszedzie tak samo zaimplementowane bo specyfikacja nieprecyzyjna; pod miktex'em po prostu nie widac wtedy ramek
 
 
@@ -28,19 +29,15 @@
 \end{tightlist}
 
 
-
-
-
-
 \section{Wstęp}
 
 Naszym zadaniem było zaimplementowanie i przestudiowanie asymetrycznego problemu komiwojażera. Problem ten polega na znalezieniu najkrótszego cyklu Hamiltona w grafie asymetrycznym. Można go interpretować jako logistyczny problem dotyczący znalezienia takiej trasy dla dostawcy, aby ten odwiedził wszystkich odbiorców w jak najkrótszym czasie. Problem należy do klasy problemów NP-zupełnych. Złożoność tego problemu, w najgorszym przypadku, sprowadza się do przeglądnięcia wszystkich cyklów Hamiltona których dla grafu o zupełnego o $n$ wierzchołkach jest $n!$. Dlatego problem ten optymalizuje się algorytmami które w przestrzeni rozwiązań starają się rozważać mniejszą część rozwiązań i uzyskują rozwiązania często gorsze od optymalnego ale osiągają ten wynik w znacznie krótszym czasie.
 
-\begin{figure} 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{TSP_USA.png}
+    \includegraphics[width=0.7\textwidth]{map002g.png}
 \end{center}
-\caption{Przykładowe rozwiązanie problemu komiwojażera polegającego na znalezieniu trasy pomiędzy stolicami stanów Stanów Zjednoczonych.}
+\caption{Przykładowe rozwiązanie problemu komiwojażera ze stolicami stanów Stanów Zjednoczonych.}
 \label{fig:schemat}
 \end{figure}
 
@@ -54,7 +51,7 @@ Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest twor
 \includegraphics[width=0.4\textwidth]{twooptwiki.pdf}
 \end{center}
 \caption{Przykład sąsiedztwa.}
-\label{fig:schemat}
+\label{fig:schemat2}
 \end{figure}
 
 
@@ -68,34 +65,32 @@ gdzie:\\
 $\eta_{min}$ -- długość optimum globalnego \\
 $\eta$ -- długość rozważanego rozwiązania
 
-Co można interpretować jako wartość o ile długość rozwiązania $\eta$ jest procentowo dłuższa od rozwiązania optymalnego $\eta_{min}$
+Co można interpretować jako wartość o jaką długość rozwiązania $\eta$ jest procentowo dłuższa od rozwiązania optymalnego $\eta_{min}$
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
-\includegraphics[width=1\textwidth]{min_s.pdf}
+    \includegraphics[width=1\textwidth]{plot_min.pdf}
 \end{center}
 \caption{Najlepsze uzyskane wyniki.}
 \label{fig:plot_min}
 \end{figure}
 
-Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 - 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego.
+Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 - 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego. Dodatkowo dla największych instancji algorytm heurystyczny dawał gorsze wyniki niż algorytm lokalny.
 
-
-Na rys. \ref{fig:plot_svg} zostały przedstawione średnie wyniki algorytmów.
-
-\begin{figure} 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[width=1\textwidth]{avg_s.pdf}
+    \includegraphics[width=1\textwidth]{plot_mean.pdf}
 \end{center}
 \caption{Średnie wyniki algorytmów}
 \label{fig:plot_avg}
 \end{figure}
 
+
+Na rys. \ref{fig:plot_avg} zostały przedstawione średnie wyniki algorytmów. Dla czytelności rozmiary instancji są pokazane w skali logarytmicznej. Z wykresu widać że algorytm losowy znowu dawał najgorsze wyniki, algorytmy lokalne działały bardzo podobnie na korzyść algorytmu steepest. Można także zauważyć że instancja o rozmiarze 124 była dość trudna bo algorytmy otrzymywały rozwiązania o bardzo różnorodnej długości.
+
 \subsection{Czas działania}
 
-Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie Greedy i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny.
-
-\begin{figure} 
+\begin{figure}[H]
 \begin{center}
     \includegraphics[width=1\textwidth]{plot_mean_time.pdf}
 \end{center}
@@ -103,11 +98,13 @@ Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej dzi
 \label{fig:plot_time}
 \end{figure}
 
+Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie Greedy i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny. Widać także że czas działania algorytmów rośnie wykładniczo, gdyż wykres jest wyskalowany logarytmicznie.
+
+
 \subsection{Efektywność}
 
-Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas działania oraz jakoś wyniku wykreśliliśmy wykres który przedstawia te zależności.. Z rys. \ref{fig:plot_quality} można wyczytać że najlepsze wyniki w czasie uzyskał algorytm heurystyczny a najgorsze algorytm losowy.
 
-\begin{figure} 
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\textwidth]{quality.pdf}
 \end{center}
@@ -115,33 +112,40 @@ Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas d
 \label{fig:plot_quality}
 \end{figure}
 
-\subsection{Średnia liczba kroków algorytmów}
+Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas działania oraz jakoś wyniku wykreśliliśmy wykres punktowy który przedstawia te zależności. Aby znaleźć najefektywniejsze algorytmy należy spojrzeć na kąt pomiędzy początkiem układu współrzędnych, punktem odpowiadającym instancji, a osią X. Na wykres zostały naniesione linie dzielące podobne jakościowo algorytmy. Z rys. \ref{fig:plot_quality} można wyczytać że najlepsze wyniki w czasie uzyskał algorytm heurystyczny a najgorsze algorytm losowy.
 
-\ref{fig:plot_steps}
+
+\subsection{Średnia liczba kroków algorytmów}
 
 \begin{figure} 
 \begin{center}
-\includegraphics[width=1\textwidth]{steps.pdf}
+    \includegraphics[width=1\textwidth]{steps2.pdf}
 \end{center}
 \caption{Średnia liczba kroków algorytmów}
 \label{fig:plot_steps}
 \end{figure}
 
-\section{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
+Na rys. \ref{fig:plot_steps} przedstawiono ilość kroków i ilość obliczonych delt przez algorytmy Greedy i Steepest. Widać że instancje 33 i 38 miały bardzo różne ilości sprawdzonych rozwiązań przez algorytm greedy. Z danych wynika także że algorytm steepest sprawdzał więcej rozwiązań, zaś liczba kroków była podobna co może świadczyć o tym że nie opłaca się sprawdzać wszystkich sąsiadów aby trafić w podobne minimum lokalne co algorytm steepest, ponieważ wyniki tych algorytmów są podobne a czas działania lepszy w algorytmie greedy.
 
 
-\begin{figure}
+
+
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=1\textwidth]{first_last_finest.pdf}
     \end{center}
     \caption{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
-    \label{fig:plot_steps}
+    \label{fig:first_finnest}
 \end{figure}
+
+
+\section{Jakość rozwiązania początkowego, a jakość rozwiązania końcowego}
+
+Rys. \ref{fig:first_finnest} przedstawia zależność długości rozwiązania początkowego i długości rozwiązania końcowego dla instancji 43 i 48. Dla instancji 248 obydwa algorytmy dawały losowe rozwiązania z tym że algorytm steepest dawał nieco lepsze rezultaty. Dla instancji 48 oba algorytmy wpadały w podobne 4 minima lokalne i nie były wstanie polepszyć wyników. Dla tej instancji optimum lokalne miało długość 5620 co w części rozwiązań zostawało osiągane.
 
 \section{Jakość rozwiązania w zależności od ilości uruchomień}
 
-
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=1\textwidth]{multi_run_ry48p_atsp.pdf}
     \end{center}
@@ -149,18 +153,21 @@ Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas d
     \label{fig:plot_multi_run_ry48p}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=1\textwidth]{multi_run_ftv35_atsp.pdf}
     \end{center}
     \caption{Jakość rozwiązania w zależności od ilości uruchomień. Instancja ftv35.}
-    \label{fig:plot_multi_run_ry48p}
+    \label{fig:plot_multi_run_ftv35}
 \end{figure}
 
+Przedstawione na rys. \ref{fig:plot_multi_run_ry48p} i \ref{fig:plot_multi_run_ftv35}  wykresy przedstawiają jakość rozwiązania w zależności od liczby uruchomień, Z wykresów wynika że po ok 50 uruchomieniach obydwa algorytmy uzyskały drugie najlepsze wyniki spośród stu uruchomień. Na pewno można polepszyć wyniki ale widać że potrzebo ok dwukrotnie więcej uruchomień aby uzyskać 
 
 \section{Podobieństwo rozwiązań}
 
-\begin{figure}
+Na rys. \ref{fig:quality_sim_ry48p} i \ref{fig:quality_sim_ftv48} pokazana jest zależność pomiędzy jakością 1000 rozwiązań a znalezionym optimum lokalnym. Można zauważyć że im lepsze rozwiązanie tym bardziej jest podobne do znalezionego optimum.
+
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=1\textwidth]{quality_similarity_ftv38.pdf}
     \end{center}
@@ -168,7 +175,7 @@ Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas d
     \label{fig:quality_sim_ftv38}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=1\textwidth]{quality_similarity_ry48p.pdf}
     \end{center}
@@ -176,11 +183,29 @@ Aby zbadać który algorytm jest najbardziej efektywny biorąc pod uwagę czas d
     \label{fig:quality_sim_ry48p}
 \end{figure}
 
+
+Na rys. \ref{fig:quality_sim} przedstawiono podobieństwo 15 najlepszych spośród 1000 rozwiązań oraz ich podobieństwo do najlepszego znalezionego rozwiązania. Widać ze rozwiązania różnią się a najbardziej podobne są tylko w 12.5/%.
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{quality_similarity_best15.pdf}
+    \end{center}
+    \caption{Podobieństwo 15 najlepszych rozwiązań oraz znalezionego optimum. Instancja ry48p.}
+    \label{fig:quality_sim}
+\end{figure}
+
 \section{Wnioski}
+
+Najlepiej sprawdził się algorytm heurystyczny który działał zarówno w najkrótszym czasie jak i dawał najlepsze wyniki. Algorytm losowy wypadł najgorzej. Speetest i Greedy dały podobne rezultaty z tym że steepest średnio dawał lepsze rozwiązania.
 
 \section{Trudności i problemy}
 
+Aby wykonać poprawnie wykresy i pokazać jak najwięcej informacji trzeba poświęcić dużo czasu na ich stworzenie. Początkowo pojawiły się także problemy z budowaniem części projektu napisanej w c++ gdyż wymaga on narzędzi w jednakowej wersji i konfiguracji.
+
 \section{Propozycje udoskonaleń}
+
+Można by dodać bibliotekę napisaną w języku cpp jako skompilowany moduł do języka Python co ułatwiłoby komunikację między językami.
 
 \clearpage
 

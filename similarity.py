@@ -94,20 +94,46 @@ def main():
         x = []
         y = []
         q = defaultdict(list)
-        for quality, solution in solutions:
-            comp = compare(solution, best[1])
-            x.append(comp)
-            y.append(quality)
-            q[comp].append(quality / best[0] - 1)
-        indicates = list(q.keys())
-        data = list(q.values())
-        plt.violinplot(data, indicates, widths=0.02)
-        plt.xlabel('Podobieństwo rozwiązania')
-        plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
-        plt.savefig(f'report/pics/quality_similarity_{file}.pdf')
-        plt.show()
-        plt.clf()
+        # for quality, solution in solutions:
+        #     comp = compare(solution, best[1])
+        #     x.append(comp)
+        #     y.append(quality)
+        #     q[comp].append(quality / best[0] - 1)
+        # indicates = list(q.keys())
+        # data = list(q.values())
+        # plt.violinplot(data, indicates, widths=0.02)
+        # plt.xlabel('Podobieństwo rozwiązania')
+        # plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
+        # plt.savefig(f'report/pics/quality_similarity_{file}.pdf')
+        # plt.clf()
 
+        choosen = sorted(solutions)[:15]
+        mat = np.zeros((15, 15))
+        mat_best = np.zeros((15, 1))
+        for i, sol_i in enumerate(choosen):
+            for j, sol_j in enumerate(choosen):
+                if i == j:
+                    comp = 0
+                else:
+                    comp = compare(sol_i[1], sol_j[1])
+                mat[i, j] = comp
+            mat_best[i] = compare(sol_i[1], best[1])
+        fig, (ax1, ax2) = plt.subplots(1, 2, sharey='all', gridspec_kw={'width_ratios': [5, 1]})
+        ax1.matshow(mat, cmap="Blues")
+        ax2.matshow(mat_best, cmap="Blues")
+        for (i, j), z in np.ndenumerate(mat):
+            if i == j:
+                text = '1.0'
+            else:
+                text = '{:0.1f}%'.format(z * 100)
+            ax1.text(j, i, text, ha='center', va='center', size='x-small')
+        for i, z in np.ndenumerate(mat_best):
+            text = '{:0.1f}'.format(z)
+            ax2.text(0, i[0], text, ha='center', va='center', size='x-small')
+        ax2.set_xlabel('Najlepszy')
+        ax2.set_xticks([], [])
+        ax2.set_yticks([], [])
+        plt.savefig(f'report/pics/quality_similarity_best15.pdf')
 
 if __name__ == '__main__':
     # assert compare([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]) == 1.0
