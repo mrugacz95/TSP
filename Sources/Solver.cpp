@@ -40,7 +40,7 @@ void Solver::start() {
         solvingTimes.push_back(double(end - begin) / CLOCKS_PER_SEC);
         accumulator += solvingTimes.back();
     //} while (accumulator < 60 && solvingTimes.size() < 10);
-    } while (solvingTimes.size() < 300);
+    } while (solvingTimes.size() < 10);
     meanSolvingTime = accumulator / solvingTimes.size();
 }
 
