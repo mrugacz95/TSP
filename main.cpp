@@ -60,14 +60,9 @@ int main() {
 
             std::cout << "Simulated Annealing added\nChoose parameters: temperature, "
                          "and cooling factor (-1) for default)";
-            float temp, coolingFactor;
-            cin >> temp;
-            if (temp < 0) {
-                solver = new SimulatedAnnealing();
-                break;
-            }
+            float coolingFactor;
             cin >> coolingFactor;
-            solver = new SimulatedAnnealing(graph->size*(graph->size)/2, coolingFactor, temp);
+            solver = new SimulatedAnnealing((graph->size-1)*(graph->size-1)/2, coolingFactor);
             break;
         }
         case 5: {

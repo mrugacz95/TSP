@@ -14,7 +14,7 @@ public:
 
     SimulatedAnnealing();
 
-    SimulatedAnnealing(int Lk, float coolingFactor, float startTemperature);
+    SimulatedAnnealing(int Lk, float coolingFactor);
 
     void temperatureDrop();
 
@@ -23,6 +23,7 @@ public:
 private:
     int search(std::vector<int>& solution);
     int delta(const std::vector<int> solution, const int i, const int j);
+    void setTemperature(std::vector<int> solution);
     float startTemperature;
     float temperature;
     float coolingFactor;
