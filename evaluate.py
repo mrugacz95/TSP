@@ -70,8 +70,9 @@ def getPlotStuff(alg):
     return {
         '1': ('RS', 0),
         '3': ('H Nearest', 1),
-        '7': ('LS Greedy', 2),
-        '8': ('LS Steepest', 3)
+        '4': ('SA', 2),
+        '7': ('LS Greedy', 3),
+        '8': ('LS Steepest', 4)
     }.get(alg, ())
 
 
@@ -80,10 +81,11 @@ def main():
         a = fh.read()
     lines = a.split("\n")[:-1]
 
-    instances = {'RS': defaultdict(list, {'color': 'red'}),
-                 'H Nearest': defaultdict(list, {'color': 'purple'}),
-                 'LS Greedy': defaultdict(list, {'color': 'green'}),
-                 'LS Steepest': defaultdict(list, {'color': 'blue'}),
+    instances = {'RS': {'color': 'red'},
+                 'H Nearest': {'color': 'cyan'},
+                 'SA': {'color': 'magenta'},
+                 'LS Greedy': {'color': 'green'},
+                 'LS Steepest': {'color': 'blue'},
                  }
 
     labels = []
@@ -110,8 +112,8 @@ def main():
         instances[plot_stuff[0]]['instance'].append(POS[labels[-1]])
         instances[plot_stuff[0]]['instance_size'].append(int(re.findall('\d+', line[0])[0]))
 
-    # plot 1 avg score
 
+    # plot 1 avg score
     fig, ax = plt.subplots()
     for k, v in instances.items():
         lists = sorted(zip(*[v['instance_size'], v['mean_s']]))
