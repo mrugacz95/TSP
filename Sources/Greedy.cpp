@@ -17,3 +17,7 @@ int Greedy::search(std::vector<int>& solution) {
 std::string Greedy::getName() {
     return "Greedy LS Solver";
 }
+
+Greedy::Greedy(std::default_random_engine engine) : LocalSearch(engine) {
+
+}

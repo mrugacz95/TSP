@@ -7,7 +7,7 @@ ListGraph::ListGraph(unsigned size) {
     for (int i = 0; i < size; ++i) {
         std::vector<Edge> list;
         for (int j = 0; j < size / 2; ++j) {
-            list.push_back(Edge(rand() % size, rand() % size % MAX_LENGTH + 1));
+            list.push_back(Edge(random() % size, random() % size % MAX_LENGTH + 1));
         }
         neighbourList.push_back(list);
     }
@@ -62,4 +62,8 @@ ListGraph::~ListGraph() {
         neighbour.clear();
     }
     neighbourList.clear();
+}
+
+unsigned int ListGraph::getSize() {
+    return neighbourList.size();
 }

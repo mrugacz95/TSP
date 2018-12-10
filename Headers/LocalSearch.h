@@ -3,18 +3,23 @@
 
 
 #include "Solver.h"
+#include <random>
 
 class LocalSearch : public Solver {
 
-public: 
+public:
+    LocalSearch(std::default_random_engine engine);
     void solve() override;
     void printParameters() override;
 
 protected:
     std::vector<int> deltaCounter;
     std::vector<int> jumpCounter;
-    int delta(const std::vector<int> solution, const int i, const int j);
+
+    int delta(std::vector<int> solution, int i, int j);
     virtual int search(std::vector<int>& solution) = 0;
+
+    std::default_random_engine engine;
 };
 
 

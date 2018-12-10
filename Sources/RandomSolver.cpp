@@ -1,32 +1,44 @@
 #include "RandomSolver.h"
-
-RandomSolver::RandomSolver(unsigned int iterations) {
-    this->iterations = iterations;
-}
+#include <algorithm>
+#include <random>
+#include <RandomSolver.h>
 
 void RandomSolver::solve() {
     std::vector<int> tmpSolution(graph->getNumberOfNodes());
     for (int i = 0; i < tmpSolution.size(); i++)
         tmpSolution[i] = i;
     unsigned int bestLength = std::numeric_limits<unsigned>::max();
-    for (int iter = 0; iter < iterations; iter++) {
-        // shuffle
-        for (unsigned long i = tmpSolution.size() - 1; i > 1; i--) {
-            std::swap(tmpSolution[i], tmpSolution[rand() % i]);
-        }
+    std::vector<int> bestSolution;
+    auto random_engine = std::default_random_engine(seed);
+    std::clock_t start = clock();
+    solution = tmpSolution;
+    unsigned iterationsCounter = iterations;
+    while (start + this->maxTime >= clock() && iterationsCounter--) {
+        std::shuffle(tmpSolution.begin(), tmpSolution.end(), random_engine);
         unsigned length = countSolutionLength(tmpSolution);
         if (bestLength > length) {
             bestLength = length;
             solution = tmpSolution;
         }
     }
-    bestScores.push_back(bestLength);
 }
 
 std::string RandomSolver::getName() {
     return "Random Solver";
 }
 
+RandomSolver::RandomSolver(unsigned seed, unsigned maxTime) {
+    this->seed = seed;
+    this->maxTime = maxTime;
+    this->iterations = std::numeric_limits<unsigned>::max();
+}
+
 void RandomSolver::printParameters() {
+
+}
+
+RandomSolver::RandomSolver(unsigned iterations) {
+    this->iterations = iterations;
+    this->maxTime = std::numeric_limits<unsigned>::max();
 
 }

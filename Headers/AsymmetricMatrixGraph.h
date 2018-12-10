@@ -26,8 +26,11 @@ public:
 
     void print() override;
 
+    unsigned int getSize() override;
+
 private:
     std::vector<std::vector<unsigned>> matrix;
+    unsigned size;
 };
 
 

@@ -6,7 +6,6 @@
 
 class Graph {
 public:
-    int size;
     /**
      * Returns graph's implementation name
      * @return graph's implementation name
@@ -58,6 +57,8 @@ public:
     virtual ~Graph() = default;
 
     const unsigned MAX_LENGTH = 100;
+
+    virtual unsigned getSize() = 0;
 };
 
 

@@ -7,7 +7,7 @@ SymmetricMatrixGraph::SymmetricMatrixGraph(unsigned int size) {
     this->size = size;
     distances.resize(size * (size - 1) / 2);
     for (unsigned int &i : distances) {
-        i = rand() % MAX_LENGTH + 1;
+        i = random() % MAX_LENGTH + 1;
     }
 }
 
@@ -57,5 +57,9 @@ int SymmetricMatrixGraph::findClosestNeighbour(unsigned node) {
         }
     }
     return closest;
+}
+
+unsigned int SymmetricMatrixGraph::getSize() {
+    return size;
 }
 

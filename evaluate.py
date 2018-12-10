@@ -1,6 +1,11 @@
 #!/usr/bin/python
+import itertools
+import re
+from collections import defaultdict
+
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.ticker import ScalarFormatter
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
@@ -83,21 +88,14 @@ def main():
                  'LS Steepest': {'color': 'blue'},
                  }
 
-    for k, v in instances.items():
-        v['pos'] = []
-        v['mean_t'] = []
-        v['std_t'] = []
-        v['mean_s'] = []
-        v['std_s'] = []
-        v['min_s'] = []
-        v['quality'] = []
-
     labels = []
+    instances_sizes = []
     positions = []
     for i in range(0, len(lines), 4):
         print(lines[i])
         line = lines[i].split()
         labels.append(line[0].replace(".atsp", ""))
+        instances_sizes.append(int(re.findall('\d+', line[0])[0]))
         positions.append(POS[labels[-1]] * 3 + BAR_WIDTH)
 
         plot_stuff = getPlotStuff(lines[i].split()[-1])
@@ -108,52 +106,75 @@ def main():
         instances[plot_stuff[0]]['mean_t'].append(np.mean(times))
         instances[plot_stuff[0]]['std_t'].append(np.std(times))
         instances[plot_stuff[0]]['mean_s'].append(np.mean(scores))
-        instances[plot_stuff[0]]['quality'].append(1 / np.mean(scores))
+        instances[plot_stuff[0]]['quality'].append(1 / (np.mean(scores)))
         instances[plot_stuff[0]]['std_s'].append(np.std(scores))
         instances[plot_stuff[0]]['min_s'].append(np.min(scores))
+        instances[plot_stuff[0]]['instance'].append(POS[labels[-1]])
+        instances[plot_stuff[0]]['instance_size'].append(int(re.findall('\d+', line[0])[0]))
 
-    # plot 1
+
+    # plot 1 avg score
+    fig, ax = plt.subplots()
     for k, v in instances.items():
-        plt.bar(v['pos'], v['mean_s'], width=BAR_WIDTH,
-                color=v['color'], label=k)
-    plt.xticks(positions, labels)
-    plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
-    plt.legend()
+        lists = sorted(zip(*[v['instance_size'], v['mean_s']]))
+        new_x, new_y = list(zip(*lists))
+        ax.errorbar(new_x, new_y,
+                    yerr=v['std_s'], label=k, alpha=0.75, elinewidth=5)
+
+    ax.set_ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
+    ax.set_xscale('log')
+    to_remove = [48, 35, 44, 47, 53, 358, 403, 64]
+    used_instances = [inst for inst in instances_sizes[::3] if inst not in to_remove]
+    ax.set_xticks(used_instances)
+    ax.get_xaxis().set_major_formatter(ScalarFormatter())
+    ax.get_xaxis().set_tick_params(which='minor', size=0)
+    ax.get_xaxis().set_tick_params(which='minor', width=0)
+    ax.legend()
     plt.savefig('report/pics/plot_mean.pdf')
     plt.clf()
 
-    # plot 2
+    # plot 2 best score
     for k, v in instances.items():
-        plt.bar(v['pos'], v['min_s'], width=BAR_WIDTH,
-                color=v['color'], label=k)
+        lists = sorted(zip(*[v['pos'], v['min_s']]))
+        new_x, new_y = list(zip(*lists))
+        plt.plot(new_x, new_y,
+                 label=k)
 
-    plt.xticks(positions, labels)
-    plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
+    plt.xticks(positions, instances_sizes)
+    plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
+    plt.xlabel('Rozmiar instancji')
     plt.legend()
     plt.savefig('report/pics/plot_min.pdf')
     plt.clf()
 
-    # plot 3
+    # plot 3 run time
+    plt.figure(num=None, figsize=(10, 6))
     for k, v in instances.items():
-        plt.bar(v['pos'], v['mean_t'], width=BAR_WIDTH,
-                color=v['color'], yerr=v['std_t'], label=k)
-    plt.xticks(positions, labels)
-    plt.ylabel(r'Czas [s]', fontsize=18)
+        lists = sorted(zip(*[v['instance_size'], v['mean_t']]))
+        new_x, new_y = list(zip(*lists))
+        plt.plot(new_x, new_y, color=v['color'], label=k, marker='.')
+    # plt.xticks(list(POS.values()), list(POS.keys()))
     plt.yscale('log')
+    plt.ylabel(r'Czas [s]')
+    plt.xlabel(r'Rozmiar instancji')
     plt.legend()
-    plt.savefig('report/pics/plot_steps.pdf')
+    plt.savefig('report/pics/plot_mean_time.pdf')
+    plt.gcf().clear()
     plt.clf()
 
-    # plot 4
+    # plot 4 efficiency
     for k, v in instances.items():
-        plt.plot(v['quality'], v['mean_t'], color=v['color'], marker='o',
+        plt.plot(v['quality'], v['mean_t'], marker='.',
                  linestyle='', label=k)
 
-    plt.ylabel(r'Czas [s]', fontsize=18)
-    plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$', fontsize=18)
+    plt.ylabel(r'Czas [s]')
+    plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$')
     plt.yscale('log')
-    plt.xscale('log')
     plt.legend()
+    plt.plot([0, 2.5], [0.00007, 200], 'k-', lw=1)
+    plt.plot([0, 20], [0.00007, 40], 'k-', lw=1)
+    # plt.plot([0, 0.001], [20, 0.1], 'k-', lw=1)
+    plt.xlim(-2, 20)
     plt.savefig('report/pics/quality.pdf')
     plt.clf()
 
