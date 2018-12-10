@@ -25,7 +25,7 @@ void SimulatedAnnealing::solve() {
     // calculate initial temperature
     setTemperature(solution);
     // search until no prgress
-    while (noProgress < 10*Lk && temperature > 0.001) {
+    while (noProgress < 10*Lk && temperature > 0.0001) {
         int last_best = bestScore;
         bestScore += search(solution); 
         if (bestScore >= last_best) noProgress++;

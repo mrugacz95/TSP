@@ -65,8 +65,9 @@ def getPlotStuff(alg):
     return {
         '1': ('RS', 0),
         '3': ('H Nearest', 1),
-        '7': ('LS Greedy', 2),
-        '8': ('LS Steepest', 3)
+        '4': ('SA', 2),
+        '7': ('LS Greedy', 3),
+        '8': ('LS Steepest', 4)
     }.get(alg, ())
 
 
@@ -77,6 +78,7 @@ def main():
 
     instances = {'RS': {'color': 'red'},
                  'H Nearest': {'color': 'cyan'},
+                 'SA': {'color': 'magenta'},
                  'LS Greedy': {'color': 'green'},
                  'LS Steepest': {'color': 'blue'},
                  }
@@ -110,6 +112,10 @@ def main():
         instances[plot_stuff[0]]['std_s'].append(np.std(scores))
         instances[plot_stuff[0]]['min_s'].append(np.min(scores))
 
+    # plot 1
+    for k, v in instances.items():
+        plt.bar(v['pos'], v['mean_s'], width=BAR_WIDTH,
+                color=v['color'], label=k)
     plt.xticks(positions, labels)
     plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$', fontsize=18)
     plt.legend()
