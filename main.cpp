@@ -36,10 +36,10 @@ int main() {
 
     }
 
-    std::cout << "Provide seed\n";
     std::cout << "Provide output file path\n";
     std::cin >> outputFile;
 
+    std::cout << "Provide seed\n";
     unsigned int seed = 422;
     std::cin >> seed;
     if (seed == 0) {
@@ -76,7 +76,7 @@ int main() {
                          "and cooling factor (-1) for default)";
             float coolingFactor;
             cin >> coolingFactor;
-            solver = new SimulatedAnnealing((graph->size-1)*(graph->size-1)/2, coolingFactor);
+            solver = new SimulatedAnnealing((graph->getSize()-1)*(graph->getSize()-1)/2, coolingFactor);
             break;
         }
         case 5: {

@@ -10,7 +10,7 @@ void RandomSolver::solve() {
     unsigned int bestLength = std::numeric_limits<unsigned>::max();
     std::vector<int> bestSolution;
     auto random_engine = std::default_random_engine(seed);
-    std::clock_t start = clock();
+    clock_t start = clock();
     solution = tmpSolution;
     unsigned iterationsCounter = iterations;
     while (start + this->maxTime >= clock() && iterationsCounter--) {

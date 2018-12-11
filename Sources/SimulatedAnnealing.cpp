@@ -41,7 +41,7 @@ void SimulatedAnnealing::solve() {
 }
 
 void SimulatedAnnealing::setTemperature(std::vector<int> solution) {
-    int K = 10;
+    int K = 100;
     int size = K*(solution.size()-1)*(solution.size()-1)/2;
     int dmin = 0;
     int sum = 0;
