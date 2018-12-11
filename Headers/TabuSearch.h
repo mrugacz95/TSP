@@ -20,7 +20,6 @@ public:
 
     ~TabuSearch() override = default;
 
-protected:
     unsigned int countSolutionLength(std::vector<int> &vec) override;
 
 private:

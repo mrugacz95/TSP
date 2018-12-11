@@ -12,7 +12,34 @@
 #include <ctime>
 #include <TabuSearch.h>
 
+void testSolver() {
+    TabuSearch ts = TabuSearch(30, 5);
+    auto *graph = new AsymmetricMatrixGraph(100);
+    ts.setGraph(graph);
+    vector<int> k;
+    k.resize(100);
+    std::iota(k.begin(), k.end(), 0);
+    default_random_engine engine(5);
+    std::shuffle(k.begin(), k.end(), engine);
+    int count = 0;
+    for (int i = 0; i < 5000; ++i) {
+        unsigned a = engine() % graph->getSize();
+        unsigned b = engine() % graph->getSize();
+        int before = ts.countSolutionLength(k);
+        int delta = ts.delta(k, a, b);
+        std::swap(k[a], k[b]);
+        int after = ts.countSolutionLength(k);
+        if (before + delta != after) {
+            cout << "Wrong for " << a << " " << b << " expected:" << after - before << " returned" << delta << "\n";
+            count++;
+        }
+    }
+    cout << "count: " << count << "\n";
+    delete graph;
+}
+
 int main() {
+    testSolver();
     int algorithm;
     std::vector<SymmetricMatrixGraph *> graphs;
     std::string outputFile;
@@ -87,7 +114,7 @@ int main() {
 //                      "Ants Algorithm added\nChoose parameters number of ants, alpha, beta, rho and number of iterations (-1) for default)\n";
 //            cin >> antsNum;
 //            if (antsNum < 0) {
-                solver = new AntsAlgorithm();
+            solver = new AntsAlgorithm();
 //                break;
 //            }
 //            cin >> alpha >> beta >> rho >> iter;

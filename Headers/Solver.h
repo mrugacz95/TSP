@@ -71,6 +71,8 @@ public:
 
     int delta(std::vector<int> solution, unsigned i, unsigned j);
 
+    virtual unsigned countSolutionLength(std::vector<int> &vec);
+
 protected:
     double meanSolvingTime;
     std::vector<double> solvingTimes;
@@ -80,7 +82,6 @@ protected:
     std::vector<int> firstScores;
 
     virtual void solve() = 0;
-    virtual unsigned countSolutionLength(std::vector<int> &vec);
 
     unsigned deltaCounter = 0;
 };

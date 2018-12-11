@@ -86,20 +86,20 @@ void Solver::saveToFile(std::string filename) {
 
 void Solver::printTimes() {
     std::cout << "TIMES: ";
-    for (auto& t : solvingTimes)
+    for (auto &t : solvingTimes)
         std::cout << t << " ";
     std::cout << std::endl;
 }
 
 void Solver::printScores() {
     std::cout << "BEST SCORES: ";
-    for (auto& score : bestScores) {
-      std::cout << score << " ";
+    for (auto &score : bestScores) {
+        std::cout << score << " ";
     }
     std::cout << std::endl;
     std::cout << "FIRST SCORES: ";
-    for (auto& score : firstScores) {
-      std::cout << score << " ";
+    for (auto &score : firstScores) {
+        std::cout << score << " ";
     }
     std::cout << std::endl;
 }

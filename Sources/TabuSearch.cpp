@@ -44,7 +44,7 @@ void TabuSearch::solve() {
         // apply moves
         bool improved = false;
         for (int i = 0; i < k; ++i) {
-            if (nextMoves[i].delta > abs(nextMoves[0].delta) * 0.1) {
+            if (nextMoves[i].delta > 0) {
                 break;
             }
             if (getTabu(nextMoves[i].from, nextMoves[i].to) == 0) {
@@ -53,8 +53,11 @@ void TabuSearch::solve() {
                 improved = true;
             }
         }
-        if (!improved)
+        if (!improved) {
             notImproved++;
+        } else {
+            notImproved = 0;
+        }
         // decrease cadence
         for (int i = 0; i < graph->getSize() - 1; ++i) {
             for (int j = 0; j < graph->getSize() - i - 1; ++j) {
