@@ -70,8 +70,9 @@ def getPlotStuff(alg):
     return {
         '1': ('RS', 0),
         '3': ('H Nearest', 1),
-        '7': ('LS Greedy', 2),
-        '8': ('LS Steepest', 3)
+        '4': ('SA', 2),
+        '7': ('LS Greedy', 3),
+        '8': ('LS Steepest', 4)
     }.get(alg, ())
 
 
@@ -80,11 +81,23 @@ def main():
         a = fh.read()
     lines = a.split("\n")[:-1]
 
-    instances = {'RS': defaultdict(list, {'color': 'red'}),
-                 'H Nearest': defaultdict(list, {'color': 'purple'}),
-                 'LS Greedy': defaultdict(list, {'color': 'green'}),
-                 'LS Steepest': defaultdict(list, {'color': 'blue'}),
+    instances = {'RS': {'color': 'red', 'marker':'.'},
+                 'H Nearest': {'color': 'cyan', 'marker':'*'},
+                 'SA': {'color': 'magenta', 'marker':'^'},
+                 'LS Greedy': {'color': 'green', 'marker':'v'},
+                 'LS Steepest': {'color': 'blue', 'marker':'1'},
                  }
+
+    for k, v in instances.items():
+        instances[k]['pos'] = []
+        instances[k]['mean_t'] = []
+        instances[k]['std_t'] = []
+        instances[k]['mean_s'] = []
+        instances[k]['std_s'] = []
+        instances[k]['min_s'] = []
+        instances[k]['quality'] = []
+        instances[k]['instance'] = []
+        instances[k]['instance_size'] = []
 
     labels = []
     instances_sizes = []
@@ -110,8 +123,8 @@ def main():
         instances[plot_stuff[0]]['instance'].append(POS[labels[-1]])
         instances[plot_stuff[0]]['instance_size'].append(int(re.findall('\d+', line[0])[0]))
 
-    # plot 1 avg score
 
+    # plot 1 avg score
     fig, ax = plt.subplots()
     for k, v in instances.items():
         lists = sorted(zip(*[v['instance_size'], v['mean_s']]))
@@ -150,7 +163,7 @@ def main():
     for k, v in instances.items():
         lists = sorted(zip(*[v['instance_size'], v['mean_t']]))
         new_x, new_y = list(zip(*lists))
-        plt.plot(new_x, new_y, color=v['color'], label=k, marker='.')
+        plt.plot(new_x, new_y, color=v['color'], label=k, marker=v['marker'])
     # plt.xticks(list(POS.values()), list(POS.keys()))
     plt.yscale('log')
     plt.ylabel(r'Czas [s]')
@@ -162,7 +175,7 @@ def main():
 
     # plot 4 efficiency
     for k, v in instances.items():
-        plt.plot(v['quality'], v['mean_t'], marker='.',
+        plt.plot(v['quality'], v['mean_t'], marker=v['marker'],
                  linestyle='', label=k)
 
     plt.ylabel(r'Czas [s]')

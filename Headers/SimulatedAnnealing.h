@@ -14,18 +14,23 @@ public:
 
     SimulatedAnnealing();
 
-    SimulatedAnnealing(unsigned int iterations, float coolingFactor, float startTemperture);
+    SimulatedAnnealing(int Lk, float coolingFactor);
 
-    double temperatureFunc(int i);
+    void temperatureDrop();
 
     void printParameters() override;
 
 private:
-    unsigned int iterations = 1000;
+    int search(std::vector<int>& solution);
+    int delta(const std::vector<int> solution, const int i, const int j);
+    void setTemperature(std::vector<int> solution);
     float startTemperature;
     float temperature;
     float coolingFactor;
+    int Lk;
     int acc, noacc;
+    std::vector<int> deltaCounter;
+    std::vector<int> jumpCounter;
 };
 
 
