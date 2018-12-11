@@ -21,7 +21,7 @@ void LocalSearch::solve() {
         prevScore = bestScore;
         bestScore += search(solution);
         jumpCounter.back()++;
-    } while (bestScore > prevScore);
+    } while (bestScore < prevScore);
     bestScores.push_back(bestScore);
 }
 
