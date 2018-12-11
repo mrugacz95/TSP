@@ -103,3 +103,35 @@ void Solver::printScores() {
     }
     std::cout << std::endl;
 }
+
+
+int Solver::delta(const std::vector<int> solution, const unsigned i, unsigned int j) {
+    deltaCounter++;
+    int a = (i - 1 + solution.size()) % solution.size();
+    int b = (i + 1) % solution.size();
+    int c = ((j - 1) + solution.size()) % solution.size();
+    int d = (j + 1) % solution.size();
+    int result = 0;
+
+    result += graph->distanceBetween(solution[a], solution[i]);
+    result += graph->distanceBetween(solution[i], solution[b]);
+    if (abs((int) (i - j)) == 1) {
+        result += graph->distanceBetween(solution[j], solution[d]);
+        result -= graph->distanceBetween(solution[a], solution[j]);
+        result -= graph->distanceBetween(solution[j], solution[i]);
+        result -= graph->distanceBetween(solution[i], solution[d]);
+    } else if (abs((int) (i - j)) == solution.size() - 1) {
+        result += graph->distanceBetween(solution[c], solution[j]);
+        result -= graph->distanceBetween(solution[c], solution[i]);
+        result -= graph->distanceBetween(solution[i], solution[j]);
+        result -= graph->distanceBetween(solution[j], solution[b]);
+    } else {
+        result += graph->distanceBetween(solution[c], solution[j]);
+        result += graph->distanceBetween(solution[j], solution[d]);
+        result -= graph->distanceBetween(solution[a], solution[j]);
+        result -= graph->distanceBetween(solution[j], solution[b]);
+        result -= graph->distanceBetween(solution[c], solution[i]);
+        result -= graph->distanceBetween(solution[i], solution[d]);
+    }
+    return -result;
+}

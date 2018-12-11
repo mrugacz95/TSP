@@ -10,6 +10,7 @@
 #include "Greedy.h"
 #include "Steepest.h"
 #include <ctime>
+#include <TabuSearch.h>
 
 int main() {
     int algorithm;
@@ -51,7 +52,7 @@ int main() {
 
     std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
                  "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
-                 "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n-1 start\n";
+                 "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n9 TabuSearch\n-1 start\n";
     std::cin >> algorithm;
     switch (algorithm) {
         case 0:
@@ -76,7 +77,7 @@ int main() {
                          "and cooling factor (-1) for default)";
             float coolingFactor;
             cin >> coolingFactor;
-            solver = new SimulatedAnnealing((graph->getSize()-1)*(graph->getSize()-1)/1, coolingFactor);
+            solver = new SimulatedAnnealing((graph->getSize() - 1) * (graph->getSize() - 1) / 1, coolingFactor);
             break;
         }
         case 5: {
@@ -114,6 +115,10 @@ int main() {
         case 8:
             std::cout << "Steepest added\n";
             solver = new Steepest(engine);
+            break;
+        case 9:
+            std::cout << "Steepest added\n";
+            solver = new TabuSearch(30, 5);
             break;
         default:
             std::cout << "Wrong number\n";

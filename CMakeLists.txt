@@ -44,6 +44,6 @@ set(SOURCE_FILES main.cpp
         Sources/SymmetricMatrixGraph.cpp
         Sources/LocalSearch.cpp
         Sources/Steepest.cpp
-        Sources/Greedy.cpp)
+        Sources/Greedy.cpp Sources/TabuSearch.cpp Headers/TabuSearch.h)
 add_executable(TSP ${SOURCE_FILES} ${HEADER_FILES})
 
