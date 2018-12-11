@@ -29,10 +29,10 @@ void TabuSearch::solve() {
     }
     unsigned notImproved = 0;
     std::vector<Move> nextMoves;
-    nextMoves.resize(k * 10, Move(0, 0, 0));
+    nextMoves.resize(k * 3, Move(0, 0, 0));
     while (notImproved < 10) {
         // generate next k moves
-        for (int i = 0; i < k * 10; ++i) {
+        for (int i = 0; i < k * 3; ++i) {
             nextMoves[i].from = engine() % graph->getSize();
             do {
                 nextMoves[i].to = engine() % graph->getSize();
@@ -44,7 +44,7 @@ void TabuSearch::solve() {
         // apply moves
         bool improved = false;
         for (int i = 0; i < k; ++i) {
-            if (nextMoves[i].delta > 0) {
+            if (nextMoves[i].delta > abs(nextMoves[0].delta) * 0.1) {
                 break;
             }
             if (getTabu(nextMoves[i].from, nextMoves[i].to) == 0) {

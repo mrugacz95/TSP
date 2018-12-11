@@ -69,7 +69,7 @@ public:
 
     void saveToFile(std::string filename);
 
-    int delta(std::vector<int> solution, int i, int j);
+    int delta(std::vector<int> solution, unsigned i, unsigned j);
 
 protected:
     double meanSolvingTime;
