@@ -10,6 +10,7 @@
 #include "Greedy.h"
 #include "Steepest.h"
 #include <ctime>
+#include <TabuSearch.h>
 
 int main() {
     int algorithm;
@@ -36,10 +37,10 @@ int main() {
 
     }
 
-    std::cout << "Provide seed\n";
     std::cout << "Provide output file path\n";
     std::cin >> outputFile;
 
+    std::cout << "Provide seed\n";
     unsigned int seed = 422;
     std::cin >> seed;
     if (seed == 0) {
@@ -51,7 +52,7 @@ int main() {
 
     std::cout << "Choose algorithm:\n0 BruteForce\n1 Random\n2 Branch and Bound"
                  "\n3 Closest Neighbour\n4 Simulated Annealing\n5 AntsAlgorithm"
-                 "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n-1 start\n";
+                 "\n6 Geneticalgorithm\n7 Greedy\n8 Steepest\n9 TabuSearch\n-1 start\n";
     std::cin >> algorithm;
     switch (algorithm) {
         case 0:
@@ -120,6 +121,10 @@ int main() {
         case 8:
             std::cout << "Steepest added\n";
             solver = new Steepest(engine);
+            break;
+        case 9:
+            std::cout << "Steepest added\n";
+            solver = new TabuSearch(30, 5);
             break;
         default:
             std::cout << "Wrong number\n";

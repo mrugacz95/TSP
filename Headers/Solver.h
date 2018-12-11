@@ -69,6 +69,8 @@ public:
 
     void saveToFile(std::string filename);
 
+    int delta(std::vector<int> solution, int i, int j);
+
 protected:
     double meanSolvingTime;
     std::vector<double> solvingTimes;
@@ -79,6 +81,8 @@ protected:
 
     virtual void solve() = 0;
     virtual unsigned countSolutionLength(std::vector<int> &vec);
+
+    unsigned deltaCounter = 0;
 };
 
 

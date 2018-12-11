@@ -9,7 +9,7 @@ int Steepest::search(std::vector<int> &solution) {
     int max_i = 0, max_j = 0;
     for (int i = 0; i < solution.size() - 1; i++) {
         for (int j = i + 1; j < solution.size(); j++) {
-            int d = LocalSearch::delta(solution, i, j);
+            int d = Solver::delta(solution, i, j);
             if (d < 0) {
                 max_d = d;
                 max_i = i;

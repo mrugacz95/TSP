@@ -102,3 +102,21 @@ void Solver::printScores() {
     }
     std::cout << std::endl;
 }
+
+int Solver::delta(const std::vector<int> solution, const int i, const int j) {
+    deltaCounter++;
+    int a = (i - 1 + solution.size()) % solution.size();
+    int b = i + 1;
+    int c = j - 1;
+    int d = (j + 1) % solution.size();
+    int result = 0;
+    result += graph->distanceBetween(solution[a], solution[i]);
+    result += graph->distanceBetween(solution[i], solution[b]);
+    result += graph->distanceBetween(solution[c], solution[j]);
+    result += graph->distanceBetween(solution[j], solution[d]);
+    result -= graph->distanceBetween(solution[a], solution[j]);
+    result -= graph->distanceBetween(solution[j], solution[b]);
+    result -= graph->distanceBetween(solution[c], solution[i]);
+    result -= graph->distanceBetween(solution[i], solution[d]);
+    return -result;
+}
