@@ -25,7 +25,7 @@ void SimulatedAnnealing::solve() {
     // calculate initial temperature
     setTemperature(solution);
     // search until no prgress
-    while (noProgress < 10*Lk && temperature > 0.0001) {
+    while (noProgress < 10*Lk && temperature > 0.001) {
         int last_best = bestScore;
         bestScore += search(solution); 
         if (bestScore >= last_best) noProgress++;
@@ -54,7 +54,6 @@ void SimulatedAnnealing::setTemperature(std::vector<int> solution) {
             for (int j=i+1; j < solution.size(); j++) {
                 int d = delta(solution, i, j);
                 if (d > 0) {
-                    //std::cout << "DELTA: " << d << std::endl;
                     sum += d;
                     it++;
                 }
@@ -68,33 +67,34 @@ void SimulatedAnnealing::setTemperature(std::vector<int> solution) {
     //std::cout << "RAT: " << ratio <<std::endl;
     //std::cout << "DAVG: " << davg <<std::endl;
     //std::cout << "TEMP: " << -davg / log((ratio-0.05)/ratio) <<std::endl;
-    this->temperature = -davg / log((ratio-0.05)/ratio);
+    this->temperature = -davg / log((ratio-0.15)/ratio);
     this->startTemperature = this->temperature;
 }
 
 int SimulatedAnnealing::search(std::vector<int>& solution) {
-    for (int i=0; i < solution.size()-1; i++) {
-        for (int j=i+1; j < solution.size(); j++) {
-            if (deltaCounter.back() % Lk == Lk - 1) temperatureDrop();
-            int d = delta(solution, i, j);
-            if (d < 0) {
-                std::swap(solution[i], solution[j]);
-                return d;
-            }
-            else if (d > 0){
-                if (exp(-d/temperature) > rand() / float(RAND_MAX)) {
-                    acc++;
-                    std::swap(solution[i], solution[j]);
-                    return d;
-                } 
-                noacc++;
-            }
-        }
+    if (deltaCounter.back() % Lk == Lk - 1) temperatureDrop();
+    int i = rand() % (solution.size());
+    int j = 0;
+    do {
+      j = rand() % (solution.size());
+    } while (j == i);
+    int d = delta(solution, i, j);
+    //std::cout << i << " " << j << " DELTA: " << d << std::endl;
+    if (d < 0) {
+        std::swap(solution[i], solution[j]);
+        return d;
     }
+    if (exp(-d/temperature) > rand() / float(RAND_MAX)) {
+        acc++;
+        std::swap(solution[i], solution[j]);
+        return d;
+    } 
+    noacc++;
     return 0;
 }
 
-int SimulatedAnnealing::delta(const std::vector<int> solution, const int i, const int j) {
+int SimulatedAnnealing::delta(const std::vector<int> solution, int i, int j) {
+    if (i > j) std::swap(i,j);
     deltaCounter.back()++;
     int a = (i - 1 + solution.size()) % solution.size();
     int b = i + 1;

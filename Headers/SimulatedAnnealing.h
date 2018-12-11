@@ -22,7 +22,7 @@ public:
 
 private:
     int search(std::vector<int>& solution);
-    int delta(const std::vector<int> solution, const int i, const int j);
+    int delta(const std::vector<int> solution, int i, int j);
     void setTemperature(std::vector<int> solution);
     float startTemperature;
     float temperature;

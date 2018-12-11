@@ -76,7 +76,7 @@ int main() {
                          "and cooling factor (-1) for default)";
             float coolingFactor;
             cin >> coolingFactor;
-            solver = new SimulatedAnnealing((graph->getSize()-1)*(graph->getSize()-1)/2, coolingFactor);
+            solver = new SimulatedAnnealing((graph->getSize()-1)*(graph->getSize()-1)/1, coolingFactor);
             break;
         }
         case 5: {

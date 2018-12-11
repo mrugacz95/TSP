@@ -21,6 +21,7 @@ void RandomSolver::solve() {
             solution = tmpSolution;
         }
     }
+    bestScores.push_back(bestLength);
 }
 
 std::string RandomSolver::getName() {
