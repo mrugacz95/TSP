@@ -36,7 +36,7 @@ Naszym zadaniem było zaimplementowanie i przestudiowanie asymetrycznego problem
 
 \begin{figure}[H]
 \begin{center}
-    \includegraphics[width=0.7\textwidth]{map002g.png}
+    \includegraphics[width=0.6\textwidth]{map002g.png}
 \end{center}
 \caption{Przykładowe rozwiązanie problemu komiwojażera ze stolicami stanów Stanów Zjednoczonych Źródło: \url{http://support.sas.com/documentation/cdl/en/ornoaug/67520/HTML/default/viewer.htm}.}
 \label{fig:schemat}
@@ -87,7 +87,7 @@ Co można interpretować jako wartość, o jaką długość rozwiązania $\eta$ 
 \label{fig:plot_min}
 \end{figure}
 
-Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 -- 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego. Najlepsze wyniki z nich osiągnął algorytm SA, następnie TS oraz kolejno H-nearest, LS steepest, LS greedy. Dodatkowo dla największych instancji algorytm heurystyczny dawał gorsze wyniki niż pozostałe algorytmy.
+Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 -- 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy osiągały zbliżoną jakość, jednakże najlepsze wyniki z nich osiągnął algorytm SA, następnie TS oraz kolejno H-nearest, LS steepest, LS greedy. Ponadto dla największych instancji algorytm heurystyczny dawał gorsze wyniki niż pozostałe algorytmy.
 
 \begin{figure}[H]
 \begin{center}
@@ -110,7 +110,7 @@ Na rys. \ref{fig:plot_avg} zostały przedstawione średnie wyniki algorytmów. D
 \label{fig:plot_time}
 \end{figure}
 
-Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie TS, LS Greedy, SA i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny. Widać także, że zarówno czas działania algorytmów, jak i tempo jego narastania, rośnie wraz z rozmiarem instancji.
+Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie TS, LS Greedy, SA i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny. Widać także, że zarówno czas działania algorytmów, jak i tempo jego narastania, rośnie wraz z rozmiarem instancji. Najmniejsze tempo wzrostu można zaobserwować dla dużych instancji i algorytmu tabu, co jest pożądaną własnością.
 
 
 \subsection{Efektywność}
@@ -137,9 +137,8 @@ Aby zbadać, który algorytm jest najbardziej efektywny biorąc pod uwagę czas 
 \label{fig:plot_steps}
 \end{figure}
 
-Na rys. \ref{fig:plot_steps} przedstawiono ilość kroków i ilość ocenionych rozwiązań przez algorytmy TS, SA, Greedy i Steepest. Widać, że instancje 33 i 38 miały bardzo różne ilości sprawdzonych rozwiązań przez algorytmy. Z danych wynika także, że algorytm steepest sprawdzał najwięcej rozwiązań, zaś liczba kroków była podobna dla algorytmów LS, co może świadczyć o tym, że nie opłaca się sprawdzać wszystkich sąsiadów aby trafić w podobne minimum lokalne co algorytm Steepest, ponieważ wyniki tych algorytmów są podobne, a czas działania lepszy w algorytmie Greedy. Mimo że TS oraz SA miały dużo większa liczbę kroków i sprawdzonych rozwiązań niż algorytmy LS dawały lepsze rezultaty. Wynika z tego że lista tabu oraz temperatura w algorytmach TS i SA słusznie wyprowadzały algorytmy z minimów lokalnych, ale przez to musiały przeglądać więcej rozwiązań.
-
-
+Na rys. \ref{fig:plot_steps} przedstawiono ilość kroków i ilość ocenionych rozwiązań przez algorytmy TS, SA, Greedy i Steepest. Widać, że instancje 33 i 38 miały bardzo różne ilości sprawdzonych rozwiązań przez algorytmy. Z danych wynika także, że algorytm steepest sprawdzał najwięcej rozwiązań, zaś liczba kroków była podobna dla algorytmów LS, co może świadczyć o tym, że nie opłaca się sprawdzać wszystkich sąsiadów aby trafić w podobne minimum lokalne co algorytm Steepest, ponieważ wyniki tych algorytmów są podobne, a czas działania lepszy w algorytmie Greedy.
+Algorytm SA i TS wykonywały największą liczbę kroków, jednakże SA sprawdzał znacznie więcej rozwiązań, gdyż losowo przegladał sąsiadów. Większa liczba kroków obu algorytmów świadczy o tym, że lista tabu w TS oraz temperatura w SA wychodziły z minimów lokalnych i dłużej eksplorowały przestrzeń rozwiązań.
 
 \begin{figure}[H]
     \begin{center}
@@ -156,17 +155,17 @@ Rys. \ref{fig:first_finnest} przedstawia zależność długości rozwiązania po
 
 \section{Jakość rozwiązania w zależności od ilości uruchomień}
 
-\begin{figure}[H]
+\begin{figure}
     \begin{center}
-        \includegraphics[width=1\textwidth]{multi_run_ry48p_atsp.pdf}
+        \includegraphics[width=0.9\textwidth]{multi_run_ry48p_atsp.pdf}
     \end{center}
     \caption{Jakość rozwiązania w zależności od ilości uruchomień. Instancja ry48p.}
     \label{fig:plot_multi_run_ry48p}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \begin{center}
-        \includegraphics[width=1\textwidth]{multi_run_ftv35_atsp.pdf}
+        \includegraphics[width=0.9\textwidth]{multi_run_ftv35_atsp.pdf}
     \end{center}
     \caption{Jakość rozwiązania w zależności od ilości uruchomień. Instancja ftv35.}
     \label{fig:plot_multi_run_ftv35}
@@ -178,17 +177,17 @@ Przedstawione na rys. \ref{fig:plot_multi_run_ry48p} i \ref{fig:plot_multi_run_f
 
 Na rys. \ref{fig:quality_sim_ftv38} i \ref{fig:quality_sim_ry48p} pokazana jest zależność pomiędzy jakością 1000 rozwiązań otrzymanych przy pomocy algorytmu Steepest, a najlepszym znalezionym optimum lokalnym. Można zauważyć, że im lepsze rozwiązanie, tym bardziej jest podobne do znalezionego optimum.
 
-\begin{figure}[H]
+\begin{figure}
     \begin{center}
-        \includegraphics[width=1\textwidth]{quality_similarity_ftv38.pdf}
+        \includegraphics[width=0.8\textwidth]{quality_similarity_ftv38.pdf}
     \end{center}
     \caption{Jakość rozwiązań w zależności podobieństwa do najlepszego znalezionego optimum. Instancja ftv38.}
     \label{fig:quality_sim_ftv38}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \begin{center}
-        \includegraphics[width=1\textwidth]{quality_similarity_ry48p.pdf}
+        \includegraphics[width=0.8\textwidth]{quality_similarity_ry48p.pdf}
     \end{center}
     \caption{Jakość rozwiązania w zależności podobieństwa do najlepszego znalezionego optimum. Instancja ry48p.}
     \label{fig:quality_sim_ry48p}
@@ -198,17 +197,11 @@ Na rys. \ref{fig:quality_sim_ftv38} i \ref{fig:quality_sim_ry48p} pokazana jest 
 Na rys. \ref{fig:quality_sim} przedstawiono podobieństwo 15 najlepszych spośród 1000 rozwiązań oraz ich podobieństwo do najlepszego znalezionego rozwiązania. Widać ze rozwiązania różnią się a najbardziej podobne są tylko w 12.5\%.
 
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=1\textwidth]{quality_similarity_best15.pdf}
-    \end{center}
-    \caption{Wzajemne podobieństwo 15 najlepszych rozwiązań oraz najlepszego znalezionego optimum. Instancja ry48p.}
-    \label{fig:quality_sim}
-\end{figure}
-
 \section{Wnioski}
 
-Najlepiej sprawdził się algorytm heurystyczny, który działał zarówno w najkrótszym czasie jak i dawał najlepsze wyniki. Algorytm losowy wypadł najgorzej. Speetest i Greedy dały podobne rezultaty z tym, że steepest średnio dawał lepsze rozwiązania.
+
+Najlepsze rezultaty, zarówno jeżeli chodzi o wartość średnią, jak i minimalną, osiągał algorytm SA. Zbliżoną jakość, przy znacznie krótszym czasie działania, dla instancji małej i średniej wielkości prezentował algorytm heurystyczny. Algorytmy Greedy i Steepest osiągały zbliżone rezultaty, jednakże Steepest cechował się nieznacznie lepszą jakością rozwiązania, a Greedy czasem działania.
+Najgorszą jakośc rozwiązań otrzymano dla algorytmu losowego.
 
 \section{Trudności i problemy}
 
@@ -216,7 +209,15 @@ Aby wykonać poprawnie wykresy i pokazać jak najwięcej informacji trzeba pośw
 
 \section{Propozycje udoskonaleń}
 
-Można by jeszcze bardziej zautomatyzować wykonywanie eksperymentów i prezentację wyników (generowanie wykresów) poprzez napisanie skryptu, który kompilowałby projekt, wykonywałby wszystkie zaimplementowane eksperymenty, a nastpnie generował wykresy. Aktualnie każda z tych części jest wykonywana osobnymi poleceniami.
+Można by jeszcze bardziej zautomatyzować wykonywanie eksperymentów i prezentację wyników (generowanie wykresów) poprzez napisanie skryptu, który kompilowałby projekt, wykonywałby wszystkie zaimplementowane eksperymenty, a nastpnie generował wykresy. Aktualnie każda z tych części jest wykonywana osobnymi poleceniami. Można było zaproponować jakąś heurystykę, w celu doboru parametrów algorytmów SA i TS.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{quality_similarity_best15.pdf}
+    \end{center}
+    \caption{Wzajemne podobieństwo 15 najlepszych rozwiązań oraz najlepszego znalezionego optimum. Instancja ry48p.}
+    \label{fig:quality_sim}
+\end{figure}
 
 \clearpage
 
