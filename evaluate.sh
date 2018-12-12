@@ -6,7 +6,7 @@ INSTANCES=`ls ./data/*.atsp`
 for ALG in $ALGORITHMS; do
   for INSTANCE in $INSTANCES; do
     echo ${INSTANCE##*/} $ALG
-    RESULT=$(./cmake-build-release/TSP <<< "1 $INSTANCE ./output 0 $ALG 100 5")
+    RESULT=$(./cmake-build-release/TSP <<< "1 $INSTANCE ./output 0 $ALG 1000 15")
     SIZE=`echo "$RESULT" | grep "SIZE:" | sed 's/SIZE: //g'`
     echo $SIZE
     TIMES=`echo "$RESULT" | grep "TIMES:" | sed 's/TIMES: //g'`

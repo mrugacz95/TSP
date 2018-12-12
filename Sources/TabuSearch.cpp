@@ -47,12 +47,10 @@ void TabuSearch::solve() {
         std::sort(nextMoves.begin(), nextMoves.end());
         // apply moves
         for (int i = 0; i < k; ++i) {
-            if (nextMoves[i].delta > 0 && i > 1) {
-                break;
-            }
             if (getTabu(nextMoves[i].from, nextMoves[i].to) == 0) {
                 setTabu(nextMoves[i].from, nextMoves[i].to, cadence);
                 std::swap(solution[nextMoves[i].from], solution[nextMoves[i].to]);
+                break;
             }
         }
         // decrease cadence
@@ -69,7 +67,7 @@ void TabuSearch::solve() {
         } else {
             notImproved++;
         }
-    } while (notImproved < 50);
+    } while (notImproved < 100);
     solution = best;
     bestScores.push_back(bestLength);
 }

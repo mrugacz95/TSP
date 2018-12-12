@@ -145,7 +145,7 @@ int main() {
             break;
         case 9:
             std::cout << "Steepest added\n";
-            int neighbourhoodSize, cadence;
+            int neighbourhoodSize, cadence; // 500 15
             cin >> neighbourhoodSize >> cadence;
             solver = new TabuSearch(neighbourhoodSize, cadence);
             break;
