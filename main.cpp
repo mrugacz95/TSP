@@ -13,7 +13,7 @@
 #include <TabuSearch.h>
 
 void testSolver() {
-    TabuSearch ts = TabuSearch(30, 5);
+    TabuSearch ts = TabuSearch(7, 5);
     auto *graph = new AsymmetricMatrixGraph(100);
     ts.setGraph(graph);
     vector<int> k;
@@ -39,7 +39,7 @@ void testSolver() {
 }
 
 int main() {
-    testSolver();
+//    testSolver();
     int algorithm;
     std::vector<SymmetricMatrixGraph *> graphs;
     std::string outputFile;
@@ -145,7 +145,9 @@ int main() {
             break;
         case 9:
             std::cout << "Steepest added\n";
-            solver = new TabuSearch(30, 5);
+            int neighbourhoodSize, cadence;
+            cin >> neighbourhoodSize >> cadence;
+            solver = new TabuSearch(neighbourhoodSize, cadence);
             break;
         default:
             std::cout << "Wrong number\n";

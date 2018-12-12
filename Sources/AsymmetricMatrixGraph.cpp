@@ -19,7 +19,7 @@ AsymmetricMatrixGraph::AsymmetricMatrixGraph(unsigned size) {
 AsymmetricMatrixGraph::AsymmetricMatrixGraph(std::string filename) {
     std::ifstream infile(filename);
     if (!infile.is_open()) {
-        std::cout << "File not found";
+        std::cout << "File not found: " << filename;
         exit(0);
     }
     std::string line;

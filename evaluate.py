@@ -72,20 +72,22 @@ def getPlotStuff(alg):
         '3': ('H Nearest', 1),
         '4': ('SA', 2),
         '7': ('LS Greedy', 3),
-        '8': ('LS Steepest', 4)
+        '8': ('LS Steepest', 4),
+        '9': ('TS', 5)
     }.get(alg, ())
 
 
 def main():
-    with open('eval_new', 'r') as fh:
+    with open('evaluation', 'r') as fh:
         a = fh.read()
     lines = a.split("\n")[:-1]
 
-    instances = {'RS': {'color': 'red', 'marker':'.'},
-                 'H Nearest': {'color': 'cyan', 'marker':'*'},
-                 'SA': {'color': 'magenta', 'marker':'^'},
-                 'LS Greedy': {'color': 'green', 'marker':'v'},
-                 'LS Steepest': {'color': 'blue', 'marker':'1'},
+    instances = {'RS': {'marker': '.'},
+                 'H Nearest': {'marker': '*'},
+                 'SA': {'marker': '^'},
+                 'LS Greedy': {'marker': 'v'},
+                 'LS Steepest': {'marker': '1'},
+                 'TS': {'marker': '+'}
                  }
 
     for k, v in instances.items():
@@ -163,7 +165,7 @@ def main():
     for k, v in instances.items():
         lists = sorted(zip(*[v['instance_size'], v['mean_t']]))
         new_x, new_y = list(zip(*lists))
-        plt.plot(new_x, new_y, color=v['color'], label=k, marker=v['marker'])
+        plt.plot(new_x, new_y, label=k, marker=v['marker'])
     # plt.xticks(list(POS.values()), list(POS.keys()))
     plt.yscale('log')
     plt.ylabel(r'Czas [s]')

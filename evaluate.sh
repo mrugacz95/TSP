@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #ALGORITHMS="1 3 7 8"
-ALGORITHMS="4"
-INSTANCES=`ls ./problems/*.atsp`
+ALGORITHMS="9"
+INSTANCES=`ls ./data/*.atsp`
 for ALG in $ALGORITHMS; do
   for INSTANCE in $INSTANCES; do
     echo ${INSTANCE##*/} $ALG
-    RESULT=$(./TSP <<< "1 $INSTANCE ./a 442 $ALG 0.94")
+    RESULT=$(./cmake-build-release/TSP <<< "1 $INSTANCE ./output 0 $ALG 100 5")
     SIZE=`echo "$RESULT" | grep "SIZE:" | sed 's/SIZE: //g'`
     echo $SIZE
     TIMES=`echo "$RESULT" | grep "TIMES:" | sed 's/TIMES: //g'`

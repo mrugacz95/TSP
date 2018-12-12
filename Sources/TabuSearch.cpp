@@ -22,6 +22,10 @@ void TabuSearch::solve() {
     std::iota(solution.begin(), solution.end(), 0);
     std::shuffle(solution.begin(), solution.end(), engine);
 
+    std::vector<int> best;
+    int bestLength = countSolutionLength(solution);
+    firstScores.push_back(bestLength);
+
     //init tabu array
     tabu.resize(graph->getSize() - 1);
     for (unsigned i = 1; i < graph->getSize(); ++i) {
@@ -29,10 +33,10 @@ void TabuSearch::solve() {
     }
     unsigned notImproved = 0;
     std::vector<Move> nextMoves;
-    nextMoves.resize(k * 3, Move(0, 0, 0));
-    while (notImproved < 10) {
+    nextMoves.resize(k, Move(0, 0, 0));
+    do {
         // generate next k moves
-        for (int i = 0; i < k * 3; ++i) {
+        for (int i = 0; i < k; ++i) {
             nextMoves[i].from = engine() % graph->getSize();
             do {
                 nextMoves[i].to = engine() % graph->getSize();
@@ -42,21 +46,14 @@ void TabuSearch::solve() {
         // sort moves
         std::sort(nextMoves.begin(), nextMoves.end());
         // apply moves
-        bool improved = false;
         for (int i = 0; i < k; ++i) {
-            if (nextMoves[i].delta > 0) {
+            if (nextMoves[i].delta > 0 && i > 1) {
                 break;
             }
             if (getTabu(nextMoves[i].from, nextMoves[i].to) == 0) {
                 setTabu(nextMoves[i].from, nextMoves[i].to, cadence);
                 std::swap(solution[nextMoves[i].from], solution[nextMoves[i].to]);
-                improved = true;
             }
-        }
-        if (!improved) {
-            notImproved++;
-        } else {
-            notImproved = 0;
         }
         // decrease cadence
         for (int i = 0; i < graph->getSize() - 1; ++i) {
@@ -64,7 +61,17 @@ void TabuSearch::solve() {
                 tabu[i][j] = (((int) tabu[i][j]) - 1 > 0) ? tabu[i][j] - 1 : 0;
             }
         }
-    }
+        int currentLength = countSolutionLength(solution);
+        if (currentLength < bestLength) {
+            best = solution;
+            bestLength = currentLength;
+            notImproved = 0;
+        } else {
+            notImproved++;
+        }
+    } while (notImproved < 50);
+    solution = best;
+    bestScores.push_back(bestLength);
 }
 
 unsigned int TabuSearch::countSolutionLength(std::vector<int> &vec) {
