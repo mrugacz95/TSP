@@ -40,7 +40,7 @@ def main():
 
     # plot 3
     for k, v in instances.items():
-        plt.scatter(v['first_s'], v['last_s'], s=50, marker=v['type'],
+        plt.scatter(v['first_s'], v['last_s'], marker=v['type'],
                     label=v['name'], alpha=0.5)
     plt.legend()
     plt.xlabel("długość rozwiązania początkowego")

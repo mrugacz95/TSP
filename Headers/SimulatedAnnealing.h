@@ -29,8 +29,6 @@ private:
     float coolingFactor;
     int Lk;
     int acc, noacc;
-    std::vector<int> deltaCounter;
-    std::vector<int> jumpCounter;
 };
 
 

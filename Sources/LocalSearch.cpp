@@ -5,8 +5,7 @@
 #include <LocalSearch.h>
 
 void LocalSearch::solve() {
-    deltaCounter.push_back(0);
-    jumpCounter.push_back(0);
+    deltaCounter.back()++;
     // prepare permutation
     solution.resize(graph->getNumberOfNodes());
     std::iota(solution.begin(), solution.end(), 0);

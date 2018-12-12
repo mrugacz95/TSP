@@ -8,14 +8,11 @@
 class LocalSearch : public Solver {
 
 public:
-    LocalSearch(std::default_random_engine engine);
+    explicit LocalSearch(std::default_random_engine engine);
     void solve() override;
     void printParameters() override;
 
 protected:
-    std::vector<int> deltaCounter;
-    std::vector<int> jumpCounter;
-
     int delta(std::vector<int> solution, int i, int j);
     virtual int search(std::vector<int>& solution) = 0;
 
