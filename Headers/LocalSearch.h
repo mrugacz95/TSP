@@ -13,9 +13,6 @@ public:
     void printParameters() override;
 
 protected:
-    std::vector<int> deltaCounter;
-    std::vector<int> jumpCounter;
-
     int delta(std::vector<int> solution, int i, int j);
     virtual int search(std::vector<int>& solution) = 0;
 

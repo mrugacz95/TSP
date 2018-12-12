@@ -60,7 +60,7 @@ Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest twor
 
 Pominiemy opis trywialnych algorytmów jak LS, H-nearest oraz RS, aby skupić się na TS oraz SA.
 
-Działanie Tabu Search przebiega następująco. Na początku algorytm losuje rozwiązanie startowe po czym w każdej iteracji wybiera 1000 losowych sąsiadów i liczy dla każdego z nich deltę, aby stworzyć master listę. Następnie ta lista jest sortowana rosnąco po obliczonych deltach. W kolejnym kroku lista jest przeglądana od najlepszych ruchów do najgorszych i zmiany zostają wprowadzone w tymczasowym rozwiązaniu. Jadnak jest możliwe że nie wszystkie ruchy zostaną wykorzystane. Zależy to od listy tabu, która przechowuje informacje ile iteracji temu wybrany ruch został użyty. Lista jest aktualizowana za każdym razem kiedy zostanie wprowadzona zmiana i jeżeli jakiś ruch został wcześniej wykorzystany nie jest on aplikowany. Kadencja w naszej implementacji trwa 5 iteracji. Aby odblokować ruchy pod koniec każdej iteracji lista tabu jest dekrementowana. Na końcu rozwiązanie tymczasowe jest zapisywane jeżeli jest krótsze od dotychczas najlepszego. Algorytm kończy się gdy przez 100 iteracji nie uzyska poprawy.
+Działanie Tabu Search przebiega następująco. Na początku algorytm losuje rozwiązanie startowe po czym w każdej iteracji wybiera 1000 losowych sąsiadów i liczy dla każdego z nich deltę, aby stworzyć master listę. Następnie ta lista jest sortowana rosnąco po obliczonych deltach. W kolejnym kroku lista jest przeglądana od najlepszych ruchów do najgorszych i zmiany zostają wprowadzone w tymczasowym rozwiązaniu. Jadnak jest możliwe że nie wszystkie ruchy zostaną wykorzystane. Zależy to od listy tabu, która przechowuje informacje ile iteracji temu wybrany ruch został użyty. Lista jest aktualizowana za każdym razem kiedy zostanie wprowadzona zmiana i jeżeli jakiś ruch został wcześniej wykorzystany nie jest on aplikowany. Kadencja w naszej implementacji trwa 15 iteracji. Aby odblokować ruchy pod koniec każdej iteracji lista tabu jest dekrementowana. Na końcu rozwiązanie tymczasowe jest zapisywane jeżeli jest krótsze od dotychczas najlepszego. Algorytm kończy się gdy przez 100 iteracji nie uzyska poprawy.
 
 
 Algorytm Simulated Annealing na samym początku określa temperature startową poprzez wylosowanie $K$ rozwiązań, sprawdzeniu całego sąsiedztwa oraz zapisaniu uzyskanych delt. $K$ w naszej implementacji wynosiło $\frac{100 * N}{2}$, gdzie $N$ to rozmiar instancji. Następnie dla delt które dawały lepsze rozwiązanie jest liczony średnia wartość delty $\Delta_{avg}$ oraz stosunek -- $ratio$ korzystnych sąsiadów, czy takich dla których delta była mniejsza od zera, do wszystkich przejrzanych. Wtedy temperatura początkowa jest obliczana jako:
@@ -131,14 +131,13 @@ Aby zbadać, który algorytm jest najbardziej efektywny biorąc pod uwagę czas 
 
 \begin{figure} 
 \begin{center}
-    \includegraphics[width=1\textwidth]{steps2.pdf}
+    \includegraphics[width=1\textwidth]{steps.pdf}
 \end{center}
-\caption{Średnia liczba kroków algorytmów}
+\caption{(góra) Liczba sprawdzonych rozwiązań oraz (dół) liczba kroków algorytmów)}
 \label{fig:plot_steps}
 \end{figure}
 
-Na rys. \ref{fig:plot_steps} przedstawiono ilość kroków i ilość ocenionych rozwiązań przez algorytmy Greedy i Steepest. Widać, że instancje 33 i 38 miały bardzo różne ilości sprawdzonych rozwiązań przez algorytm Greedy. Z danych wynika także, że algorytm steepest sprawdzał więcej rozwiązań, zaś liczba kroków była podobna, co może świadczyć o tym, że nie opłaca się sprawdzać wszystkich sąsiadów aby trafić w podobne minimum lokalne co algorytm Steepest, ponieważ wyniki tych algorytmów są podobne, a czas działania lepszy w algorytmie Greedy.
-
+Na rys. \ref{fig:plot_steps} przedstawiono ilość kroków i ilość ocenionych rozwiązań przez algorytmy TS, SA, Greedy i Steepest. Widać, że instancje 33 i 38 miały bardzo różne ilości sprawdzonych rozwiązań przez algorytmy. Z danych wynika także, że algorytm steepest sprawdzał najwięcej rozwiązań, zaś liczba kroków była podobna dla algorytmów LS, co może świadczyć o tym, że nie opłaca się sprawdzać wszystkich sąsiadów aby trafić w podobne minimum lokalne co algorytm Steepest, ponieważ wyniki tych algorytmów są podobne, a czas działania lepszy w algorytmie Greedy. Mimo że TS oraz SA miały dużo większa liczbę kroków i sprawdzonych rozwiązań niż algorytmy LS dawały lepsze rezultaty. Wynika z tego że lista tabu oraz temperatura w algorytmach TS i SA słusznie wyprowadzały algorytmy z minimów lokalnych, ale przez to musiały przeglądać więcej rozwiązań.
 
 
 
