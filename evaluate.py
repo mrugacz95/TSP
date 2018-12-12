@@ -77,7 +77,7 @@ def getPlotStuff(alg):
 
 
 def main():
-    with open('evaluation', 'r') as fh:
+    with open('eval_new', 'r') as fh:
         a = fh.read()
     lines = a.split("\n")[:-1]
 

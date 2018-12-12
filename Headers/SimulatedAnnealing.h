@@ -20,7 +20,7 @@ public:
 
     void printParameters() override;
 
-    int delta(const std::vector<int> solution, const int i, const int j);
+    int delta(const std::vector<int> solution, int i, int j);
 private:
     int search(std::vector<int>& solution);
     void setTemperature(std::vector<int> solution);

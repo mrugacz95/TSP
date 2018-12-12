@@ -6,7 +6,7 @@ INSTANCES=`ls ./problems/*.atsp`
 for ALG in $ALGORITHMS; do
   for INSTANCE in $INSTANCES; do
     echo ${INSTANCE##*/} $ALG
-    RESULT=$(./TSP <<< "1 $INSTANCE $ALG 0.9")
+    RESULT=$(./TSP <<< "1 $INSTANCE ./a 442 $ALG 0.94")
     SIZE=`echo "$RESULT" | grep "SIZE:" | sed 's/SIZE: //g'`
     echo $SIZE
     TIMES=`echo "$RESULT" | grep "TIMES:" | sed 's/TIMES: //g'`

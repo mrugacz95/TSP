@@ -97,8 +97,8 @@ int SimulatedAnnealing::delta(const std::vector<int> solution, int i, int j) {
     if (i > j) std::swap(i,j);
     deltaCounter.back()++;
     int a = (i - 1 + solution.size()) % solution.size();
-    int b = i + 1;
-    int c = j - 1;
+    int b = (i + 1) % solution.size();
+    int c = (j - 1 + solution.size()) % solution.size();
     int d = (j + 1) % solution.size();
     int result = 0;
 
@@ -141,6 +141,7 @@ void SimulatedAnnealing::temperatureDrop() {
 SimulatedAnnealing::SimulatedAnnealing(int Lk, float coolingFactor) {
     this->coolingFactor = coolingFactor;
     this->Lk = Lk;
+    deltaCounter.push_back(0);
 }
 
 void SimulatedAnnealing::printParameters() {

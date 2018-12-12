@@ -105,11 +105,12 @@ void Solver::printScores() {
 }
 
 
-int Solver::delta(const std::vector<int> solution, const unsigned i, unsigned int j) {
+int Solver::delta(const std::vector<int> solution, unsigned i, unsigned int j) {
+    if (i > j) std::swap(i,j);
     deltaCounter++;
-    int a = (i - 1 + solution.size()) % solution.size();
+    int a = (i + solution.size() - 1) % solution.size();
     int b = (i + 1) % solution.size();
-    int c = ((j - 1) + solution.size()) % solution.size();
+    int c = (j + solution.size() - 1) % solution.size();
     int d = (j + 1) % solution.size();
     int result = 0;
 
