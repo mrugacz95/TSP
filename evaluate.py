@@ -82,12 +82,12 @@ def main():
         a = fh.read()
     lines = a.split("\n")[:-1]
 
-    instances = {'RS': {'marker': '.'},
-                 'H Nearest': {'marker': '*'},
-                 'SA': {'marker': '^'},
-                 'LS Greedy': {'marker': 'v'},
-                 'LS Steepest': {'marker': '1'},
-                 'TS': {'marker': '+'}
+    instances = {'RS': {'marker': '.', 'ls': ':'},
+                 'H Nearest': {'marker': '*', 'ls': '-.'},
+                 'SA': {'marker': '^', 'ls': '--'},
+                 'LS Greedy': {'marker': 'v', 'ls': ':'},
+                 'LS Steepest': {'marker': '1', 'ls': '--'},
+                 'TS': {'marker': '+', 'ls': '-'}
                  }
 
     for k, v in instances.items():
@@ -125,14 +125,14 @@ def main():
         instances[plot_stuff[0]]['instance'].append(POS[labels[-1]])
         instances[plot_stuff[0]]['instance_size'].append(int(re.findall('\d+', line[0])[0]))
 
-
     # plot 1 avg score
     fig, ax = plt.subplots()
     for k, v in instances.items():
         lists = sorted(zip(*[v['instance_size'], v['mean_s']]))
         new_x, new_y = list(zip(*lists))
         ax.errorbar(new_x, new_y,
-                    yerr=v['std_s'], label=k, alpha=0.75, elinewidth=5)
+                    yerr=v['std_s'], label=k, alpha=0.75, elinewidth=5,
+                    linestyle=v['ls'])
 
     ax.set_ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
     ax.set_xscale('log')
@@ -151,7 +151,7 @@ def main():
         lists = sorted(zip(*[v['pos'], v['min_s']]))
         new_x, new_y = list(zip(*lists))
         plt.plot(new_x, new_y,
-                 label=k)
+                 label=k, marker=v['marker'], alpha=0.75)
 
     plt.xticks(positions, instances_sizes)
     plt.ylabel(r'$\frac{\eta}{\eta_{min}}-1$')
@@ -184,8 +184,8 @@ def main():
     plt.xlabel(r'$\frac{1}{\frac{\eta}{\eta_{min}}-1}$')
     plt.yscale('log')
     plt.legend()
-    plt.plot([0, 2.5], [0.00007, 200], 'k-', lw=1)
-    plt.plot([0, 20], [0.00007, 40], 'k-', lw=1)
+    # plt.plot([0, 2.5], [0.00007, 200], 'k-', lw=1)
+    # plt.plot([0, 20], [0.00007, 40], 'k-', lw=1)
     # plt.plot([0, 0.001], [20, 0.1], 'k-', lw=1)
     plt.xlim(-2, 20)
     plt.savefig('report/pics/quality.pdf')

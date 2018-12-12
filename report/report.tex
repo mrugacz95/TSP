@@ -56,6 +56,18 @@ Operatorem sąsiedztwa w naszej implementacji jest 2-OPT. Nowy sąsiad jest twor
 \end{figure}
 
 
+\section{Opis algorytmów}
+
+Pominiemy opis trywialnych algorytmów jak LS, H-nearest oraz RS, aby skupić się na TS oraz SA.
+
+Działanie Tabu Search przebiega następująco. Na początku algorytm losuje rozwiązanie startowe po czym w każdej iteracji wybiera 1000 losowych sąsiadów i liczy dla każdego z nich deltę, aby stworzyć master listę. Następnie ta lista jest sortowana rosnąco po obliczonych deltach. W kolejnym kroku lista jest przeglądana od najlepszych ruchów do najgorszych i zmiany zostają wprowadzone w tymczasowym rozwiązaniu. Jadnak jest możliwe że nie wszystkie ruchy zostaną wykorzystane. Zależy to od listy tabu, która przechowuje informacje ile iteracji temu wybrany ruch został użyty. Lista jest aktualizowana za każdym razem kiedy zostanie wprowadzona zmiana i jeżeli jakiś ruch został wcześniej wykorzystany nie jest on aplikowany. Kadencja w naszej implementacji trwa 5 iteracji. Aby odblokować ruchy pod koniec każdej iteracji lista tabu jest dekrementowana. Na końcu rozwiązanie tymczasowe jest zapisywane jeżeli jest krótsze od dotychczas najlepszego. Algorytm kończy się gdy przez 100 iteracji nie uzyska poprawy.
+
+
+Algorytm Simulated Annealing na samym początku określa temperature startową poprzez wylosowanie $K$ rozwiązań, sprawdzeniu całego sąsiedztwa oraz zapisaniu uzyskanych delt. $K$ w naszej implementacji wynosiło $\frac{100 * N}{2}$, gdzie $N$ to rozmiar instancji. Następnie dla delt które dawały lepsze rozwiązanie jest liczony średnia wartość delty $\Delta_{avg}$ oraz stosunek -- $ratio$ korzystnych sąsiadów, czy takich dla których delta była mniejsza od zera, do wszystkich przejrzanych. Wtedy temperatura początkowa jest obliczana jako:
+$$
+T_{start} = \frac{-D_{avg}}{log((ratio - 0.15) / ratio)}
+$$
+Następnie zaczyna się właściwa część algorytmu. Jest losowane rozwiazanie początkowe. W każdej kolejnej iteracji jest losowany sąsiad i jeżeli jego delta $\Delta$ jest korzystna to zmiana zostaje wykorzystana, w przeciwnym przypadku jest akceptowana z prawdopodobieństwem $e^{\Delta/T}$, gdzie $T$ to aktualna temperatura. Temperatura jest aktualizowana co $N^2$ i jest obliczana z wzoru $T'=T*\alpha$, gdzie $\alpha$ to współczynnik chłodzenia i w naszej implementacji został ustawiony na wartość $0.94$.
 \section{Porównanie działania algorytmów}
 
 
@@ -75,7 +87,7 @@ Co można interpretować jako wartość, o jaką długość rozwiązania $\eta$ 
 \label{fig:plot_min}
 \end{figure}
 
-Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 -- 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego. Dodatkowo dla największych instancji algorytm heurystyczny dawał gorsze wyniki niż algorytm lokalny.
+Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 10 uruchomień algorytmów. Na wykresie można zauważyć że najgorsze wyniki daje algorytm Random Search, który uzyskuje średnio jakość 1 -- 2 czyli dwukrotnie gorsze rozwiązanie od optymalnego oraz 8 razy gorsze w najgorszym przypadku. Pozostałe algorytmy dawały bardzo podobne do siebie rezultaty czyli o 30\% gorsze od rozwiązania optymalnego. Najlepsze wyniki z nich osiągnął algorytm SA, następnie TS oraz kolejno H-nearest, LS steepest, LS greedy. Dodatkowo dla największych instancji algorytm heurystyczny dawał gorsze wyniki niż pozostałe algorytmy.
 
 \begin{figure}[H]
 \begin{center}
@@ -86,7 +98,7 @@ Na rys. \ref{fig:plot_min} przedstawiono wykres zawierający najlepsze wyniki z 
 \end{figure}
 
 
-Na rys. \ref{fig:plot_avg} zostały przedstawione średnie wyniki algorytmów. Dla czytelności rozmiary instancji są pokazane w skali logarytmicznej. Z wykresu widać, że algorytm losowy znowu dawał najgorsze wyniki, a algorytmy lokalne działały bardzo podobnie na korzyść algorytmu steepest. Można także zauważyć, że instancja o rozmiarze 124 charakteyzowała się dużą liczbą lokalnych optimów do których zbiegały testowane algorytmy, gdyż zaobserwowano dużą różnorodność w długości końcowych rozwiązań.
+Na rys. \ref{fig:plot_avg} zostały przedstawione średnie wyniki algorytmów. Dla czytelności rozmiary instancji są pokazane w skali logarytmicznej. Z wykresu widać, że algorytm losowy znowu dawał najgorsze wyniki, następnie algorytmy lokalne dawały lepsze wyniki i działały bardzo podobnie na korzyść algorytmu steepest. Najlepsze znowu okazały się algorytmy SA i TS. Można także zauważyć, że instancja o rozmiarze 124 charakteryzowała się dużą liczbą lokalnych optimów do których zbiegały testowane algorytmy, gdyż zaobserwowano dużą różnorodność w długości końcowych rozwiązań.
 
 \subsection{Czas działania}
 
@@ -98,7 +110,7 @@ Na rys. \ref{fig:plot_avg} zostały przedstawione średnie wyniki algorytmów. D
 \label{fig:plot_time}
 \end{figure}
 
-Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie Greedy, SA i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny. Widać także, że zarówno czas działania algorytmów, jak i tempo jego narastania, rośnie wraz z rozmiarem instancji.
+Rys. \ref{fig:plot_time} Przedstawia czas działania algorytmów. Naszybciej działał algorytm heurystyczny, następnie TS, LS Greedy, SA i na końcu Steepest. Czas działania algorytmu losowego był dobrany tak aby działał porównywalnie długo jak algorytm lokalny. Widać także, że zarówno czas działania algorytmów, jak i tempo jego narastania, rośnie wraz z rozmiarem instancji.
 
 
 \subsection{Efektywność}

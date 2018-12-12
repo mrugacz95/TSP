@@ -69,7 +69,7 @@ unsigned int Ant::countLength() {
     length = 0;
     for (int i = 0; i < path.size() - 1; i++)
         length += graph->distanceBetween(path[i], path[i + 1]);
-    length += graph->distanceBetween(path.front(), path.back());
+    length += graph->distanceBetween(path.back(), path.front());
     return length;
 }
 
