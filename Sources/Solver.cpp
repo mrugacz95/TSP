@@ -25,6 +25,16 @@ void Solver::printResults() {
     getSolutionPath();
     printTimes();
     printScores();
+    std::cout << "DELTAS: ";
+    for (auto &delta : deltaCounter) {
+        std::cout << delta << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "JUMPS: ";
+    for (auto &jump : jumpCounter) {
+        std::cout << jump << " ";
+    }
+    std::cout << std::endl;
 }
 
 unsigned Solver::countSolutionLength(std::vector<int> &vec) {
@@ -40,6 +50,8 @@ void Solver::start() {
     double accumulator = 0.0;
     clock_t begin, end;
     do {
+        deltaCounter.push_back(0);
+        jumpCounter.push_back(0);
         begin = std::clock();
         solve();
         end = clock();
@@ -107,7 +119,8 @@ void Solver::printScores() {
 
 int Solver::delta(const std::vector<int> solution, unsigned i, unsigned int j) {
     if (i > j) std::swap(i,j);
-    deltaCounter++;
+    deltaCounter.push_back(0);
+    jumpCounter.push_back(0);
     int a = (i + solution.size() - 1) % solution.size();
     int b = (i + 1) % solution.size();
     int c = (j + solution.size() - 1) % solution.size();
@@ -135,4 +148,8 @@ int Solver::delta(const std::vector<int> solution, unsigned i, unsigned int j) {
         result -= graph->distanceBetween(solution[i], solution[d]);
     }
     return -result;
+}
+
+void Solver::increaseJump() {
+    jumpCounter.back()++;
 }

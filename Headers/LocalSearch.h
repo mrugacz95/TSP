@@ -8,7 +8,7 @@
 class LocalSearch : public Solver {
 
 public:
-    LocalSearch(std::default_random_engine engine);
+    explicit LocalSearch(std::default_random_engine engine);
     void solve() override;
     void printParameters() override;
 

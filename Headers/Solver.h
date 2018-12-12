@@ -73,6 +73,7 @@ public:
 
     virtual unsigned countSolutionLength(std::vector<int> &vec);
 
+    void increaseJump();
 protected:
     double meanSolvingTime;
     std::vector<double> solvingTimes;
@@ -83,7 +84,8 @@ protected:
 
     virtual void solve() = 0;
 
-    unsigned deltaCounter = 0;
+    std::vector<unsigned> deltaCounter;
+    std::vector<unsigned> jumpCounter;
 };
 
 

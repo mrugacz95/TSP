@@ -6,8 +6,6 @@
 
 void SimulatedAnnealing::solve() {
     temperature = startTemperature;
-    deltaCounter.push_back(0);
-    jumpCounter.push_back(0);
     // prepare permutation
     solution.resize(graph->getNumberOfNodes());
     std::iota(solution.begin(), solution.end(), 0);
@@ -60,6 +58,7 @@ void SimulatedAnnealing::setTemperature(std::vector<int> solution) {
                 diff.push_back(d);
             }
         }
+        increaseJump();
         std::shuffle(solution.begin(), solution.end(), g);
     }
     float davg = sum / float(it);
@@ -82,11 +81,13 @@ int SimulatedAnnealing::search(std::vector<int>& solution) {
     //std::cout << i << " " << j << " DELTA: " << d << std::endl;
     if (d < 0) {
         std::swap(solution[i], solution[j]);
+        increaseJump();
         return d;
     }
     if (exp(-d/temperature) > rand() / float(RAND_MAX)) {
         acc++;
         std::swap(solution[i], solution[j]);
+        increaseJump();
         return d;
     } 
     noacc++;
@@ -141,7 +142,6 @@ void SimulatedAnnealing::temperatureDrop() {
 SimulatedAnnealing::SimulatedAnnealing(int Lk, float coolingFactor) {
     this->coolingFactor = coolingFactor;
     this->Lk = Lk;
-    deltaCounter.push_back(0);
 }
 
 void SimulatedAnnealing::printParameters() {
